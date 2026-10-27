@@ -2,7 +2,7 @@ CONFIG_IDF_TARGET="esp32"
 # Release version printed at boot (app_init: App version) and stored in the
 # binary's app descriptor; bump it for every client release.
 CONFIG_APP_PROJECT_VER_FROM_CONFIG=y
-CONFIG_APP_PROJECT_VER="1.0.0"
+CONFIG_APP_PROJECT_VER="1.0.1"
 CONFIG_ESPTOOLPY_FLASHSIZE_8MB=y
 CONFIG_PARTITION_TABLE_CUSTOM=y
 CONFIG_PARTITION_TABLE_CUSTOM_FILENAME="partitions.csv"
@@ -32,12 +32,11 @@ CONFIG_BTDM_CTRL_BR_EDR_MAX_SYNC_CONN=1
 CONFIG_BTDM_CTRL_BR_EDR_MAX_ACL_CONN=2
 
 CONFIG_ESP_DEFAULT_CPU_FREQ_MHZ_240=y
-# Brownout detector at its highest level (2.80 V), ABOVE the LyraT's IMP809
-# supervisor (2.63 V): a supply collapse then resets the chip with reason
-# BROWNOUT instead of an anonymous EN-pin (POWERON) reset, so the firmware
-# can tell a real power trip from a normal power-off or a flash-tool reset.
-CONFIG_ESP_BROWNOUT_DET=y
-CONFIG_ESP_BROWNOUT_DET_LVL_SEL_7=y
+# ESP-IDF's brownout handler is OFF: it would reset the chip. main/power_guard.c
+# programs the same brownout comparator itself (level 7 = 2.80 V, above the
+# LyraT's IMP809 supervisor at 2.63 V) and its interrupt cuts the amplifier
+# instead of resetting, so a weak supply costs a short mute, not the link.
+CONFIG_ESP_BROWNOUT_DET=n
 
 # Release build (final project). -O2 instead of the IDF default -Og: the audio
 # task does float limiter / gain maths per sample at 44.1 kHz on core 1.

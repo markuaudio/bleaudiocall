@@ -21,7 +21,8 @@ Firmware identifiers as printed by `app_init: App version` (git describe, `-dirt
 | `831add3-dirty` | English log strings; reconnect fixes from the audit (docs/05) |
 | `9efee2c-dirty` | reconnect to the last connected phone, RTC power-trip flag, ADC supply guard, always discoverable |
 | `df773b5-dirty` | power self-test (radio-loaded), NVS power-trip flag, supply guard removed, discoverable only while free |
-| final | self-test result margin of one step (`CAL_MARGIN_STEPS`), brownout detector 2.80 V and BROWNOUT-only trip rule, this commit |
+| final / 1.0.0 | self-test result margin of one step (`CAL_MARGIN_STEPS`), brownout detector 2.80 V and BROWNOUT-only trip rule |
+| `1.0.1` | brownout guard: the interrupt cuts the amplifier instead of resetting; no take-over by a second phone |
 
 ---
 
@@ -166,6 +167,19 @@ Firmware identifiers as printed by `app_init: App version` (git describe, `-dirt
 - Observed: `Wrote 889024 bytes ... Hash of data verified`; boot log `App version: 1.0.0`, `ELF file SHA256: 01cfc71a7...` (matches `esptool image-info`), `READY`. Also: `DAC profile P2 (-9.0 dB): not yet calibrated, the power self-test runs now` and no bonded phones: the merged image had overwritten the NVS area (merge-bin pads the gap between the partition table and the app with 0xFF), so the board came up as a new unit and ran the self-test.
 - Verdict: **PASS** for the package (boots, correct version, self-test runs on a "new" board). Finding: the full image is a factory reset; documented in `README-CLIENT.md` and docs/10 (use `bleaudiocall.bin` at `0x10000` for updates that must keep pairings).
 
+## T15: Brownout guard armed, self-test under the guard
+
+- Firmware: 1.0.1 (`power_guard.c`, IDF brownout handler off, no take-over).
+- Procedure: flash; 12 s capture with reset (`docs/test-data/2026-10-27-T15-guard-boot.log`); then console `0`, 40 s capture (`docs/test-data/2026-10-27-T15-guard-selftest.log`). Phone connected.
+- Observed: boot log `App version: 1.0.1`, `guard: Brownout guard armed at level 7 (2.80 V): a sagging rail cuts the amplifier instead of resetting`; self-test steps P0..P4 at 1.5 s intervals, `POWER SELF-TEST passed up to P4 (-6.0 dB); saving P3 (-7.5 dB) with 1 step(s) of margin`, no guard event during the tone.
+- Verdict: **PASS** (arming, self-test path). The guard's reaction to a real sag is exercised by T16.
+
+## T16: Bass-boosted music at full volume with the guard (user run)
+
+- Procedure: live monitor running (`docs/live-serial.log`); the user plays a bass-boosted track at full phone volume for several minutes.
+- Expected: `BROWNOUT GUARD: ... amplifier cut in the interrupt (event N). DAC profile lowered to Px ... No reset, phone stays connected`, a 0.4 s mute, music continues; no `rst:` banner, no `disconnected from`.
+- Result: pending at the time of writing; the live log will be copied to `docs/test-data/` and this entry updated.
+
 ---
 
 ## Summary table
@@ -186,6 +200,8 @@ Firmware identifiers as printed by `app_init: App version` (git describe, `-dirt
 | T12 long loud run | df773b5-dirty | PASS at P3, 7.4 min | margin of 1 step (D13), brownout rule (D16) |
 | T13 self-test final | final | PASS, saves P3 directly | final configuration |
 | T14 client package flash | v1.0.0 | PASS; full image = factory reset | README-CLIENT / docs/10 note |
+| T15 guard armed + self-test | 1.0.1 | PASS | - |
+| T16 bass-boosted music with guard | 1.0.1 | pending (user run) | - |
 
 ## Not tested yet
 

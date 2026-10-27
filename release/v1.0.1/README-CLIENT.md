@@ -1,4 +1,4 @@
-# blu2 firmware v1.0.0 for ESP32-LyraT V4.3: flashing instructions
+# blu2 firmware v1.0.1 for ESP32-LyraT V4.3: flashing instructions
 
 This package contains only the compiled firmware. No source code is included or required.
 
@@ -6,7 +6,7 @@ This package contains only the compiled firmware. No source code is included or 
 
 | File | Flash address | What it is |
 |---|---|---|
-| `blu2-v1.0.0-full-0x0.bin` | `0x0` | **Everything in one file**: bootloader + partition table + application. Use this one for new boards. It also overwrites the settings area, so the speaker comes up as new: paired phones are forgotten and the power self-test runs again at the first boot (a **factory reset**). |
+| `blu2-v1.0.1-full-0x0.bin` | `0x0` | **Everything in one file**: bootloader + partition table + application. Use this one for new boards. It also overwrites the settings area, so the speaker comes up as new: paired phones are forgotten and the power self-test runs again at the first boot (a **factory reset**). |
 | `bootloader.bin` | `0x1000` | 2nd-stage bootloader (only needed if you flash the three parts separately) |
 | `partition-table.bin` | `0x8000` | partition table |
 | `bleaudiocall.bin` | `0x10000` | the application. Flashing only this file (or the three parts at their addresses) **keeps** the paired phones and the self-test result: use that for updates of boards already in use. |
@@ -32,7 +32,7 @@ Either:
 
 1. Download "Flash Download Tools" from https://www.espressif.com/en/support/download/other-tools and unzip it.
 2. Start `flash_download_tool_*.exe`, choose **ChipType: ESP32**, **WorkMode: Develop**, **LoadMode: UART**.
-3. In the first row tick the checkbox, click `...`, select `blu2-v1.0.0-full-0x0.bin`, and type `0x0` in the address field.
+3. In the first row tick the checkbox, click `...`, select `blu2-v1.0.1-full-0x0.bin`, and type `0x0` in the address field.
 4. SPI SPEED: **40MHz**, SPI MODE: **DIO**, DoNotChgBin: ticked. COM: your port. BAUD: 460800.
 5. For a **new board** click **ERASE** first (clears old settings), wait for FINISH.
 6. Click **START**. Wait for **FINISH** (about 20 s). Remove the jumpers (if used), press RST or power-cycle.
@@ -43,14 +43,14 @@ Install once: `pip install esptool` (needs Python 3). Then, with the board in do
 
 ```
 python -m esptool --chip esp32 --port COM6 --baud 460800 erase-flash
-python -m esptool --chip esp32 --port COM6 --baud 460800 --before default-reset --after hard-reset write-flash --flash-mode dio --flash-freq 40m --flash-size 8MB 0x0 blu2-v1.0.0-full-0x0.bin
+python -m esptool --chip esp32 --port COM6 --baud 460800 --before default-reset --after hard-reset write-flash --flash-mode dio --flash-freq 40m --flash-size 8MB 0x0 blu2-v1.0.1-full-0x0.bin
 ```
 
 Replace `COM6` with your port (`/dev/ttyUSB0` on Linux). On Windows you can simply run `Flash-Client.ps1` (right-click, Run with PowerShell) or `flash.bat COM6`. Older esptool versions use `erase_flash` / `write_flash` with underscores.
 
 ## Option C: in the browser (Chrome / Edge, no install)
 
-Open https://espressif.github.io/esptool-js/ , click **Connect**, choose the board's COM port, baud 460800. Add the file `blu2-v1.0.0-full-0x0.bin` with flash address `0x0`, click **Program**. Use **Erase** first on a new board.
+Open https://espressif.github.io/esptool-js/ , click **Connect**, choose the board's COM port, baud 460800. Add the file `blu2-v1.0.1-full-0x0.bin` with flash address `0x0`, click **Program**. Use **Erase** first on a new board.
 
 ## First power-on after flashing (important)
 

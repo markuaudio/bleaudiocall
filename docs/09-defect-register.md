@@ -20,6 +20,8 @@ One entry per problem found on 2026-10-27, in the order they were found. Each en
 | D14 | Right onboard microphone coupling capacitor C50 is "NC" on the schematic | open, observation |
 | D15 | `gpio: conflict found for GPIO[21]` warning at boot | open, cosmetic |
 | D16 | Normal power-off or a flash-tool reset while playing was counted as a power trip (saved level lowered P3 -> P2) | fixed (brownout detector at 2.80 V, only BROWNOUT counts), verified T13 |
+| D17 | Bass-boosted track at full volume still reset the board (brownout) after 2-3 minutes, twice (P3 -> P2 -> P1), each with a disconnect | fixed: brownout interrupt now cuts the amplifier instead of resetting (power_guard.c), verified T15 (arming, self-test); music test T16 pending |
+| D18 | Another already-paired phone could take the speaker over while one phone was connected | fixed (take-over removed, user request), verify by connecting a second phone |
 
 ---
 
@@ -129,6 +131,20 @@ One entry per problem found on 2026-10-27, in the order they were found. Each en
 - **Fix:** the ESP32's own brownout detector is set to its highest level, 2.80 V (`CONFIG_ESP_BROWNOUT_DET_LVL_SEL_7` in `sdkconfig.defaults`), which is **above** the IMP809 supervisor's 2.63 V. A collapsing rail now trips the brownout detector first, which resets the chip with reason `BROWNOUT` (ROM banner `rst:0xf`). `load_boot_profile()` counts only `ESP_RST_BROWNOUT` as a trip, for both the self-test (`calstep`) and the fallback (`paon`). A `POWERON` reset during the self-test simply re-runs the test; a `POWERON` with `paon` = 1 is ignored.
 - **Files:** `sdkconfig.defaults`, `sdkconfig`, `main/audio_engine.c`, `main/board_config.h`.
 - **Verified:** T13 (docs/08).
+
+## D17: Brownout still reset the board on bass-heavy music
+
+- **Symptom (live log, firmware 1.0.0):** with a bass-boosted track at full phone volume: `E BOD: Brownout detector was triggered`, `reset reason=9 (BROWNOUT)`, `POWER TRIP ... lowered to P2`; a few minutes later the same again to P1. Each event was a reset and a Bluetooth reconnect.
+- **Cause:** the adapter sags slowly under sustained bass current (minutes, not seconds), so neither the 7.5 s self-test nor any fixed margin can predict it; and ESP-IDF's brownout handler always resets the chip.
+- **Fix:** `main/power_guard.c` replaces the IDF handler (`CONFIG_ESP_BROWNOUT_DET=n`): the brownout interrupt (2.80 V, microseconds) cuts the amplifier enable pin in the ISR, the audio task mutes for 400 ms, lowers the saved DAC profile one step and re-arms the detector. No reset, the link stays up. The self-test uses the same event to stop without a reset. Details in docs/07, fifth iteration.
+- **Files:** `main/power_guard.c/.h`, `main/audio_engine.c`, `main/board_config.h`, `main/CMakeLists.txt`, `sdkconfig.defaults`.
+- **Verified:** T15 (guard armed, self-test under the guard). T16 (bass-boosted music) pending.
+
+## D18: Take-over by a second phone
+
+- **Symptom:** with phone A connected, phone B (already paired) could connect and A was dropped (the "newest phone wins" rule from D10). The user wants one phone at a time: hidden while connected, no take-over.
+- **Fix:** the ACL handler in `bt_core.c` now only logs `Another phone ... tried to connect while ... is connected: ignored`; the stack refuses the newcomer's A2DP/HFP (single connection) and the firmware never opens profiles to it. Discoverable only while no phone is connected (unchanged). A phone's own list may still show `blu2` from its pairing history; connecting from there fails until the current phone disconnects (SET hold 2 s on the speaker, or from the connected phone).
+- **Verified:** build; functional check with two phones pending.
 
 ## D15: GPIO21 conflict warning (cosmetic)
 

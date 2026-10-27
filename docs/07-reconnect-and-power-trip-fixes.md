@@ -205,6 +205,35 @@ Build and flash passed. The live log after flashing shows the self-test running 
 
 ---
 
+## Fifth iteration: the brownout interrupt cuts the amplifier instead of resetting
+
+After the brownout detector was moved above the supervisor (D16), the live log showed what happens on a bass-boosted track at full phone volume: `E BOD: Brownout detector was triggered`, reset reason 9, `POWER TRIP ... lowered to P2`, and a few minutes later the same again down to P1. The trips came **2-3 minutes** into the track, not within seconds: the adapter sags slowly (heating / current-limit foldback), which a 7.5 s self-test can never see. The fallback converged correctly, but every step cost a reset and a reconnect, exactly what the user does not want.
+
+The detector itself is the solution. ESP-IDF's handler resets the chip after a brownout interrupt; on the ESP32 that reset is a software reset (`rst:0x3`), nothing forces it. The comparator fires within microseconds of the rail crossing 2.80 V, long before the IMP809 (2.63 V) acts. So `main/power_guard.c` takes the interrupt over:
+
+| Change | Where | Why |
+|---|---|---|
+| `CONFIG_ESP_BROWNOUT_DET=n`: IDF's handler is not installed | `sdkconfig.defaults` | it would reset the chip |
+| `power_guard_init()`: same comparator (level 7 = 2.80 V), `reset_enabled = false`, flash/RF power-down off, own ISR via `rtc_isr_register` (IRAM) | `main/power_guard.c` | keep running through the event |
+| ISR: `GPIO.out_w1tc = 1 << 21` (amplifier enable low), disable the brownout interrupt, count the event | `bod_isr()` | the load that pulls the 5 V rail down disappears within microseconds; the rail recovers; the IMP809 never sees 2.63 V |
+| Audio task: on an event mute the DAC, hold the amplifier off for `POWER_GUARD_HOLDOFF_MS` (400 ms), lower the DAC profile by `POWER_GUARD_DAC_STEP` (1) and save it (at most once per 2 s), log `BROWNOUT GUARD: ...`, re-arm the interrupt after the hold-off | `audio_engine.c` | a short mute instead of a reset; the phone stays connected; the level converges on the loudest safe value without any disconnect |
+| `pa()` refuses to switch the amplifier on during the hold-off | `audio_engine.c` | the music/call paths cannot re-enable it too early |
+| Self-test: a guard event during step p ends the test, saves p-1-margin, no reset | `power_self_test()` | the test is now reset-free as well |
+| `POWERON` with the amplifier flag set is only a warning now (power switch, RST, flash tool, or a collapse too fast for the guard) | `load_boot_profile()` | no false trips, no silent misses |
+| Stats line adds `brownout guard events since boot: N` | audio task | visible in the monitor |
+| No take-over: while a phone is connected, another phone's connection attempt is ignored (user request) | `bt_core.c` | one phone at a time; the speaker is hidden while connected and visible to everyone once free |
+
+### What to expect
+
+- Bass-boosted track at full volume on a weak supply: at the moment the rail sags the sound mutes for 0.4 s, the log shows `BROWNOUT GUARD: 3.3 V rail reached 2.80 V, amplifier cut in the interrupt (event 1). DAC profile lowered to P2 (-9.0 dB). No reset, phone stays connected; audio resumes in 400 ms`, the music continues 1.5 dB quieter. If it sags again (at least 2 s later) one more step. No reset, no reconnect.
+- If a `POWERON` reset still occurs while playing, the supply collapsed faster than the guard could act (or someone pressed RST / the power switch); the log says so.
+
+### Verification
+
+T15 (docs/08): guard armed at boot, self-test under the guard passes P4 and saves P3 on this adapter, no event during the 60 Hz tone. The bass-boosted music test with the guard is the user's next run; its live log goes into docs/08 as T16.
+
+---
+
 ## Files touched
 
 | File | Lines changed (approx.) |
@@ -214,6 +243,7 @@ Build and flash passed. The live log after flashing shows the self-test running 
 | `main/main.c` | +4: reset reason in words |
 | `main/board_config.h` | +8 constants, comments |
 | `main/supply.c`, `main/supply.h` | added in iteration 2, **removed** in iteration 4 (did not work, see above) |
+| `main/power_guard.c`, `main/power_guard.h` | iteration 5: brownout interrupt cuts the amplifier, no reset |
 | `README.md`, `docs/01`, `docs/02`, `docs/06`, `CHANGELOG.md` | behaviour and troubleshooting rows |
 
 Commit: "Reconnect for ever to the last connected phone; power-trip protection".

@@ -239,20 +239,12 @@ static void gap_callback(esp_bt_gap_cb_event_t event, esp_bt_gap_cb_param_t *p)
         ESP_LOGI(TAG, "Radio link with %s: status 0x%x%s", bt_core_bda_str(p->acl_conn_cmpl_stat.bda, str),
                  p->acl_conn_cmpl_stat.stat, ok ? "" : " (0x104 = page timeout: phone off / out of range)");
         if (ok && connected && memcmp(cur, p->acl_conn_cmpl_stat.bda, 6)) {
-            // Newest phone wins: drop the current phone's profiles and open ours
-            // to the newcomer shortly after, so it never has to "refresh".
+            // One phone at a time (user request): the connected phone keeps the
+            // speaker. The newcomer's A2DP/HFP requests are refused by the stack
+            // (single connection) and we never open profiles to it ourselves.
             char old[18];
-            ESP_LOGI(TAG, "Another phone %s arrived while %s is connected: switching to the new phone",
+            ESP_LOGI(TAG, "Another phone %s tried to connect while %s is connected: ignored (disconnect the current phone first)",
                      str, bt_core_bda_str(cur, old));
-            portENTER_CRITICAL(&lock);
-            memcpy(s.peer, p->acl_conn_cmpl_stat.bda, 6); s.have_peer = true;
-            memcpy(s.target, p->acl_conn_cmpl_stat.bda, 6); s.have_target = true;
-            s.a2dp_tried = s.hfp_tried = false; s.user_stopped = false;
-            s.followup_at = esp_timer_get_time() + 2000000LL;   // give the old links time to close
-            s.next_attempt_at = esp_timer_get_time() + 15000000LL; // no reconnect paging meanwhile
-            portEXIT_CRITICAL(&lock);
-            bt_call_disconnect();
-            bt_music_disconnect();
         }
         break;
     }
@@ -280,9 +272,8 @@ static void set_scan_mode(bool discoverable)
 {
     // Always connectable: phones open HFP seconds after A2DP (or the other way
     // round), so the radio must keep answering pages while one profile is up.
-    // Discoverable only while no phone is connected (user request): a phone
-    // already bonded can still connect while another is in use and takes over
-    // (newest phone wins, see GAP); a new phone pairs once the speaker is free.
+    // Discoverable only while no phone is connected (user request), and no
+    // take-over: while a phone is connected nobody else gets the speaker.
     esp_err_t err = esp_bt_gap_set_scan_mode(ESP_BT_CONNECTABLE,
                                              discoverable ? ESP_BT_GENERAL_DISCOVERABLE : ESP_BT_NON_DISCOVERABLE);
     if (err != ESP_OK) { ESP_LOGW(TAG, "Scan mode: %s", esp_err_to_name(err)); return; }

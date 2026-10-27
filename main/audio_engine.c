@@ -15,6 +15,7 @@
 #include "es8388.h"
 #include "audio_io.h"
 #include "bt_core.h"
+#include "power_guard.h"
 #include "audio_engine.h"
 
 static const char *TAG = "audio";
@@ -234,8 +235,11 @@ static inline int16_t clip16(int32_t v)
     return v > 32767 ? 32767 : v < -32768 ? -32768 : (int16_t)v;
 }
 
+static int64_t pa_holdoff_until; // after a brownout event the amplifier stays off until this time
+
 static void pa(bool on, bool *pa_on)
 {
+    if (on && esp_timer_get_time() < pa_holdoff_until) return; // still recovering from a brownout event
     if (on == *pa_on) return;
     if (on) es8388_dac_mute(false);
     gpio_set_level(BOARD_PA_ENABLE, on);
@@ -257,6 +261,7 @@ static void audio_task(void *arg)
     uint32_t phase = 0, phase2 = 0, in_peak = 0, out_peak = 0, mic_peak = 0, limited = 0;
     uint64_t frames_out = 0;
     int64_t prefill_since = esp_timer_get_time(), last_report = prefill_since, ring_since = prefill_since;
+    int64_t last_guard_us = -(int64_t)POWER_GUARD_MIN_INTERVAL_MS * 1000LL, guard_rearm_at = 0;
     while (1) {
         unsigned epoch, mode, profile, rate, music_volume, call_volume, queued;
         bool music_active, ring, diagnose; source_t source;
@@ -268,6 +273,28 @@ static void audio_task(void *arg)
         diagnose = st.diagnose; st.diagnose = false;
         portEXIT_CRITICAL(&lock);
         if (diagnose) { es8388_log_readback(); audio_io_log_clocks(); }
+
+        // ---------------- brownout guard ----------------
+        if (power_guard_take_event()) {
+            int64_t now_us = esp_timer_get_time();
+            pa_on = false;                                   // the ISR already pulled the pin low
+            es8388_dac_mute(true);
+            save_pa_flag(false);
+            pa_holdoff_until = now_us + POWER_GUARD_HOLDOFF_MS * 1000LL;
+            unsigned lowered = profile;
+            if (now_us - last_guard_us > POWER_GUARD_MIN_INTERVAL_MS * 1000LL && profile >= POWER_GUARD_DAC_STEP) {
+                lowered = profile - POWER_GUARD_DAC_STEP;
+                nvs_handle_t h;
+                if (nvs_open("audio", NVS_READWRITE, &h) == ESP_OK) { nvs_set_u8(h, "dac", (uint8_t)lowered); nvs_commit(h); nvs_close(h); }
+                boot_profile = lowered;
+                portENTER_CRITICAL(&lock); st.dac_profile = lowered; ++st.epoch; portEXIT_CRITICAL(&lock);
+            }
+            last_guard_us = now_us;
+            ESP_LOGW(TAG, "BROWNOUT GUARD: 3.3 V rail reached 2.80 V, amplifier cut in the interrupt (event %"PRIu32"). DAC profile %s P%u (%.1f dB). No reset, phone stays connected; audio resumes in %u ms",
+                     power_guard_events(), lowered != profile ? "lowered to" : "stays at", lowered, (double)es8388_dac_profile_db(lowered), (unsigned)POWER_GUARD_HOLDOFF_MS);
+            guard_rearm_at = now_us + POWER_GUARD_HOLDOFF_MS * 1000LL;
+        }
+        if (guard_rearm_at && esp_timer_get_time() >= guard_rearm_at) { guard_rearm_at = 0; power_guard_rearm(); }
 
         bool run_cal;
         portENTER_CRITICAL(&lock); run_cal = cal_pending && bt_core_ready(); if (run_cal) cal_pending = false; portEXIT_CRITICAL(&lock);
@@ -422,6 +449,7 @@ report:
                      source == SRC_CALL ? "CALL" : "MUSIC", rate, pa_on, in_peak, out_peak, mic_peak, frames_out, limited, profile);
             ESP_LOGI(TAG, "music buffer=%u B drops=%"PRIu32" underruns=%"PRIu32" | call rx_drops=%"PRIu32" tx_drops=%"PRIu32" underruns=%"PRIu32" | i2s_errors=%"PRIu32,
                      q, md, mu, crd, ctd, cu, ie);
+            if (power_guard_events()) ESP_LOGI(TAG, "brownout guard events since boot: %"PRIu32, power_guard_events());
             in_peak = out_peak = mic_peak = limited = 0; frames_out = 0;
             last_report = esp_timer_get_time();
         }
@@ -433,7 +461,7 @@ report:
 //                       self-test: that step collapsed the supply, the one
 //                       below it is the limit (saved, test marked done).
 //   paon == 1 + reset -> a reset while the amplifier was on in normal use:
-//                       lower the saved profile by POWER_TRIP_DAC_STEP (fallback).
+//                       lower the saved profile by POWER_GUARD_DAC_STEP (fallback).
 //   cal != 1         -> the self-test has not run yet: run it now.
 static void load_boot_profile(void)
 {
@@ -466,9 +494,11 @@ static void load_boot_profile(void)
             cal_done = false; // some other reset interrupted the test: run it again
         }
         nvs_commit(h);
+    } else if (why == ESP_RST_POWERON && nvs_get_u8(h, "paon", &v) == ESP_OK && v == 1) {
+        ESP_LOGW(TAG, "Reset while the amplifier was on (EN pin / power switch). If nobody switched it off, the supply collapsed faster than the brownout guard could cut the amplifier");
     } else if (trip_reason && nvs_get_u8(h, "paon", &v) == ESP_OK && v == 1) {
-        if (profile >= POWER_TRIP_DAC_STEP) {
-            profile -= POWER_TRIP_DAC_STEP;
+        if (profile >= POWER_GUARD_DAC_STEP) {
+            profile -= POWER_GUARD_DAC_STEP;
             nvs_set_u8(h, "dac", (uint8_t)profile); nvs_commit(h);
             ESP_LOGW(TAG, "POWER TRIP: the board reset while the amplifier was on (reset reason %d). DAC profile lowered to P%u (%.1f dB) and saved; '0' re-runs the self-test",
                      (int)why, profile, (double)es8388_dac_profile_db(profile));
@@ -510,8 +540,9 @@ static void power_self_test(void)
         es8388_apply_dac_profile(p);
         pa(true, &pa_on);
         ESP_LOGI(TAG, "  self-test P%u (%.1f dB)", p, (double)es8388_dac_profile_db(p));
-        unsigned done = 0;
-        while (done < per_step) {
+        unsigned done = 0; bool tripped = false;
+        while (done < per_step && !tripped) {
+            if (power_guard_take_event()) { tripped = true; break; }
             size_t n = per_step - done; if (n > AUDIO_IO_MAX_FRAMES) n = AUDIO_IO_MAX_FRAMES;
             for (size_t i = 0; i < n; ++i, ++pos) {
                 int32_t s = sine32[phase >> 27] * (int32_t)(CAL_TONE_AMPLITUDE / 8192); // sine32 peaks at 8192
@@ -521,6 +552,25 @@ static void power_self_test(void)
                 phase += d;
             }
             audio_io_write(block, n); done += n;
+        }
+        if (tripped) {
+            // The guard cut the amplifier during step p: the supply holds p-1 at best.
+            pa_on = false; // the ISR already pulled the pin low
+            pa_holdoff_until = esp_timer_get_time() + POWER_GUARD_HOLDOFF_MS * 1000LL;
+            unsigned limit = p > CAL_MARGIN_STEPS ? p - 1 - CAL_MARGIN_STEPS : 0;
+            bt_core_radio_load(false);
+            nvs_handle_t h2;
+            if (nvs_open("audio", NVS_READWRITE, &h2) == ESP_OK) {
+                nvs_erase_key(h2, "calstep"); nvs_set_u8(h2, "dac", (uint8_t)limit); nvs_set_u8(h2, "cal", 1); nvs_commit(h2); nvs_close(h2);
+            }
+            boot_profile = limit;
+            portENTER_CRITICAL(&lock); st.dac_profile = limit; portEXIT_CRITICAL(&lock);
+            es8388_dac_mute(true);
+            ESP_LOGW(TAG, "POWER SELF-TEST: the brownout guard cut the amplifier at P%u (%.1f dB); saving P%u (%.1f dB) with %u step(s) of margin. No reset.",
+                     p, (double)es8388_dac_profile_db(p), limit, (double)es8388_dac_profile_db(limit), (unsigned)CAL_MARGIN_STEPS);
+            vTaskDelay(pdMS_TO_TICKS(POWER_GUARD_HOLDOFF_MS));
+            power_guard_rearm();
+            return;
         }
     }
     pa(false, &pa_on);
@@ -548,6 +598,7 @@ esp_err_t audio_engine_init(void)
     call_tx_ring = xRingbufferCreate(CALL_TX_BUFFER_BYTES, RINGBUF_TYPE_BYTEBUF);
     if (!music_ring || !call_rx_ring || !call_tx_ring) return ESP_ERR_NO_MEM;
     ESP_ERROR_CHECK(audio_io_init(44100));
+    ESP_ERROR_CHECK(power_guard_init());
     ESP_LOGI(TAG, "Engine: music 1x gain + limiter, DAC P%u, call volume %u/15, mic gain %.1fx",
              boot_profile, (unsigned)CALL_BOOT_VOLUME, (double)MIC_DIGITAL_GAIN);
     if (xTaskCreatePinnedToCore(audio_task, "audio", 8192, NULL, 6, NULL, 1) != pdPASS) return ESP_ERR_NO_MEM;

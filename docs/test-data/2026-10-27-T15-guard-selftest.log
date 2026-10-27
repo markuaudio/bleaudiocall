@@ -1,0 +1,55 @@
+I (10523) audio: DAC profile reset to P2 and saved limit cleared; running the power self-test again
+W (10523) audio: POWER SELF-TEST: 60 Hz tone at -3 dBFS on both speakers with the radio busy (inquiry), P0..P4, 1500 ms each, to find the loudest level this supply holds. A reset during the test is expected on a weak supply; the result is saved either way.
+I (10843) i2s: TX clocks: source=160000000 MCLK=11289537 BCLK=2822400 Fs=44100 capture=0 (32-bit data and slots)
+I (10843) es8388: ADC/microones OFF
+I (10843) es8388: DAC profile P0: -12.0 dB (reg 0x18)
+I (10843) audio:   self-test P0 (-12.0 dB)
+I (12353) es8388: DAC profile P1: -10.5 dB (reg 0x15)
+I (12353) audio:   self-test P1 (-10.5 dB)
+I (13853) es8388: DAC profile P2: -9.0 dB (reg 0x12)
+I (13853) audio:   self-test P2 (-9.0 dB)
+I (15353) es8388: DAC profile P3: -7.5 dB (reg 0x0f)
+I (15353) audio:   self-test P3 (-7.5 dB)
+I (16853) es8388: DAC profile P4: -6.0 dB (reg 0x0c)
+I (16853) audio:   self-test P4 (-6.0 dB)
+W (18353) audio: POWER SELF-TEST passed up to P4 (-6.0 dB); saving P3 (-7.5 dB) with 1 step(s) of margin for real streaming.
+I (18353) es8388: DAC profile P3: -7.5 dB (reg 0x0f)
+I (18353) es8388: ADC/microphones OFF
+I (18363) is: TX clocks: source=160000000 MCLK=11289537 BCLK=2822400 Fs=44100 capture=0 (32-bit data and slots)
+I (18373) audio: Path: MUSIC at 44100 Hz
+I (18373) audio: MUSIC 44100 Hz PA=0 in_peak=0 out_peak=0 mic_peak=0 frames=0 limited=0 P3
+I (18383) audio: music buffer=0 B drops=0 underruns=0 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (23393) audio: MUSIC 44100 Hz PA=0 in_peak=0 out_peak=0 mic_peak=0 frames=0 limited=0 P3
+I (23393) audio: music buffer=0 B drops=0 underruns=0 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (28403) audio: MUSIC 44100 Hz PA=0 in_peak=0 out_peak=0 mic_peak=0 frames=0 limited=0 P3
+I (28403) audio: music buffer=0 B drops=0 underruns=0 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (31193) bt: Reconnect attempt 2 to other bonded phone 50:49:b0:90:c5:33 (next in 10 s)
+I (31193) bt: Opening music (A2DP) to 50:49:b0:90:c5:33 ourselves
+W (31193) BT_APPL: reset flags
+I (31213) music: A2DP connecting...
+I (33413) audio: MUSIC 44100 Hz PA=0 in_peak=0 out_peak=0 mic_peak=0 frames=0 limited=0 P3
+I (33413) audio: music buffer=0 B drops=0 underruns=0 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+W (36333) BT_SDP: SDP - Rcvd conn cnf with error: 0x4  CID 0x41
+
+W (36333) BT_HCI: hcif conn complete: hdl 0xfff, st 0x4
+I (36333) bt: Radio link with 50:49:b0:90:c5:33: status 0x104 (0x104 = page timeout: phone off / out of range)
+W (36343) BT_BTC: BTA_AV_OPEN_EVT::FAILED status: 2
+
+I (36353) bt: Music (A2DP) attempt failed (phone not reachable)
+I (38423) audio: MUSIC 44100 Hz PA=0 in_peak=0 out_peak=0 mic_peak=0 frames=0 limited=0 P3
+I (38423) audio: music buffer=0 B drops=underruns=0 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (41203) bt: Reconnect attempt 3 to last connected phone 2c:d0:66:b0:8c:74 (next in 10 s)
+I (41203) bt: Opening music (A2DP) to 2c:d0:66:b0:8c:74 ourselves
+W (41203) BT_APPL: reset flags
+I (41213) music: A2DP connecting...
+I (43433) audio: MUSIC 44100 Hz PA=0 in_peak=0 out_peak=0 mic_peak=0 frames=0 limited=0 P3
+I (43433) audio: music buffer=0 B drops=0 underruns=0 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+W (46333) BT_SDP: SDP - Rcvd conn cnf with error: 0x4  CID 0x40
+
+W (46333) BT_HCI: hcif conn complete: hdl 0xfff, st 0x4
+I (46333) bt: Radio link with 2c:d0:66:b0:8c:74: status 0x104 (0x104 = page timeout: phone off / out of range)
+W (46343) BT_BTC: BTA_AV_OPEN_EVT::FAILED status: 2
+
+I (46343) bt: Music (A2DP) attempt failed (phone not reachable)
+I (48443) audio: MUSIC 44100 Hz PA=0 in_peak=0 out_peak=0 mic_peak=0 frames=0 limited=0 P3
+I (48443) audio: music buffer=0 B drops=underruns=0 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0

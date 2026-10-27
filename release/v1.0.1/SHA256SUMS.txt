@@ -1,0 +1,4 @@
+2cb512a566d43e6d02c298a65cdcaaa5c73a8c37879dab2f43e5cdbf6fb73de2  bleaudiocall.bin
+eadc779d4ac666754e3ce007385f81b4591a81d7861e89fc3db77c2c9175a19b  blu2-v1.0.1-full-0x0.bin
+ef2dd2a773af03be3b85caf39295f06142ccc9a146a6941fb88205f755319d22  bootloader.bin
+73c0b5c3e5fcba3a151cc70c453c93dd5f4798899e7f2f8cca76da1f32ffc501  partition-table.bin

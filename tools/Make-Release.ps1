@@ -8,6 +8,7 @@ $build = Join-Path $root 'build'
 $out = Join-Path $root "release\v$Version"
 New-Item -ItemType Directory -Force $out | Out-Null
 $full = Join-Path $out "blu2-v$Version-full-0x0.bin"
+Remove-Item -Force (Join-Path $out '*.bin') -ErrorAction SilentlyContinue
 $toolsDir = if ($env:IDF_TOOLS_PATH) { $env:IDF_TOOLS_PATH } else { 'C:\Espressif\tools' }
 $python = Join-Path $toolsDir 'python\v6.1\venv\Scripts\python.exe'
 & $python -m esptool --chip esp32 merge-bin -o $full --flash-mode dio --flash-freq 40m --flash-size 8MB `

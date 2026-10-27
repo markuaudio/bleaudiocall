@@ -1,4 +1,4 @@
-# Flash blu2 firmware v1.0.0 onto an ESP32-LyraT V4.3 (Windows).
+# Flash blu2 firmware v1.0.1 onto an ESP32-LyraT V4.3 (Windows).
 # Needs Python 3 and esptool:  pip install esptool
 # Put the board into download mode first (JP23/JP24/JP25 caps, or hold Boot + press RST).
 param(
@@ -7,7 +7,7 @@ param(
     [switch]$NoErase
 )
 $ErrorActionPreference = 'Stop'
-$bin = Join-Path $PSScriptRoot 'blu2-v1.0.0-full-0x0.bin'
+$bin = Join-Path $PSScriptRoot 'blu2-v1.0.1-full-0x0.bin'
 if (-not (Test-Path $bin)) { throw "Firmware file not found: $bin" }
 $py = Get-Command python -ErrorAction SilentlyContinue
 if (-not $py) { throw 'Python 3 not found. Install it from python.org, then run: pip install esptool' }
