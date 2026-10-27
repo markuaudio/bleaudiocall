@@ -33,6 +33,7 @@ What it does:
 9. [**Reconnect and power-trip fixes**: why the speaker did not auto-connect, why the link dropped at high volume, what changed and where, verification](docs/07-reconnect-and-power-trip-fixes.md)
 10. [**Test report**: every test run on the board on 2026-10-27, firmware, log evidence, verdicts, charts](docs/08-test-report.md)
 11. [**Defect register**: every problem found, root cause, fix, files, verification, open items; notes for hardware builders](docs/09-defect-register.md)
+12. [**Delivering the firmware to a client** without source: release package, three flashing methods, protection, commercial notes](docs/10-release-and-flashing-for-clients.md); the ready package is in `release/v1.0.0/` (client-facing README inside)
 
 All changes in one place: [CHANGELOG.md](CHANGELOG.md). Build logs and serial logs live in `docs/` with their dates.
 
@@ -42,10 +43,11 @@ All changes in one place: [CHANGELOG.md](CHANGELOG.md). Build logs and serial lo
 main/            firmware source (8 modules, see docs/01)
 sdkconfig.defaults  every non-default project setting; sdkconfig is generated from it
 partitions.csv   nvs + phy + 3 MB factory app
-tools/           Build.ps1, Flash.ps1, Monitor.ps1, Enter-EspIdf.ps1, live_serial.py, capture_serial.py
+tools/           Build.ps1, Flash.ps1, Monitor.ps1, Make-Release.ps1, Enter-EspIdf.ps1, live_serial.py, capture_serial.py, plot_serial_log.py
 docs/            learning notes, audit, build guide, build/serial logs, ES8388 reference driver
 docs/hardware/   official schematic + component layout (PDF + PNG), BOM
 docs/test-data/  live serial log of the test day, SVG charts and CSV table generated from it (tools/plot_serial_log.py)
+release/v1.0.0/  binary-only client package: merged image for 0x0, separate bins, SHA256SUMS, flash scripts, README-CLIENT.md
 build/           generated (gitignored)
 ```
 

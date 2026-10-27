@@ -159,6 +159,13 @@ Firmware identifiers as printed by `app_init: App version` (git describe, `-dirt
 - Observed: `DAC profile reset to P2 and saved limit cleared; running the power self-test again`; steps P0..P4 at 12.9, 14.4, 15.9, 17.4, 18.9 s (1.5 s each); `POWER SELF-TEST passed up to P4 (-6.0 dB); saving P3 (-7.5 dB) with 1 step(s) of margin for real streaming.`; `DAC profile P3` applied. No reset.
 - Verdict: **PASS**. A fresh unit on this supply now boots at P3, the level that T12 proved stable, without any reset in use. The brownout path itself (a collapse reading as `rst:0xf BROWNOUT`) has not been exercised yet because nothing tripped; it will show on the first real trip.
 
+## T14: Client package flashed the client's way
+
+- Firmware: release v1.0.0 (`CONFIG_APP_PROJECT_VER="1.0.0"`), package `release/v1.0.0/` built by `tools/Make-Release.ps1` (merged image 889,024 bytes, SHA-256 in `SHA256SUMS.txt`, ELF SHA-256 `01cfc71a...`).
+- Procedure: `python -m esptool --chip esp32 --port COM6 --baud 460800 write-flash --flash-mode dio --flash-freq 40m --flash-size 8MB 0x0 blu2-v1.0.0-full-0x0.bin` (no `idf.py`, no erase), then a 20 s capture: `docs/test-data/2026-10-27-T14-client-image-boot.log`.
+- Observed: `Wrote 889024 bytes ... Hash of data verified`; boot log `App version: 1.0.0`, `ELF file SHA256: 01cfc71a7...` (matches `esptool image-info`), `READY`. Also: `DAC profile P2 (-9.0 dB): not yet calibrated, the power self-test runs now` and no bonded phones: the merged image had overwritten the NVS area (merge-bin pads the gap between the partition table and the app with 0xFF), so the board came up as a new unit and ran the self-test.
+- Verdict: **PASS** for the package (boots, correct version, self-test runs on a "new" board). Finding: the full image is a factory reset; documented in `README-CLIENT.md` and docs/10 (use `bleaudiocall.bin` at `0x10000` for updates that must keep pairings).
+
 ---
 
 ## Summary table
@@ -178,6 +185,7 @@ Firmware identifiers as printed by `app_init: App version` (git describe, `-dirt
 | T11 self-test v2 | df773b5-dirty | ran, optimistic by 1 step | margin of 1 step |
 | T12 long loud run | df773b5-dirty | PASS at P3, 7.4 min | margin of 1 step (D13), brownout rule (D16) |
 | T13 self-test final | final | PASS, saves P3 directly | final configuration |
+| T14 client package flash | v1.0.0 | PASS; full image = factory reset | README-CLIENT / docs/10 note |
 
 ## Not tested yet
 

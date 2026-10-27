@@ -1,4 +1,8 @@
 CONFIG_IDF_TARGET="esp32"
+# Release version printed at boot (app_init: App version) and stored in the
+# binary's app descriptor; bump it for every client release.
+CONFIG_APP_PROJECT_VER_FROM_CONFIG=y
+CONFIG_APP_PROJECT_VER="1.0.0"
 CONFIG_ESPTOOLPY_FLASHSIZE_8MB=y
 CONFIG_PARTITION_TABLE_CUSTOM=y
 CONFIG_PARTITION_TABLE_CUSTOM_FILENAME="partitions.csv"
