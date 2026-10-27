@@ -231,7 +231,7 @@ Short capture without holding the port: `python tools\capture_serial.py --port C
 
 | # | Test | Pass = |
 |---|---|---|
-| 1 | Boot | READY line, no reset loop (reset reason 1 = power-on); no `POWER TRIP` warning |
+| 1 | Boot | READY line; on the first boot the 8 s power self-test tone (radio busy), then `POWER SELF-TEST passed up to Px` or `... result: the board reset at Px` (one reset is expected on a weak supply); no further resets |
 | 2 | `l` `r` `z` `b` | correct speaker, correct tone, no hiss in silence |
 | 3 | Phone: forget the old "kanchan" → scan → `blu2` → pair (PIN 0000 if asked) | "Pairing successful", Android shows both the Media and Phone calls toggles |
 | 4 | Music | "MUSIC 44100", drops/underruns 0, L/R correct, pads work, phone volume slider in sync |
@@ -254,9 +254,9 @@ Our status (2026-10-27): 1–2 pass (from the kanchan hardware), 3–8 **pending
 | Silence + rising underruns | 16-bit data, 32-bit slots | data = slots = 32-bit, PCM16 × 65536 |
 | Very quiet, more gain does not help | LOUT2/ROUT2 at 0 dB → PA differential cancellation | reg 0x30/0x31 = 0x00 |
 | Board resets on bass, `phy_init` loop | PC USB port current limit; the PA runs from the 5 V rail | 5 V 2 A charger; lower the DAC profile with `[` |
-| **Bluetooth disconnects at high volume** | The board reset (supply sag → IMP809 2.63 V supervisor / brownout). Boot log shows `reset reason=1 (power-on / EN pin)` or `9 (BROWNOUT)` right after the drop, then `POWER TRIP: ... DAC profile lowered to Px` | Automatic: the supply guard ducks the output when the 3.3 V rail sags (log `Supply sag`) and lowers the saved DAC profile after 4 sags in 30 s without any reset; a reset with the PA on still lowers it 2 steps as fallback. Better supply (5 V 2 A, short thick cable) lets you run louder; `0` clears the learned limit |
+| **Bluetooth disconnects at high volume** | The board reset (supply sag → IMP809 2.63 V supervisor / brownout). Boot log shows `reset reason=1 (power-on / EN pin)` or `9 (BROWNOUT)` right after the drop, then `POWER TRIP: ... DAC profile lowered to Px` | Automatic: the power self-test on the first boot finds the loudest DAC level this supply holds (one deliberate reset at most, before any phone), music peaks are held at -6 dBFS, and a reset with the PA on in use lowers the saved level one more step. Better supply (5 V 2 A, short thick cable on the POWER port) lets you run louder: type `0` to re-run the test |
 | Speaker reconnects to the wrong phone / never auto-connects | Old firmware tried only the newest bond, 6 times, then stopped | Now: last connected phone (NVS) first, other bonds in turn, every 10 s then every 45 s for ever |
-| Second phone needs a Bluetooth "refresh" / new phone cannot connect | Speaker was hidden while connected, and its own paging (10 s every 10 s) starved inquiry/page scans | Always discoverable; newest phone wins; page timeout 5 s and slow retries (docs/07) |
+| Second phone needs a Bluetooth "refresh" / new phone cannot connect | The speaker's own paging (10 s every 10 s) starved inquiry/page scans; it is hidden while a phone is connected (by design) | Page timeout 5 s and slow retries; disconnect the current phone (SET hold) or let the new phone take over if it is already paired (docs/07) |
 | Phone shows "connected (no media)" / HFP does not open | the speaker went NON_CONNECTABLE | always CONNECTABLE (bt_core) |
 | Old phone does not list the speaker | CoD uncategorized | CoD AV/hands-free |
 | Phone shows "kanchan" as music-only without calls | the phone's SDP cache | forget on the phone; new name `blu2` |
@@ -273,7 +273,7 @@ Our status (2026-10-27): 1–2 pass (from the kanchan hardware), 3–8 **pending
 
 ## 8. Numbers you will tune (`main/board_config.h`)
 
-`MUSIC_BOOT_VOLUME 70`, `AUDIO_BOOT_DAC_PROFILE 4` (-6 dB; P0 -12 … P8 0 dB), `CALL_BOOT_VOLUME 10`, `CALL_RX/TX_BUFFER_BYTES 6144`, `CALL_PREFILL_BYTES 480`, `MIC_PGA_REG 0x88`, `MIC_DIGITAL_GAIN 2.0f`, `CALL_RING_ON/OFF_MS 1000/2000`, `LINK_RECONNECT_ATTEMPTS 4`, `LINK_RECONNECT_PERIOD_S 10`, `LINK_RECONNECT_SLOW_PERIOD_S 45`, `LINK_PAGE_TIMEOUT 0x2000`, `LINK_PROFILE_FOLLOWUP_S 4`, `POWER_TRIP_DAC_STEP 2`, `SUPPLY_SAG_COUNTS 200`, `SUPPLY_DUCK_MIN 0.25`, `SUPPLY_RECOVER_S 3`, `SUPPLY_SAG_LIMIT 4`, `SUPPLY_SAG_WINDOW_S 30`, `BT_DEVICE_NAME "blu2"`, `BT_LEGACY_PIN "0000"`.
+`MUSIC_BOOT_VOLUME 70`, `AUDIO_BOOT_DAC_PROFILE 2` (-9 dB until the self-test; P0 -12 … P8 0 dB), `CAL_MAX_PROFILE 4`, `CAL_TONE_HZ 60`, `CAL_TONE_AMPLITUDE 23170`, `CAL_STEP_MS 1500`, `MUSIC_PCM_PEAK_LIMIT 16384`, `CALL_BOOT_VOLUME 10`, `CALL_RX/TX_BUFFER_BYTES 6144`, `CALL_PREFILL_BYTES 480`, `MIC_PGA_REG 0x88`, `MIC_DIGITAL_GAIN 2.0f`, `CALL_RING_ON/OFF_MS 1000/2000`, `LINK_RECONNECT_ATTEMPTS 4`, `LINK_RECONNECT_PERIOD_S 10`, `LINK_RECONNECT_SLOW_PERIOD_S 45`, `LINK_PAGE_TIMEOUT 0x2000`, `LINK_PROFILE_FOLLOWUP_S 4`, `POWER_TRIP_DAC_STEP 1`, `BT_DEVICE_NAME "blu2"`, `BT_LEGACY_PIN "0000"`.
 
 ---
 

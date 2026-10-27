@@ -16,7 +16,7 @@ An old phone would not connect. Reading the code revealed these causes (one or m
 
 | Item | Now | Why |
 |---|---|---|
-| Scan mode | **always CONNECTABLE and always DISCOVERABLE**, even while a phone is connected; the newest phone that connects takes over (docs/07) | profiles open at different times; a second phone must find the speaker without a refresh |
+| Scan mode | **always CONNECTABLE**; discoverable only while no phone is connected; an already-paired phone that connects while another is in use takes over (docs/07) | profiles open at different times; the speaker is visible to everyone as soon as it is free |
 | Profiles | A2DP + AVRCP + **HFP HF** all in SDP | music-only phones, call-only phones, phones with both: everyone finds something |
 | Class of Device | `major AV, minor Hands-free (0x02), service Audio + Rendering` via `esp_bt_gap_set_cod(..., ESP_BT_INIT_COD)` | old phones see a "headset/hands-free" |
 | Pairing, new phones | SSP on, IO cap NONE ("Just Works"), `CFM_REQ` auto-accept, `KEY_NOTIF` logged | a speaker without a display; no number comparison |

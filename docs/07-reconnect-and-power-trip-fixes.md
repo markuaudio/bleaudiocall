@@ -103,6 +103,8 @@ followed by an automatic reconnect to the phone within a few seconds.
 
 ## Second iteration: supply guard (find the safe level without any reset)
 
+> **Outcome (same day): this did not work and was removed.** The live log showed the rail reading still at full scale right before every reset; see the fourth iteration below. Kept here as the record of what was tried.
+
 The learned limit above only acts *after* a reset, and every reset means reboot, reconnect and the phone re-starting the stream. The user rightly called that "calibrating in front of the user". The second iteration measures the supply while playing and backs off before the supervisor can reset the chip.
 
 ### How the rail is measured on a board with no sense pin
@@ -156,6 +158,53 @@ Reported: a second device only connected after refreshing the phone's Bluetooth 
 
 ---
 
+## Fourth iteration: what the live log proved, and the final design (power self-test)
+
+With the live monitor running, the user turned the phone up to 90-100 % five times in a row. `docs/live-serial.log` (local, not committed) showed the same sequence every time:
+
+```
+I (7974) music: Music STARTED
+I (8164) audio: Music volume 90%
+ets Jul 29 2019 12:21:46
+rst:0x1 (POWERON_RESET),boot:0x1f (SPI_FAST_FLASH_BOOT)
+...
+I (524) boot: bleaudiocall: music + calls; reset reason=1 (power-on / EN pin)
+```
+
+Facts from those five resets:
+
+1. **Every "disconnect" is an EN-pin reset by the IMP809 supervisor** (3.3 V rail below 2.63 V), 1-2 s after music starts at high phone volume. Never a Bluetooth-level disconnect.
+2. **The supply guard never saw anything.** The last stats line before each reset still read `supply raw=4095 quiet=4095 duck=1.00 sags=0`. The 3.3 V rail stays at full scale until the 5 V input has fallen below the LDO dropout, and from there to 2.63 V takes well under a millisecond (about 110 uF on the rail, several hundred mA of load). Software sampling every 5-10 ms cannot react in time, and even a faster sampler would still be behind the 46 ms of audio already queued in DMA. The approach was wrong and was **removed** (`supply.c`, the ADC dependency and all `SUPPLY_*` constants are gone).
+3. **The RTC-memory flag did not survive the reset**: no `POWER TRIP` line after any of the five resets. On this board the EN-pin reset is reported as `ESP_RST_POWERON` and the RTC slow memory contents were not usable. The flag now lives in **NVS** (`audio/paon`, written only when the amplifier state changes).
+4. **The trips happened at a modest level.** The last stats before the resets showed `out_peak` around 12000 (about -8.7 dBFS) at P4 (-6 dB), i.e. a codec output near -15 dB, roughly 0.5 W per channel. That the supply still collapsed is explained by the board's own power path (schematic, "Power System"): USB POWER -> **D3 1N5819** (0.4-0.6 V drop at 1-2 A, rated 1 A) -> Q2 -> switch -> ferrites -> NS4150 PVDD and -> **LD1117** (dropout about 1.1 V). A 5.0 V adapter with a thin cable therefore delivers about 4.0-4.2 V to the board under amplifier load, the LDO drops out, the 3.3 V rail falls, and the supervisor resets the chip. The earlier research (kanchan docs 13) put the PA's clean limit at a codec level of -11 to -12 dB on such a rail; P4 is 5-6 dB above that.
+
+Software cannot add voltage. What it can do is keep the output inside what *this* supply sustains, and find that limit once, deliberately, without a phone and without disconnects in normal use.
+
+### Final design
+
+| Change | Where | Why |
+|---|---|---|
+| **Power self-test** on the first boot after flashing (and after console `0` or `k`): a 60 Hz tone at **-3 dBFS** (`CAL_TONE_HZ`, `CAL_TONE_AMPLITUDE`) on both speakers, **1.5 s** (`CAL_STEP_MS`) at each DAC profile P0 -> P4 (`CAL_MAX_PROFILE`), **with the Bluetooth radio running an inquiry** the whole time (`bt_core_radio_load`). Before each step the step number is written to NVS (`audio/calstep`). | `power_self_test()` in `audio_engine.c`, run from the audio task once `bt_core_ready()` | 60 Hz bass is the worst case for amplifier current; the inquiry makes the ESP32 side draw about what it draws while streaming; 3 dB above the music ceiling is the margin. Verified the same day: a test with the radio idle at -6 dBFS passed P4 while streaming at P4 still reset the board, so the idle test was not representative. If the supply collapses, the supervisor resets the board during that step. |
+| On the next boot, `calstep` present + a power-type reset reason -> the previous step is saved as the limit (`audio/dac`), the test is marked done (`audio/cal` = 1). If the test completes, P4 is saved. | `load_boot_profile()` | One deliberate reset at most, once, before any phone is involved. From then on the speaker boots at the loudest level this supply holds. |
+| **Music peak ceiling -6 dBFS** (`MUSIC_PCM_PEAK_LIMIT 16384`) held by the existing limiter (instant attack, 150 ms release) | `board_config.h`, `scale_frame()` | 3 dB below the test tone. Any music is therefore easier on the supply than the test that passed, so a passed level should not trip in use. The headroom is given back by the higher DAC profile the test allows. |
+| Uncalibrated default P2 (-9 dB) (`AUDIO_BOOT_DAC_PROFILE`), only used until the test has run | `board_config.h` | Conservative starting point, matches the measured clip point. |
+| Fallback: reset while the amplifier was on (`audio/paon` = 1 in NVS) -> saved profile lowered by `POWER_TRIP_DAC_STEP` (1) | `load_boot_profile()`, `save_pa_flag()` | Covers a changed adapter or cable without re-running the test. |
+| Console `0` = default profile + forget the saved limit + run the self-test now; `k` = run the self-test now | `audio_engine_dac_reset()`, `audio_engine_calibrate()`, `main.c` | After switching to a better adapter, `0` finds the new, higher limit. |
+| Discoverable **only while no phone is connected** (user request); a bonded phone can still connect and takes over (newest phone wins) | `bt_core.c` `set_scan_mode` / `link_task` | Hidden while in use; visible to everyone as soon as it is free. |
+
+### What the user sees
+
+- First boot after flashing (as soon as Bluetooth is initialised, about 3 s): about 8 seconds of a low 60 Hz tone, rising in steps, from both speakers. If the supply is weak the board resets once during the tone and comes back quieter: `POWER SELF-TEST result: the board reset at P2, so P1 (-10.5 dB) is the loudest level this supply holds. Saved.` If it passes: `POWER SELF-TEST passed up to P4 (-6.0 dB)`.
+- Afterwards: music at any phone volume stays connected. Loud passages are held at the -6 dBFS ceiling by the limiter.
+- Better adapter later (5 V / 2 A, short thick cable, on the **POWER** port): type `0` in the monitor, the test runs again and the speaker gets louder if the supply allows it.
+- Speakers must be connected during the test; with no load the test passes trivially.
+
+### Verification
+
+Build and flash passed. The live log after flashing shows the self-test running (`POWER SELF-TEST: 60 Hz tone ...`, `self-test P0 ... P4`) and its saved result; see the live-log excerpt in the CHANGELOG row for this change. The high-volume music test on the user's adapter is the final check.
+
+---
+
 ## Files touched
 
 | File | Lines changed (approx.) |
@@ -164,7 +213,7 @@ Reported: a second device only connected after refreshing the phone's Bluetooth 
 | `main/audio_engine.c` | +45: RTC flag, `load_boot_profile`, `dac_reset`, banner |
 | `main/main.c` | +4: reset reason in words |
 | `main/board_config.h` | +8 constants, comments |
-| `main/supply.c`, `main/supply.h` | new: 3.3 V rail sensing on the REC line |
+| `main/supply.c`, `main/supply.h` | added in iteration 2, **removed** in iteration 4 (did not work, see above) |
 | `README.md`, `docs/01`, `docs/02`, `docs/06`, `CHANGELOG.md` | behaviour and troubleshooting rows |
 
 Commit: "Reconnect for ever to the last connected phone; power-trip protection".

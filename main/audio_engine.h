@@ -29,5 +29,6 @@ void audio_engine_ring(bool on); // local ring tone (when the phone sends no in-
 // Diagnostics (serial console).
 void audio_engine_test_mode(unsigned mode); // 0=Bluetooth, 1=left 400 Hz, 2=right 800 Hz, 3=digital silence
 void audio_engine_dac_step(int delta);      // ] / [ : 1.5 dB codec steps, not persisted
-void audio_engine_dac_reset(void);
+void audio_engine_dac_reset(void);      // 0 : default profile, forget the learned limit, run the power self-test again
+void audio_engine_calibrate(void);      // k : run the power self-test now
 void audio_engine_log_status(void);

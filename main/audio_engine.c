@@ -7,7 +7,6 @@
 #include "driver/gpio.h"
 #include "esp_log.h"
 #include "esp_timer.h"
-#include "esp_attr.h"
 #include "esp_system.h"
 #include "nvs.h"
 #include "esp_hf_client_api.h"
@@ -15,23 +14,27 @@
 #include "board_config.h"
 #include "es8388.h"
 #include "audio_io.h"
-#include "supply.h"
+#include "bt_core.h"
 #include "audio_engine.h"
 
 static const char *TAG = "audio";
-// Survives every reset except a real power cycle: tells the next boot whether
-// the amplifier was on when the chip reset (= supply collapsed under load).
-#define PA_FLAG_MAGIC 0x50A0C0DEu
-static RTC_NOINIT_ATTR uint32_t rtc_pa_flag;
-static unsigned boot_profile = AUDIO_BOOT_DAC_PROFILE; // after NVS / power-trip adjustment
+static unsigned boot_profile = AUDIO_BOOT_DAC_PROFILE; // after NVS / self-test / power-trip adjustment
+static bool cal_pending;   // run the power self-test at the next audio task iteration
+static void power_self_test(void);
+static bool pa_flag_nvs;   // mirror of NVS audio/paon: 1 while the amplifier is on
 
-static void save_dac_profile(unsigned profile)
+// RTC memory does not survive the IMP809 EN-pin reset on this board (verified
+// 2026-10-27: five resets, flag never seen), so the "amplifier was on" flag
+// lives in NVS. Written only on change: a couple of writes per listening session.
+static void save_pa_flag(bool on)
 {
+    if (pa_flag_nvs == on) return;
     nvs_handle_t h;
     if (nvs_open("audio", NVS_READWRITE, &h) != ESP_OK) return;
-    nvs_set_u8(h, "dac", (uint8_t)profile); nvs_commit(h); nvs_close(h);
-    boot_profile = profile;
+    nvs_set_u8(h, "paon", on ? 1 : 0); nvs_commit(h); nvs_close(h);
+    pa_flag_nvs = on;
 }
+
 static portMUX_TYPE lock = portMUX_INITIALIZER_UNLOCKED;
 static RingbufHandle_t music_ring, call_rx_ring, call_tx_ring;
 
@@ -95,6 +98,7 @@ void audio_engine_music_push(const uint8_t *data, uint32_t length)
     portENTER_CRITICAL(&lock); st.music_queued += length; portEXIT_CRITICAL(&lock);
     xRingbufferSendComplete(music_ring, p);
 }
+
 
 // ----------------------------------------------------------------- call API
 void audio_engine_call_start(unsigned rate)
@@ -187,12 +191,18 @@ void audio_engine_dac_step(int delta)
 }
 void audio_engine_dac_reset(void)
 {
-    // Back to the compile-time default and forget any learned power-trip limit.
+    // Forget the self-test result and the learned limit; the self-test runs again now.
     nvs_handle_t h;
-    if (nvs_open("audio", NVS_READWRITE, &h) == ESP_OK) { nvs_erase_key(h, "dac"); nvs_commit(h); nvs_close(h); }
+    if (nvs_open("audio", NVS_READWRITE, &h) == ESP_OK) {
+        nvs_erase_key(h, "dac"); nvs_erase_key(h, "cal"); nvs_erase_key(h, "calstep"); nvs_commit(h); nvs_close(h);
+    }
     boot_profile = AUDIO_BOOT_DAC_PROFILE;
-    portENTER_CRITICAL(&lock); st.dac_profile = AUDIO_BOOT_DAC_PROFILE; ++st.epoch; portEXIT_CRITICAL(&lock);
-    ESP_LOGI(TAG, "DAC profile reset to P%u; learned power-trip limit cleared", (unsigned)AUDIO_BOOT_DAC_PROFILE);
+    portENTER_CRITICAL(&lock); st.dac_profile = AUDIO_BOOT_DAC_PROFILE; cal_pending = true; ++st.epoch; portEXIT_CRITICAL(&lock);
+    ESP_LOGI(TAG, "DAC profile reset to P%u and saved limit cleared; running the power self-test again", (unsigned)AUDIO_BOOT_DAC_PROFILE);
+}
+void audio_engine_calibrate(void)
+{
+    portENTER_CRITICAL(&lock); cal_pending = true; ++st.epoch; portEXIT_CRITICAL(&lock);
 }
 void audio_engine_log_status(void)
 {
@@ -231,7 +241,7 @@ static void pa(bool on, bool *pa_on)
     gpio_set_level(BOARD_PA_ENABLE, on);
     if (!on) es8388_dac_mute(true);
     *pa_on = on;
-    rtc_pa_flag = on ? PA_FLAG_MAGIC : 0;
+    save_pa_flag(on);
 }
 
 // --------------------------------------------------------------- the task
@@ -247,10 +257,6 @@ static void audio_task(void *arg)
     uint32_t phase = 0, phase2 = 0, in_peak = 0, out_peak = 0, mic_peak = 0, limited = 0;
     uint64_t frames_out = 0;
     int64_t prefill_since = esp_timer_get_time(), last_report = prefill_since, ring_since = prefill_since;
-    // Supply guard state: quiet baseline of the rail reading, current duck gain,
-    // sag bookkeeping for the "lower the profile while playing" rule.
-    int supply_base = 0, supply_raw = -1; float duck = 1.0f; bool sag_active = false;
-    uint32_t sag_events = 0; unsigned sag_window = 0; int64_t window_start = prefill_since, last_loop = prefill_since;
     while (1) {
         unsigned epoch, mode, profile, rate, music_volume, call_volume, queued;
         bool music_active, ring, diagnose; source_t source;
@@ -263,34 +269,13 @@ static void audio_task(void *arg)
         portEXIT_CRITICAL(&lock);
         if (diagnose) { es8388_log_readback(); audio_io_log_clocks(); }
 
-        // ---------------- supply guard ----------------
-        int64_t now_us = esp_timer_get_time();
-        float dt = (now_us - last_loop) / 1e6f; last_loop = now_us;
-        supply_raw = supply_read_raw();
-        if (supply_raw >= 0) {
-            if (!pa_on) supply_base = supply_raw > supply_base ? supply_raw : supply_base + (supply_raw - supply_base) / 64;
-            bool sag = supply_base > 0 && supply_raw < supply_base - SUPPLY_SAG_COUNTS;
-            if (sag) {
-                if (!sag_active) { sag_active = true; ++sag_events; ++sag_window;
-                    ESP_LOGW(TAG, "Supply sag: rail raw %d (quiet %d) with PA %s; ducking output", supply_raw, supply_base, pa_on ? "on" : "off"); }
-                duck *= 0.87f; if (duck < SUPPLY_DUCK_MIN) duck = SUPPLY_DUCK_MIN; // ~6 dB per 50 ms while it lasts
-            } else {
-                sag_active = false;
-                if (duck < 1.0f) { duck += dt / SUPPLY_RECOVER_S; if (duck > 1.0f) duck = 1.0f; }
-            }
-            if (now_us - window_start > SUPPLY_SAG_WINDOW_S * 1000000LL) { window_start = now_us; sag_window = 0; }
-            if (sag_window >= SUPPLY_SAG_LIMIT) {
-                sag_window = 0; window_start = now_us;
-                if (profile > 0) {
-                    unsigned lower = profile - 1;
-                    save_dac_profile(lower);
-                    portENTER_CRITICAL(&lock); st.dac_profile = lower; ++st.epoch; portEXIT_CRITICAL(&lock);
-                    ESP_LOGW(TAG, "Supply sags repeatedly at P%u: DAC profile lowered to P%u (%.1f dB) and saved. This is the loudest level this supply holds; '0' clears it",
-                             profile, lower, (double)es8388_dac_profile_db(lower));
-                } else {
-                    ESP_LOGW(TAG, "Supply sags even at the lowest DAC profile: use a 5 V / 2 A adapter and a short, thick cable");
-                }
-            }
+        bool run_cal;
+        portENTER_CRITICAL(&lock); run_cal = cal_pending && bt_core_ready(); if (run_cal) cal_pending = false; portEXIT_CRITICAL(&lock);
+        if (run_cal) {
+            pa(false, &pa_on);
+            power_self_test();
+            last_epoch = UINT32_MAX; // re-apply the (new) profile and reclock on the next pass
+            continue;
         }
 
         if (epoch != last_epoch) {
@@ -324,7 +309,7 @@ static void audio_task(void *arg)
             if (call_primed) got = ring_read_exact(call_rx_ring, CALL_RX_BUFFER_BYTES, voice, want);
             size_t have = got / sizeof(int16_t);
             if (call_primed && have < frames) { portENTER_CRITICAL(&lock); ++st.call_underruns; portEXIT_CRITICAL(&lock); }
-            float level = call_volume / 15.0f * duck;
+            float level = call_volume / 15.0f;
             for (size_t i = 0; i < frames; ++i) {
                 int32_t s = i < have ? voice[i] : 0;
                 if (i >= have) s = last_l * (int32_t)(frames - i) / (int32_t)frames; // fade to silence
@@ -364,7 +349,7 @@ static void audio_task(void *arg)
             }
             int64_t t = (esp_timer_get_time() - ring_since) / 1000 % (CALL_RING_ON_MS + CALL_RING_OFF_MS);
             bool burst = !ringing || t < CALL_RING_ON_MS;
-            float level = music_volume / 100.0f, target = level * level * duck;
+            float level = music_volume / 100.0f, target = level * level;
             float step = 1.0f / (rate * 0.02f);
             uint32_t d1 = ((uint64_t)(mode == 2 ? 800 : mode == 1 ? 400 : 425) << 32) / rate;
             uint32_t d2 = ((uint64_t)480 << 32) / rate; // ring: 425 + 480 Hz dual tone
@@ -396,7 +381,7 @@ static void audio_task(void *arg)
             pa(true, &pa_on);
             const int16_t *in = (const int16_t *)p->data;
             size_t frames = p->length / (p->channels * sizeof(int16_t));
-            float level = music_volume / 100.0f, target = level * level * duck; // digital gain 1x at 100%
+            float level = music_volume / 100.0f, target = level * level; // digital gain 1x at 100%, peaks held at MUSIC_PCM_PEAK_LIMIT
             float step = 1.0f / (rate * 0.04f), release_step = 1.0f / (rate * 0.15f);
             for (size_t pos = 0; pos < frames;) {
                 size_t n = frames - pos; if (n > 256) n = 256;
@@ -437,44 +422,111 @@ report:
                      source == SRC_CALL ? "CALL" : "MUSIC", rate, pa_on, in_peak, out_peak, mic_peak, frames_out, limited, profile);
             ESP_LOGI(TAG, "music buffer=%u B drops=%"PRIu32" underruns=%"PRIu32" | call rx_drops=%"PRIu32" tx_drops=%"PRIu32" underruns=%"PRIu32" | i2s_errors=%"PRIu32,
                      q, md, mu, crd, ctd, cu, ie);
-            ESP_LOGI(TAG, "supply raw=%d quiet=%d duck=%.2f sags=%"PRIu32" (REC line senses the 3.3 V rail)", supply_raw, supply_base, (double)duck, sag_events);
             in_peak = out_peak = mic_peak = limited = 0; frames_out = 0;
             last_report = esp_timer_get_time();
         }
     }
 }
 
-// Decide the boot DAC profile: the saved one (if any), lowered once more when
-// the previous run ended in a reset with the amplifier on.
+// Decide the boot DAC profile from NVS:
+//   calstep present  -> the previous run reset in the middle of the power
+//                       self-test: that step collapsed the supply, the one
+//                       below it is the limit (saved, test marked done).
+//   paon == 1 + reset -> a reset while the amplifier was on in normal use:
+//                       lower the saved profile by POWER_TRIP_DAC_STEP (fallback).
+//   cal != 1         -> the self-test has not run yet: run it now.
 static void load_boot_profile(void)
 {
     esp_reset_reason_t why = esp_reset_reason();
-    bool pa_was_on = rtc_pa_flag == PA_FLAG_MAGIC;
-    rtc_pa_flag = 0;
+    bool trip_reason = why == ESP_RST_BROWNOUT || why == ESP_RST_POWERON || why == ESP_RST_UNKNOWN || why == ESP_RST_PWR_GLITCH;
     unsigned profile = AUDIO_BOOT_DAC_PROFILE;
+    bool cal_done = false;
     nvs_handle_t h;
-    if (nvs_open("audio", NVS_READWRITE, &h) != ESP_OK) return;
-    uint8_t stored;
-    if (nvs_get_u8(h, "dac", &stored) == ESP_OK && stored <= es8388_dac_profile_max()) {
-        profile = stored;
-        ESP_LOGI(TAG, "DAC profile P%u restored from NVS (learned limit)", profile);
-    }
-    bool power_trip = pa_was_on && (why == ESP_RST_BROWNOUT || why == ESP_RST_POWERON ||
-                                    why == ESP_RST_UNKNOWN || why == ESP_RST_PWR_GLITCH);
-    if (power_trip) {
+    if (nvs_open("audio", NVS_READWRITE, &h) != ESP_OK) { cal_pending = true; st.dac_profile = profile; return; }
+    uint8_t v;
+    if (nvs_get_u8(h, "dac", &v) == ESP_OK && v <= es8388_dac_profile_max()) profile = v;
+    if (nvs_get_u8(h, "cal", &v) == ESP_OK && v == 1) cal_done = true;
+    uint8_t step;
+    if (nvs_get_u8(h, "calstep", &step) == ESP_OK) {
+        nvs_erase_key(h, "calstep");
+        if (trip_reason) {
+            profile = step > 0 ? step - 1 : 0;
+            nvs_set_u8(h, "dac", (uint8_t)profile); nvs_set_u8(h, "cal", 1); cal_done = true;
+            if (step > 0)
+                ESP_LOGW(TAG, "POWER SELF-TEST result: the board reset at P%u (reset reason %d), so P%u (%.1f dB) is the loudest level this supply holds. Saved.",
+                         step, (int)why, profile, (double)es8388_dac_profile_db(profile));
+            else
+                ESP_LOGE(TAG, "POWER SELF-TEST: the board reset even at P0 (-12 dB). This supply or cable cannot drive the speakers; staying at P0. Use a 5 V / 2 A adapter on the POWER port with a short, thick cable");
+        } else {
+            cal_done = false; // some other reset interrupted the test: run it again
+        }
+        nvs_commit(h);
+    } else if (trip_reason && nvs_get_u8(h, "paon", &v) == ESP_OK && v == 1) {
         if (profile >= POWER_TRIP_DAC_STEP) {
             profile -= POWER_TRIP_DAC_STEP;
-            nvs_set_u8(h, "dac", (uint8_t)profile); nvs_commit(h); // (same key as save_dac_profile)
-            ESP_LOGW(TAG, "POWER TRIP: the board reset while the amplifier was on (reset reason %d). "
-                          "DAC profile lowered to P%u (%.1f dB) and saved. Use a 5 V / 2 A supply and a short, thick cable; '0' clears this",
+            nvs_set_u8(h, "dac", (uint8_t)profile); nvs_commit(h);
+            ESP_LOGW(TAG, "POWER TRIP: the board reset while the amplifier was on (reset reason %d). DAC profile lowered to P%u (%.1f dB) and saved; '0' re-runs the self-test",
                      (int)why, profile, (double)es8388_dac_profile_db(profile));
         } else {
             ESP_LOGW(TAG, "POWER TRIP at the lowest DAC profile: the supply or cable must be fixed");
         }
     }
+    if (nvs_get_u8(h, "paon", &v) == ESP_OK && v) { nvs_set_u8(h, "paon", 0); nvs_commit(h); }
+    pa_flag_nvs = false;
     nvs_close(h);
+    cal_pending = !cal_done;
     boot_profile = profile;
     st.dac_profile = profile;
+    ESP_LOGI(TAG, "DAC profile P%u (%.1f dB): %s", profile, (double)es8388_dac_profile_db(profile),
+             cal_done ? "limit found by the power self-test for this supply" : "not yet calibrated, the power self-test runs now");
+}
+
+// Power self-test: a CAL_TONE_HZ tone at CAL_TONE_AMPLITUDE through both
+// speakers, CAL_STEP_MS per DAC profile from P0 up to CAL_MAX_PROFILE. The step
+// in progress is stored in NVS before it plays; if the supply collapses and the
+// supervisor resets the chip, load_boot_profile() turns that into the limit.
+static void power_self_test(void)
+{
+    unsigned max = CAL_MAX_PROFILE < es8388_dac_profile_max() ? CAL_MAX_PROFILE : es8388_dac_profile_max();
+    ESP_LOGW(TAG, "POWER SELF-TEST: %u Hz tone at -3 dBFS on both speakers with the radio busy (inquiry), P0..P%u, %u ms each, to find the loudest level this supply holds. "
+                  "A reset during the test is expected on a weak supply; the result is saved either way.", (unsigned)CAL_TONE_HZ, max, (unsigned)CAL_STEP_MS);
+    bt_core_radio_load(true);
+    vTaskDelay(pdMS_TO_TICKS(300)); // let the inquiry get going before the first step
+    ESP_ERROR_CHECK(audio_io_set_rate(44100, false));
+    es8388_adc_power(false);
+    int16_t block[AUDIO_IO_MAX_FRAMES * 2];
+    const uint32_t d = ((uint64_t)CAL_TONE_HZ << 32) / 44100;
+    const unsigned ramp = 44100 / 20; // 50 ms fade in / out
+    const unsigned per_step = 44100 * CAL_STEP_MS / 1000, total = per_step * (max + 1);
+    uint32_t phase = 0; unsigned pos = 0; bool pa_on = false;
+    for (unsigned p = 0; p <= max; ++p) {
+        nvs_handle_t h;
+        if (nvs_open("audio", NVS_READWRITE, &h) == ESP_OK) { nvs_set_u8(h, "calstep", (uint8_t)p); nvs_commit(h); nvs_close(h); }
+        es8388_apply_dac_profile(p);
+        pa(true, &pa_on);
+        ESP_LOGI(TAG, "  self-test P%u (%.1f dB)", p, (double)es8388_dac_profile_db(p));
+        unsigned done = 0;
+        while (done < per_step) {
+            size_t n = per_step - done; if (n > AUDIO_IO_MAX_FRAMES) n = AUDIO_IO_MAX_FRAMES;
+            for (size_t i = 0; i < n; ++i, ++pos) {
+                int32_t s = sine32[phase >> 27] * (int32_t)(CAL_TONE_AMPLITUDE / 8192); // sine32 peaks at 8192
+                if (pos < ramp) s = s * (int32_t)pos / (int32_t)ramp;
+                else if (total - pos < ramp) s = s * (int32_t)(total - pos) / (int32_t)ramp;
+                block[2*i] = block[2*i+1] = (int16_t)s;
+                phase += d;
+            }
+            audio_io_write(block, n); done += n;
+        }
+    }
+    pa(false, &pa_on);
+    bt_core_radio_load(false);
+    nvs_handle_t h;
+    if (nvs_open("audio", NVS_READWRITE, &h) == ESP_OK) {
+        nvs_erase_key(h, "calstep"); nvs_set_u8(h, "dac", (uint8_t)max); nvs_set_u8(h, "cal", 1); nvs_commit(h); nvs_close(h);
+    }
+    boot_profile = max;
+    portENTER_CRITICAL(&lock); st.dac_profile = max; portEXIT_CRITICAL(&lock);
+    ESP_LOGW(TAG, "POWER SELF-TEST passed up to P%u (%.1f dB): this supply holds the maximum tested level. Saved.", max, (double)es8388_dac_profile_db(max));
 }
 
 esp_err_t audio_engine_init(void)
@@ -489,7 +541,6 @@ esp_err_t audio_engine_init(void)
     call_tx_ring = xRingbufferCreate(CALL_TX_BUFFER_BYTES, RINGBUF_TYPE_BYTEBUF);
     if (!music_ring || !call_rx_ring || !call_tx_ring) return ESP_ERR_NO_MEM;
     ESP_ERROR_CHECK(audio_io_init(44100));
-    if (supply_init() != ESP_OK) ESP_LOGW(TAG, "Supply guard unavailable (ADC init failed); power-trip fallback only");
     ESP_LOGI(TAG, "Engine: music 1x gain + limiter, DAC P%u, call volume %u/15, mic gain %.1fx",
              boot_profile, (unsigned)CALL_BOOT_VOLUME, (double)MIC_DIGITAL_GAIN);
     if (xTaskCreatePinnedToCore(audio_task, "audio", 8192, NULL, 6, NULL, 1) != pdPASS) return ESP_ERR_NO_MEM;

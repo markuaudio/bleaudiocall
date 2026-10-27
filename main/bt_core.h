@@ -14,6 +14,8 @@ void bt_core_profile_ready(bt_profile_t profile);
 void bt_core_profile_link(bt_profile_t profile, bool up, const uint8_t *bda);
 void bt_core_profile_failed(bt_profile_t profile); // our own connect attempt ended without a link
 bool bt_core_connected(void);       // any profile up
+bool bt_core_ready(void);           // A2DP + HFP initialised (GAP usable)
+void bt_core_radio_load(bool on);   // power self-test: run a Bluetooth inquiry to load the radio like streaming does
 void bt_core_disconnect(void);      // user request: drop both profiles, stop auto-reconnect
 void bt_core_connect_last(void);    // user request: reconnect to the newest bonded phone
 void bt_core_forget_all(void);      // remove every bond (phone must pair again)

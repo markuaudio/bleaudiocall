@@ -101,6 +101,26 @@ const char *bt_core_bda_str(const uint8_t *b, char out[18])
     return out;
 }
 
+bool bt_core_ready(void)
+{
+    portENTER_CRITICAL(&lock); bool r = s.a2dp_ready && s.hfp_ready; portEXIT_CRITICAL(&lock);
+    return r;
+}
+
+void bt_core_radio_load(bool on)
+{
+    if (on) {
+        // General inquiry for up to 61 s (cancelled by the caller): continuous
+        // TX/RX, comparable to the radio activity of an A2DP stream. Hold our own
+        // reconnect paging back meanwhile.
+        portENTER_CRITICAL(&lock); s.next_attempt_at = esp_timer_get_time() + 20000000LL; portEXIT_CRITICAL(&lock);
+        esp_err_t err = esp_bt_gap_start_discovery(ESP_BT_INQ_MODE_GENERAL_INQUIRY, 0x30, 0);
+        if (err != ESP_OK) ESP_LOGW(TAG, "Radio load (inquiry) could not start: %s", esp_err_to_name(err));
+    } else {
+        esp_bt_gap_cancel_discovery();
+    }
+}
+
 bool bt_core_connected(void)
 {
     portENTER_CRITICAL(&lock); bool c = s.a2dp_up || s.hfp_up; portEXIT_CRITICAL(&lock);
@@ -240,6 +260,9 @@ static void gap_callback(esp_bt_gap_cb_event_t event, esp_bt_gap_cb_param_t *p)
         ESP_LOGI(TAG, "Radio link closed by %s: reason 0x%x (0x13 phone, 0x16 us, 0x08 timeout/out of range)",
                  bt_core_bda_str(p->acl_disconn_cmpl_stat.bda, str), p->acl_disconn_cmpl_stat.reason);
         break;
+    case ESP_BT_GAP_DISC_RES_EVT:
+    case ESP_BT_GAP_DISC_STATE_CHANGED_EVT:
+        break; // inquiry is only used as radio load during the power self-test
     case ESP_BT_GAP_MODE_CHG_EVT:
         ESP_LOGD(TAG, "Power mode %d", p->mode_chg.mode);
         break;
@@ -257,13 +280,14 @@ static void set_scan_mode(bool discoverable)
 {
     // Always connectable: phones open HFP seconds after A2DP (or the other way
     // round), so the radio must keep answering pages while one profile is up.
-    // Always discoverable too: a second phone must find the speaker without
-    // anyone having to disconnect the first one (newest phone wins, see GAP).
+    // Discoverable only while no phone is connected (user request): a phone
+    // already bonded can still connect while another is in use and takes over
+    // (newest phone wins, see GAP); a new phone pairs once the speaker is free.
     esp_err_t err = esp_bt_gap_set_scan_mode(ESP_BT_CONNECTABLE,
                                              discoverable ? ESP_BT_GENERAL_DISCOVERABLE : ESP_BT_NON_DISCOVERABLE);
     if (err != ESP_OK) { ESP_LOGW(TAG, "Scan mode: %s", esp_err_to_name(err)); return; }
     portENTER_CRITICAL(&lock); s.discoverable = discoverable; s.scan_set = true; portEXIT_CRITICAL(&lock);
-    ESP_LOGI(TAG, "Radio: connectable, %s", discoverable ? "DISCOVERABLE (always visible in the phone's list)" : "hidden");
+    ESP_LOGI(TAG, "Radio: connectable, %s", discoverable ? "DISCOVERABLE (visible in the phone's list)" : "hidden while a phone is connected");
 }
 
 static void link_task(void *arg)
@@ -287,7 +311,7 @@ static void link_task(void *arg)
         led = connected ? true : !led;
         gpio_set_level(BOARD_LED, led);
 
-        if (!scan_set || !disc) set_scan_mode(true);
+        if (!scan_set || disc == connected) set_scan_mode(!connected);
 
         // Follow-up: one profile (or pairing) is up, the other is not; open it ourselves.
         // The timer is re-armed by bt_core_profile_link(up) or bt_core_profile_failed()

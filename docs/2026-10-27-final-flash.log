@@ -16,24 +16,37 @@ parttool.py
 Python environment activated.
 You can now use IDF commands and Python tools.
 [1/16] Building C object esp-idf/main/CMakeFiles/__idf_main.dir/es8388.c.obj
-[2/16] Building C object esp-idf/main/CMakeFiles/__idf_main.dir/main.c.obj
-[3/16] Building C object esp-idf/main/CMakeFiles/__idf_main.dir/audio_io.c.obj
-[4/16] Building C object esp-idf/main/CMakeFiles/__idf_main.dir/supply.c.obj
-[5/16] Performing build step for 'bootloader'
+[2/16] Building C object esp-idf/main/CMakeFiles/__idf_main.dir/audio_io.c.obj
+[3/16] Performing build step for 'bootloader'
 [1/1] C:\WINDOWS\system32\cmd.exe /C "cd /D D:\Vscode\bleaudiocall\build\bootloader && C:\Espressif\tools\python\v6.1\venv\Scripts\python.exe D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/partition_table/check_sizes.py --offset 0x8000 bootloader 0x1000 D:/Vscode/bleaudiocall/build/bootloader/bootloader.bin"
 
 Bootloader binary size 0x6640 bytes. 0x9c0 bytes (9%) free.
 
 
-[6/16] Building C object esp-idf/main/CMakeFiles/__idf_main.dir/bt_call.c.obj
-[7/16] No install step for 'bootloader'
-[8/16] Building C object esp-idf/main/CMakeFiles/__idf_main.dir/touch_buttons.c.obj
-[9/16] Building C object esp-idf/main/CMakeFiles/__idf_main.dir/audio_engine.c.obj
-[10/16] Completed 'bootloader'
-[11/16] Building C object esp-idf/main/CMakeFiles/__idf_main.dir/bt_core.c.obj
+[4/16] Building C object esp-idf/main/CMakeFiles/__idf_main.dir/touch_buttons.c.obj
+[5/16] No install step for 'bootloader'
+[6/16] Completed 'bootloader'
+[7/16] Building C object esp-idf/main/CMakeFiles/__idf_main.dir/main.c.obj
+[8/16] Building C object esp-idf/main/CMakeFiles/__idf_main.dir/bt_music.c.obj
+[9/16] Building C object esp-idf/main/CMakeFiles/__idf_main.dir/bt_call.c.obj
+[10/16] Building C object esp-idf/main/CMakeFiles/__idf_main.dir/bt_core.c.obj
+[11/16] Building C object esp-idf/main/CMakeFiles/__idf_main.dir/audio_engine.c.obj
 [12/16] Linking C static library esp-idf\main\libmain.a
 [13/16] Generating esp-idf/esp_system/ld/sections.ld
-Skipping linker script generation, section names unchanged
+NOTE: D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/bt/host/nimble/Kconfig.in:1428: BT_NIMBLE_MESH_PROVISIONER: 'default 0' is not a valid bool value (only 'y' and 'n' are allowed). Value is treated as 'n'.
+NOTE: D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/bt/controller/esp32/Kconfig.in:177: BTDM_CTRL_LEGACY_AUTH_VENDOR_EVT_EFF: 'default 0' is not a valid bool value (only 'y' and 'n' are allowed). Value is treated as 'n'.
+NOTE: D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/fatfs/Kconfig:240: FATFS_PRINT_LLI: 'default 0' is not a valid bool value (only 'y' and 'n' are allowed). Value is treated as 'n'.
+NOTE: D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/fatfs/Kconfig:245: FATFS_PRINT_FLOAT: 'default 0' is not a valid bool value (only 'y' and 'n' are allowed). Value is treated as 'n'.
+NOTE: D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/bootloader/Kconfig.projbuild:383: Deprecation notice: hex literal '0' without '0x' prefix detected. In the next major version, hex literals will be required to have a '0x' prefix.
+NOTE: D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/bootloader/Kconfig.projbuild:423: Deprecation notice: hex literal '0' without '0x' prefix detected. In the next major version, hex literals will be required to have a '0x' prefix.
+NOTE: D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/bt/common/Kconfig.in:136: Deprecation notice: hex literal '0' without '0x' prefix detected. In the next major version, hex literals will be required to have a '0x' prefix.
+NOTE: D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/bt/host/nimble/Kconfig.in:1023: Deprecation notice: hex literal '0' without '0x' prefix detected. In the next major version, hex literals will be required to have a '0x' prefix.
+NOTE: D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/bt/controller/esp32/Kconfig.in:542: Deprecation notice: hex literal '0' without '0x' prefix detected. In the next major version, hex literals will be required to have a '0x' prefix.
+NOTE: D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/esp_hw_support\./lowpower/port/esp32p4/Kconfig.p4_rev3_mspi_workaround:6: Deprecation notice: hex literal '0' without '0x' prefix detected. In the next major version, hex literals will be required to have a '0x' prefix.
+NOTE: D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/esp_mm/Kconfig:20: Deprecation notice: hex literal '0' without '0x' prefix detected. In the next major version, hex literals will be required to have a '0x' prefix.
+NOTE: D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/esp_system\./port/soc/esp32/Kconfig.memory:24: Deprecation notice: hex literal '0' without '0x' prefix detected. In the next major version, hex literals will be required to have a '0x' prefix.
+NOTE: D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/openthread/Kconfig:106: Deprecation notice: hex literal '0' without '0x' prefix detected. In the next major version, hex literals will be required to have a '0x' prefix.
+Skipping linker fragment parsing, fragment files unchanged
 
 [14/16] Linking CXX executable bleaudiocall.elf
 [15/16] Generating binary image from built executable
@@ -47,7 +60,7 @@ Successfully created ESP32 image.
 
 Generated D:/Vscode/bleaudiocall/build/bleaudiocall.bin
 [16/16] C:\WINDOWS\system32\cmd.exe /C "cd /D D:\Vscode\bleaudiocall\build && C:\Espressif\tools\python\v6.1\venv\Scripts\python.exe D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/partition_table/check_sizes.py --offset 0x8000 partition --type app D:/Vscode/bleaudiocall/build/partition_table/partition-table.bin D:/Vscode/bleaudiocall/build/bleaudiocall.bin"
-bleaudiocall.bin binary size 0xc9d90 bytes. Smallest app partition is 0x300000 bytes. 0x236270 bytes (74%) free.
+bleaudiocall.bin binary size 0xc9080 bytes. Smallest app partition is 0x300000 bytes. 0x236f80 bytes (74%) free.
 
 Adding "flash"'s dependency "all" to list of commands with default set of options.
 Executing action: all (aliases: build)
@@ -58,7 +71,7 @@ Running ninja in directory D:\Vscode\bleaudiocall\build
 Executing "ninja flash"...
 [1/5] C:\WINDOWS\system32\cmd.exe /C "cd /D D:\Vscode\bleaudiocall\build && C:\Espressif\tools\python\v6.1\venv\Scripts\python.exe D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/partition_table/check_sizes.py --offset 0x8000 partition --type app D:/Vscode/bleaudiocall/build/partition_table/partition-table.bin D:/Vscode/bleaudiocall/build/bleaudiocall.bin"
 
-bleaudiocall.bin binary size 0xc9d90 bytes. Smallest app partition is 0x300000 bytes. 0x236270 bytes (74%) free.
+bleaudiocall.bin binary size 0xc9080 bytes. Smallest app partition is 0x300000 bytes. 0x236f80 bytes (74%) free.
 
 
 [2/5] Performing build step for 'bootloader'
@@ -82,7 +95,7 @@ esptool v5.6.0
 
 Serial port COM6:
 
-Connecting.........
+Connecting....
 
 Connected to ESP32 on COM6:
 
@@ -140,83 +153,83 @@ Reflashing 1 changed sector at 0x00010000...
 
 Flash will be erased from 0x00010000 to 0x00010fff...
 
-Compressed 4096 bytes to 1918...
+Compressed 4096 bytes to 1919...
 
 Writing at 0x00011000 ============================== 100.0% 1.87kB/1.87kB [0s] 
 
-Wrote 4096 bytes (1918 compressed) at 0x00010000 in 0.1 seconds (599.3 kbit/s).
+Wrote 4096 bytes (1919 compressed) at 0x00010000 in 0.1 seconds (641.5 kbit/s).
 
-Reflashing 198 changed sectors at 0x00014000...
+Reflashing 199 changed sectors at 0x00013000...
 
-Flash will be erased from 0x00014000 to 0x000d9fff...
+Flash will be erased from 0x00013000 to 0x000d9fff...
 
-Compressed 811008 bytes to 519956...
+Compressed 815104 bytes to 520217...
 
-Writing at 0x00021998 >                                3.2% 16.00kB/507.77kB [0s] 
+Writing at 0x00020389 >                                3.1% 16.00kB/508.02kB [0s] 
 
-Writing at 0x0002f285 =>                               6.3% 32.00kB/507.77kB [0s] 
+Writing at 0x0002df36 =>                               6.3% 32.00kB/508.02kB [0s] 
 
-Writing at 0x0003af73 ==>                              9.5% 48.00kB/507.77kB [1s] 
+Writing at 0x00038172 ==>                              9.4% 48.00kB/508.02kB [1s] 
 
-Writing at 0x00041550 ===>                            12.6% 64.00kB/507.77kB [1s] 
+Writing at 0x00040705 ===>                            12.6% 64.00kB/508.02kB [1s] 
 
-Writing at 0x00046d9b ====>                           15.8% 80.00kB/507.77kB [2s] 
+Writing at 0x0004631e ====>                           15.7% 80.00kB/508.02kB [2s] 
 
-Writing at 0x0004c054 =====>                          18.9% 96.00kB/507.77kB [2s] 
+Writing at 0x0004b67f =====>                          18.9% 96.00kB/508.02kB [2s] 
 
-Writing at 0x0005138f ======>                         22.1% 112.00kB/507.77kB [3s] 
+Writing at 0x000508c2 ======>                         22.0% 112.00kB/508.02kB [3s] 
 
-Writing at 0x00056c68 =======>                        25.2% 128.00kB/507.77kB [3s] 
+Writing at 0x00055fc2 =======>                        25.2% 128.00kB/508.02kB [3s] 
 
-Writing at 0x0005c71f ========>                       28.4% 144.00kB/507.77kB [3s] 
+Writing at 0x0005b8cd ========>                       28.3% 144.00kB/508.02kB [3s] 
 
-Writing at 0x00061a3f =========                       31.5% 160.00kB/507.77kB [4s] 
+Writing at 0x00060e02 =========                       31.5% 160.00kB/508.02kB [4s] 
 
-Writing at 0x00066c8e ==========                      34.7% 176.00kB/507.77kB [4s] 
+Writing at 0x000660af ==========                      34.6% 176.00kB/508.02kB [4s] 
 
-Writing at 0x0006cb76 ===========                     37.8% 192.00kB/507.77kB [4s] 
+Writing at 0x0006be42 ===========                     37.8% 192.00kB/508.02kB [5s] 
 
-Writing at 0x000721a5 ============                    41.0% 208.00kB/507.77kB [5s] 
+Writing at 0x000714c5 ============                    40.9% 208.00kB/508.02kB [5s] 
 
-Writing at 0x00077700 =============                   44.1% 224.00kB/507.77kB [5s] 
+Writing at 0x00076b27 =============                   44.1% 224.00kB/508.02kB [5s] 
 
-Writing at 0x0007ca4e ==============                  47.3% 240.00kB/507.77kB [6s] 
+Writing at 0x0007bf04 ==============                  47.2% 240.00kB/508.02kB [6s] 
 
-Writing at 0x00082185 ===============                 50.4% 256.00kB/507.77kB [6s] 
+Writing at 0x0008169b ===============                 50.4% 256.00kB/508.02kB [6s] 
 
-Writing at 0x00087c3f ================                53.6% 272.00kB/507.77kB [6s] 
+Writing at 0x000870c7 ================                53.5% 272.00kB/508.02kB [6s] 
 
-Writing at 0x0008d228 =================               56.7% 288.00kB/507.77kB [7s] 
+Writing at 0x0008c5f1 =================               56.7% 288.00kB/508.02kB [7s] 
 
-Writing at 0x0009209c =================>              59.9% 304.00kB/507.77kB [7s] 
+Writing at 0x000914ee =================>              59.8% 304.00kB/508.02kB [7s] 
 
-Writing at 0x00097301 ==================>             63.0% 320.00kB/507.77kB [8s] 
+Writing at 0x000966cb ==================>             63.0% 320.00kB/508.02kB [8s] 
 
-Writing at 0x0009cc32 ===================>            66.2% 336.00kB/507.77kB [8s] 
+Writing at 0x0009bef4 ===================>            66.1% 336.00kB/508.02kB [8s] 
 
-Writing at 0x000a25c7 ====================>           69.3% 352.00kB/507.77kB [8s] 
+Writing at 0x000a1a11 ====================>           69.3% 352.00kB/508.02kB [8s] 
 
-Writing at 0x000a7f41 =====================>          72.5% 368.00kB/507.77kB [9s] 
+Writing at 0x000a7284 =====================>          72.4% 368.00kB/508.02kB [9s] 
 
-Writing at 0x000adffb ======================>         75.6% 384.00kB/507.77kB [9s] 
+Writing at 0x000ad195 ======================>         75.6% 384.00kB/508.02kB [9s] 
 
-Writing at 0x000b3c57 =======================>        78.8% 400.00kB/507.77kB [9s] 
+Writing at 0x000b2da1 =======================>        78.7% 400.00kB/508.02kB [9s] 
 
-Writing at 0x000b9728 ========================>       81.9% 416.00kB/507.77kB [10s] 
+Writing at 0x000b88d2 ========================>       81.9% 416.00kB/508.02kB [10s] 
 
-Writing at 0x000bee81 =========================>      85.1% 432.00kB/507.77kB [10s] 
+Writing at 0x000be06d =========================>      85.0% 432.00kB/508.02kB [10s] 
 
-Writing at 0x000c48dc ==========================      88.2% 448.00kB/507.77kB [11s] 
+Writing at 0x000c3aaa ==========================      88.2% 448.00kB/508.02kB [11s] 
 
-Writing at 0x000ca611 ===========================     91.4% 464.00kB/507.77kB [11s] 
+Writing at 0x000c97a7 ===========================     91.3% 464.00kB/508.02kB [11s] 
 
-Writing at 0x000cfcd7 ============================    94.5% 480.00kB/507.77kB [11s] 
+Writing at 0x000cee69 ============================    94.5% 480.00kB/508.02kB [11s] 
 
-Writing at 0x000d5c6e =============================   97.7% 496.00kB/507.77kB [12s] 
+Writing at 0x000d4e35 =============================   97.6% 496.00kB/508.02kB [12s] 
 
-Writing at 0x000da000 ============================== 100.0% 507.77kB/507.77kB [12s] 
+Writing at 0x000da000 ============================== 100.0% 508.02kB/508.02kB [12s] 
 
-Wrote 811008 bytes (519956 compressed) at 0x00014000 in 12.5 seconds (517.6 kbit/s).
+Wrote 815104 bytes (520217 compressed) at 0x00013000 in 12.5 seconds (519.9 kbit/s).
 
 Verifying written data...
 

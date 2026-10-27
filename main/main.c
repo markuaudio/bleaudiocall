@@ -45,7 +45,7 @@ void app_key(app_key_t key)
 static void console_task(void *arg)
 {
     ESP_LOGI("console", "Keys: a answer, h hangup/reject, m redial, c connect bonded phone, x disconnect, v list bonds, f forget bonds, "
-                        "i status, t ring tone test, l/r/z/b tones, ]/[ DAC +-1.5 dB, 0 reset DAC");
+                        "i status, t ring tone test, l/r/z/b tones, ]/[ DAC +-1.5 dB, 0 reset DAC + self-test, k power self-test");
     bool ring_test = false;
     while (1) {
         int c = getchar();
@@ -66,6 +66,7 @@ static void console_task(void *arg)
         case ']': audio_engine_dac_step(1); break;
         case '[': audio_engine_dac_step(-1); break;
         case '0': audio_engine_dac_reset(); break;
+        case 'k': audio_engine_calibrate(); break;
         case EOF: clearerr(stdin); break;
         default: break;
         }

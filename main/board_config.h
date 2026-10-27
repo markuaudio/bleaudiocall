@@ -26,27 +26,32 @@
 #define MUSIC_BUFFER_BYTES (32 * 1024)
 #define MUSIC_PREFILL_BYTES 8192
 #define MUSIC_BOOT_VOLUME 70       // Phone absolute volume replaces this after connect.
-#define MUSIC_PCM_PEAK_LIMIT 32767 // Limiter is only an overflow guard (digital gain 1x).
+// Music peak ceiling: -6 dBFS. The power self-test below plays a -6 dBFS tone,
+// so with this ceiling no music can draw more amplifier current than the test
+// did. The limiter (fast attack, 150 ms release) holds peaks at this level.
+#define MUSIC_PCM_PEAK_LIMIT 16384
 
-// ES8388 DAC digital volume profile (see dac_profiles[] in es8388.c): 4 = -6 dB,
-// ESP-ADF's real LyraT maximum, the clean limit of the NS4150 PA (research 2026-10-26).
-#define AUDIO_BOOT_DAC_PROFILE 4
-// Power-trip protection: if the board resets (brownout / supervisor) while the
-// amplifier is on, the DAC profile is lowered by this many steps and saved in
-// NVS, so the next boot is quieter and stays connected. Console '0' clears it.
-#define POWER_TRIP_DAC_STEP 2
-
-// Supply guard (see supply.h): the REC button line senses the 3.3 V rail.
-// A reading SUPPLY_SAG_COUNTS below the quiet baseline is a sag: the output
-// gain is cut at once (down to SUPPLY_DUCK_MIN) and recovers over
-// SUPPLY_RECOVER_S. SUPPLY_SAG_LIMIT sags within SUPPLY_SAG_WINDOW_S lower the
-// DAC profile one step and save it, while playing, without any reset.
-#define SUPPLY_SENSE_ADC_CHANNEL ADC_CHANNEL_0 // ADC1 channel 0 = GPIO36 (SENSOR_VP, REC button)
-#define SUPPLY_SAG_COUNTS 200
-#define SUPPLY_DUCK_MIN 0.25f
-#define SUPPLY_RECOVER_S 3.0f
-#define SUPPLY_SAG_LIMIT 4
-#define SUPPLY_SAG_WINDOW_S 30
+// ES8388 DAC digital volume profile (see dac_profiles[] in es8388.c). P2 = -9 dB
+// is only the level used until the power self-test has run; the test result
+// (stored in NVS) replaces it. P4 = -6 dB is ESP-ADF's LyraT maximum and the
+// highest level the self-test tries.
+#define AUDIO_BOOT_DAC_PROFILE 2
+#define CAL_MAX_PROFILE 4
+// Power self-test (first boot, and after console '0' or 'k'): a CAL_TONE_HZ
+// tone at CAL_TONE_AMPLITUDE (-3 dBFS: 3 dB above the music peak ceiling, as
+// margin) plays through both speakers for CAL_STEP_MS at each DAC profile from
+// P0 upwards, while the Bluetooth radio runs an inquiry so the ESP32 side draws
+// about what it draws when streaming (verified: a test with the radio idle
+// passed P4 while streaming at P4 still reset the board).
+// The step in progress is written to NVS first; if the supply collapses and
+// the IMP809 supervisor resets the board, the next boot knows which step did
+// it and saves the previous one as the limit. No phone, no disconnect involved.
+#define CAL_TONE_HZ 60
+#define CAL_TONE_AMPLITUDE 23170
+#define CAL_STEP_MS 1500
+// Fallback: a reset while the amplifier was on (flag kept in NVS) lowers the
+// saved profile by this many steps.
+#define POWER_TRIP_DAC_STEP 1
 
 // Call (HFP) path. Voice PCM arrives from the phone as 16-bit mono at 8 kHz
 // (CVSD) or 16 kHz (mSBC); the I2S bus runs at that same rate during a call.
