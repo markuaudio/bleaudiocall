@@ -1,0 +1,35 @@
+I (12593) audio: DAC profile reset to P2 and saved limit cleared; running the power self-test again
+W (12593) audio: POWER SELF-TEST60 Hz tone at -3 dBFS on both speakers with the radio busy (inquiry), P0..P4, 1500 ms each, to find the loudest level this supply holds. A reset during the test is expected on a weak supply; the result is saved either way.
+I (12913) i2s: TX clocks: source=160000000 MCLK=11289537 BCLK=2822400 Fs=44100 capture=0 (32-bit data and slots)
+I (12913) es8388: ADC/microones OFF
+I (12913) es8388: DAC profile P0: -12.0 dB (reg 0x18)
+I (12913) audio:   self-test P0 (-12.0 dB)
+I (14423) es8388: DAC profile P1: -10.5 dB (reg 0x15)
+I (14423) audio:   self-test P1 (-10.5 dB)
+I (15923) es8388: DAC profile P2: -9.0 dB (reg 0x12)
+I (15923) audio:   self-test P2 (-9.0 dB)
+I (17423) es8388: DAC profile P3: -7.5 dB (reg 0x0f)
+I (17423) audio:   self-test P3 (-7.5 dB)
+I (18923) es8388: DAC profile P4: -6.0 dB (reg 0x0c)
+I (18923) audio:   self-test P4 (-6.0 dB)
+W (19783) BT_HCI: hci cmd send: sniff: hdl 0x81, intv(400 800)
+W (19823) BT_HCI: hcif mode change: hdl 0x81, mode 2, intv 804, status 0x0
+W (20423) audio: POWER SELF-TEST passed up to P4 (-6.0 dB); saving P3 (-7.5 dB) with 1 step(s) of margin for real streaming.
+I (20423) es8388: DAC profile P3: -7.5 dB (reg 0x0f)
+I (20423) es8388: ADC/microphones OFF
+I (20433) i2sTX clocks: source=160000000 MCLK=12288000 BCLK=3072000 Fs=48000 capture=0 (32-bit data and slots)
+I (20443) audio: Path: MUSIC at 48000 Hz
+I (203) audio: MUSIC 48000 Hz PA=0 in_peak=0 out_peak=0 mic_peak=0 frames=0 limited=0 P3
+I (20453) audio: music buffer=0 B drops=0 underruns=0 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (25463) audio: MUSIC 48000 Hz PA=0 in_peak=0 out_peak=0 mic_peak=0 frames=0 limited=0 P3
+I (25463) audio: music buffer=0 B drops=0 underruns=0 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (30473) audio: MUSIC 48000 Hz PA=0 in_peak=0 out_peak=0 mic_peak=0 frames=0 limited=0 P3
+I (30473) audio: music buffer=0 B drops=0 underruns=0 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (35483) audio: MUSIC 48000 Hz PA=0 in_peak=0 out_peak=0 mic_peak=0 frames=0 limited=0 P3
+I (35483) audio: music buffer=0 B drops=0 underruns=0 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (40483) audio: MUSIC 48000 Hz PA=0 in_peak=0 out_peak=0 mic_peak=0 frames=0 limited=0 P3
+I (40493) audio: music buffer=0 B drops=0 underruns=0 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (45493) audio: MUSIC 48000 Hz PA=0 in_peak=0 out_peak=0 mic_peak=0 frames=0 limited=0 P3
+I (45493) audio: music buffer=0 B drops=0 underruns=0 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (50503) audio: MUSIC 48000 Hz PA=0 in_peak=0 out_peak=0 mic_peak=0 frames=0 limited=0 P3
+I (50503) audio: music buffer=0 B drops=0 underruns=0 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0

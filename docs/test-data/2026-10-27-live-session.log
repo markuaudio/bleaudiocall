@@ -1,0 +1,2169 @@
+
+--- Monitor opened 2026-10-27T17:09:06 ---
+W (13444) BT_APPL: new conn_srvc id:27, app_id:1
+I (13454) call: Link state 2 (3 = ready for calls), phone features 0x0
+I (13574) call: Call ended / none
+I (13584) call: Call setup: none
+I (13584) call: Phone network available
+I (13584) call: Phone signal 3/5
+I (13584) call: Roaming inactive
+I (13584) call: Phone battery 2/5
+I (13584) call: Call held status 0
+I (13604) call: Link state 3 (3 = ready for calls), phone features 0xf67
+I (13624) bt: Calls (HFP) connected to 2c:d0:66:b0:8c:74
+I (16254) audio: MUSIC 44100 Hz PA=1 in_peak=18753 out_peak=9188 mic_peak=0 frames=221312 limited=0 P4
+I (16254) audio: music buffer=14336 B drops=0 underruns=0 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (16254) audio: supply raw=4095 quiet=4095 duck=1.00 sags=0 (REC line senses the 3.3 V rail)
+I (21284) audio: MUSIC 44100 Hz PA=1 in_peak=18756 out_peak=9190 mic_peak=0 frames=222208 limited=0 P4
+I (21284) audio: music buffer=14336 B drops=0 underruns=0 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (21294) audio: supply raw=4095 quiet=4095 duck=1.00 sags=0 (REC line senses the 3.3 V rail)
+W (25104) BT_HCI: hcif conn complete: hdl 0x80, st 0x0
+I (25104) bt: Radio link with 50:49:b0:90:c5:33: status 0x0
+I (25104) bt: Another phone 50:49:b0:90:c5:33 arrived while 2c:d0:66:b0:8c:74 is connected: switching to the new phone
+W (25124) BT_APPL: bta_av_str_stopped status 0
+W (25314) BT_RFCOMM: port_rfc_closed RFCOMM connection in server:0 state 3 closed: Closed (res: 19)
+W (25324) BT_HCI: hci cmd send: sniff: hdl 0x81, intv(30 54)
+W (25334) BT_APPL: BTA_HF_CLIENT_SCO_SHUTDOWN_ST: Ignoring event 3
+I (25334) call: Link state 0 (3 = ready for calls), phone features 0x0
+I (25334) bt: Calls (HFP) disconnected from 2c:d0:66:b0:8c:74
+W (25344) BT_HCI: hcif mode change: hdl 0x81, mode 0, intv 0, status 0x1a
+E (25344) BT_APPL: bta_dm_pm_btm_status hci_status=26
+W (25654) BT_HCI: hci cmd send: disconnect: hdl 0x81, rsn:0x13
+W (25664) BT_HCI: hci cmd send: sniff: hdl 0x81, intv(30 54)
+W (25664) BT_HCI: opcode=0x080b, status= 0c: Cmd Disallowed
+E (25664) BT_BTM: tBTM_SEC_DEV:0x3ffd3778 rs_disc_pending=1
+W (25674) BT_HCI: opcode=0x0803, status= 02: No Connection
+I (25684) bt: Music (A2DP) disconnected from 2c:d0:66:b0:8c:74
+W (25694) BT_HCI: hcif disc complete: hdl 0x81, rsn 0x16 dev_find 1
+I (25694) es8388: DAC profile P4: -6.0 d(reg 0x0c)
+I (25694) bt: Radio link closed by 2c:d0:66:b0:8c:74: reason 0x116 (0x13 phone, 0x16 us, 0x08 timeout/out of range)
+I (25694) es8388: ADC/microphones OFF
+I (25704) i2s: TX clocks: source=160000000 MCLK=11289537 BCLK=2822400 Fs=44100 capture=0 (32-bit data and slots)
+I (25714) audio: Path: MUSIC at 44100 Hz
+I (26304) audio: MUSIC 44100 Hz PA=0 in_peak=18900 out_peak=9261 mic_peak=0 frames=166656 limited=0 P4
+I (26304) audio: music buffer=0 B drops=0 underruns=2 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (26314) audio: supply raw=4095 quiet=4095 duck=1.00 sags=0 (REC line senses the 3.3 V rail)
+W (26424) BT_APPL: new conn_srvc id:27, app_id:1
+I (26424) call: Link state 2 (3 = ready for calls), phone features 0x0
+I (26904) call: Call ended / none
+I (26904) call: Call setup: none
+I (26904) call: Phone network available
+I (26904) call: Phone signal 2/5
+I (26904) call: Roaming inactive
+I (26914) call: Phone battery 4/5
+I (26914) call: Call held status 0
+I (27084) call: Link state 3 (3 = ready for calls), phone features 0xfe7
+I (27094) bt: Remembered 50:49:b0:90:c5:33 as the phone to reconnect to
+I (27094) bt: Calls (HFP) connected to 50:49:b0:90:c5:33
+I (27364) music: A2DP connecting...
+I (27514) audio: Music PCM 44100 Hz, 2 channel(s)
+I (27514) es8388: DAC profile P4: -6.0 dB (reg 0x0c)
+I (27514) es8388: ADC/microphones OFF
+I (27514) i2s: TX clocks: source=160000000 MCLK=11289537 BCLK=2822400 Fs=44100 capture=0 (32-bit data and slots)
+I (27524) audio: Path: MUSIC at 44100 Hz
+W (27744) BT_APPL: new conn_srvc id:19, app_id:0
+I (27744) bt: Music (A2DP) connected to 50:49:b0:90:c5:33
+I (28354) audio: Music volume 0%
+W (30944) BT_HCI: hci cmd send: sniff: hdl 0x80, intv(400 800)
+W (30974) BT_HCI: hcif mode change: hdl 0x80, mode 2, intv 800, status 0x0
+I (31324) audio: MUSIC 44100 Hz PA=0 in_peak=0 out_peak=0 mic_peak=0 frames=0 limited=0 P4
+I (31324) audio: music buffer=0 B drops=0underruns=2 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (31334) audio: supply raw=4095 quiet=4095 duck=1.00 sags=0 (REC line senses the 3.3 V rail)
+I (36344) audio: MUSIC 44100 Hz PA=0 in_peak=0 out_peak=0 mic_peak=0 frames=0 limited=0 P4
+I (36344) audio: music buffer=0 B drops=0 underruns=2 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (36344) audio: supply raw=4095 quiet=4095 duck=1.00 sags=0 (REC line senses the 3.3 V rail)
+I (41354) audio: MUSIC 44100 Hz PA=0 in_peak=0 out_peak=0 mic_peak=0 frames=0 limited=0 P4
+I (41354) audio: music buffer=0 B drops=0 underruns=2 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (41364) audio: supply raw=4095 quiet=4095 duck=1.00 sags=0 (REC line senses the 3.3 V rail)
+I (46374) audio: MUSIC 44100 Hz PA=0 in_peak=0 out_peak=0 mic_peak=0 frames=0 limited=0 P4
+I (46374) audio: music buffer=0 B drops= underruns=2 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (46374) audio: supply raw=4095 quiet=4095 duck=1.00 sags=0 (REC line senses the 3.3 V rail)
+I (47004) BT_LOG: bta_av_link_role_ok hndl:x41 role:0 conn_audio:x1 bits:1 features:x864b
+W (47004) BT_APPL: new conn_srvc id:19, app_id:1
+W (47004) BT_HCI: hci cmd send: unsniff: hdl 0x80
+W (47004) BT_HCI: opcode=0x0804, status= 0c: Cmd Disallowed
+I (47014) music: Music STARTED
+I (47024) es8388: DAC profile P4: -6.0 dB (reg 0x0c)
+I (47024) es8388: ADC/microphones OFF
+I (47024) i2s: TX clocks: source=1600000 MCLK=11289537 BCLK=2822400 Fs=44100 capture=0 (32-bit data and slots)
+I (47034) audio: Path: MUSIC at 44100 Hz
+W (47494) BT_HCI: hcif mode change: hdl 0x80, mode 0, intv 0, status 0x0
+I (48734) audio: Music volume 7%
+I (49054) audio: Music volume 13%
+I (49114) audio: Music volume 20%
+I (49134) audio: Music volume 34%
+I (49204) audio: Music volume 40%
+I (49304) audio: Music volume 47%
+I (49344) audio: Music volume 54%
+I (49364) audio: Music volume 61%
+I (49384) audio: Music volume 67%
+I (49444) audio: Music volume 74%
+I (49504) audio: Music volume 80%
+I (49534) audio: Music volume 87%
+I (49644) audio: Music volume 94%
+I (49714) audio: Music volume 100%
+I (51404) audio: MUSIC 44100 Hz PA=1 in_peak=12394 out_peak=12394 mic_peak=0 frames=163840 limited=0 P4
+I (51404) audio: music buffer=12288 B drops=0 underruns=4 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (51414) audio: supply raw=4095 quiet=4095 duck=1.00 sags=0 (REC line senses the 3.3 V rail)
+ets Jul 29 2019 12:21:46
+rst:0x1 (POWERON_RESET),boot:0x1f (SPI_FAST_FLASH_BOOT)
+configsip: 0, SPIWP:0xee
+clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+mode:DIO, clock div:2
+load:0x3fff0040,len:6272
+load:0x40078000,len:15824
+load:0x40080400,len:3988
+entry 0x40080644
+I (27) boot: ESP-IDF v6.1 2nd stage bootloader
+I (27) boot: compile time Oct 27 2026 16:03:24
+I (28) boot: Multicore bootloader
+I (29) boot: chip revision: v3.0
+I (31) boot.esp32: SPI Speed      : 40MHz
+I (35) boot.esp32: SPI Mode       : DIO
+I (39) boot.esp32: SPI Flash Size : 8MB
+I (42) boot: Enabling RNG early entropy source...
+I (47) boot: Partition Table:
+I (49) boot: ## Label            Usage          Type ST Offset   Length
+I (56) boot:  0 nvs              WiFi data        01 02 00009000 00006000
+I (62) boot:  1 phy_init         RF data          01 01 0000f000 00001000
+I (69) boot:  2 factory          factory app      00 00 00010000 00300000
+I (75) boot: End of partition table
+I (79) esp_image: segment 0: paddr=00010020 vaddr=3f400020 size=277cch (161740) map
+I (144) esp_image: segment 1: paddr=000377f4 vaddr=3ffbdb60 size=04fach ( 20396) load
+I (152) esp_image: segment 2: paddr=0003c7a8 vaddr=40080000 size=03870h ( 14448) load
+I (158) esp_image: segment 3: paddr=00040020 vaddr=400d0020 size=87f9ch (556956) map
+I (357) esp_image: segment 4: paddr=000c7fc4 vaddr=40083870 size=11d78h ( 73080) load
+I (387) esp_image: segment 5: paddr=000d9d44 vaddr=50000004 size=00028h (    40) load
+I (398) boot: Loaded app from partition at offset 0x10000
+I (398) boot: Disabling RNG early entropy source...
+I (409) cpu_start: Multicore app
+I (417) cpu_start: GPIO 3 and 1 are used as console UART I/O pins
+I (417) cpu_start: Pro cpu start user code
+I (417) cpu_start: cpu freq: 240000000 Hz
+I (419) app_init: Application information:
+I (423) app_init: Project name:     bleaudiocall
+I (427) app_init: App version:      9efee2c-dirty
+I (432) app_init: Compile time:     Oct 27 2026 16:53:03
+I (437) app_init: ELF file SHA256:  cb0f296c1...
+I (441) app_init: ESP-IDF:          v6.1
+I (445) efuse_init: Min chip rev:     v0.0
+I (449) efuse_init: Max chip rev:     v3.99 
+I (453) efuse_init: Chip rev:         v3.0
+I (457) heap_init: Initializing. RAM available for dynamic allocation:
+I (463) heap_init: At 3FFAFF10 len 000000F0 (0 KiB): DRAM
+I (468) heap_init: At 3FFB6BF8 len 00001408 (5 KiB): DRAM
+I (473) heap_init: At 3FFB9A20 len 00004108 (16 KiB): DRAM
+I (478) heap_init: At 3FFCD3B0 len 00012C50 (75 KiB): DRAM
+I (483) heap_init: At 3FFE0440 len 00003AE0 (14 KiB): D/IRAM
+I (489) heap_init: At 3FFE4350 len 0001BCB0 (111 KiB): D/IRAM
+I (494) heap_init: At 400955E8 len 0000AA18 (42 KiB): IRAM
+W (501) spi_flash: Detected boya flash chip but using generic driver. For optimal functionality, enable `SPI_FLASH_SUPPORT_BOYA_CHIP` in menuconfig
+I (512) spi_flash: detected chip: generic
+I (516) spi_flash: flash io: dio
+I (520) coexist: coex firmware version: a830d28
+I (524) main_task: Started on CPU0
+I (524) main_task: Calling app_main()
+I (524) boot: bleaudiocall: music + calls; reset reason=1 (power-on / EN pin)
+I (554) bt: Starting Bluetooth radio before codec/I2S/touch initialization
+I (554) BTDM_INIT: BT controller compile version [4a0f94d]
+I (554) BTDM_INIT: Using main XTAL as clock source
+I (554) BTDM_INIT: Bluetooth MAC: 08:3a:f2:31:29:3e
+I (564) phy_init: phy_version 4863,a3a4459,Oct 28 2025,14:30:06
+I (634) phy_init: Saving new calibration data due to checksum failure or outdated calibration data, mode(0)
+I (1034) bt: Radio and host enabled, own address 08:3a:f2:31:29:3e
+W (1044) gpio: conflict found for GPIO[21]
+I (1154) es8388: Ready: DAC P4 (-6.0 dB) -> LOUT1 0 dB -> PA; mics LIN1/RIN1 PGA reg 0x88 (ADC off until a call)
+W (1154) i2s_common: the rx channel on I2S0 is switched from master to slave for full-duplex mode
+I (1154) i2s: TX clocks: source=160000000 MCLK=11289537 BCLK=2822400 Fs=44100 capture=0 (32-bit data and slots)
+I (1164) supply: Guard: sensing the 3.3 V rail on GPIO36 (REC line), raw=4095; sag = 200 counts below the quiet baseline
+I (1174) audio: Engine: music 1x gain + limiter, DAC P4, call volume 10/15, mic gain 2.0x
+I (1194) es8388: DAC profile P4: -6.0 dB (reg 0x0c)
+I (1194) touch: Calibration: do not touch pads for 1 second
+I (1194) es8388: ADC/microphones OFF
+I (1204) i2s: TX clocks: source=160000000 MCLK=11289537 BCLK=2822400 Fs=44100 capture=0 (32-bit data and slots)
+I (1204) audio: Path: MUSIC at 44100 Hz
+I (2134) touch: PLAY GPIO33 baseline=1277
+I (2134) touch: SET GPIO32 baseline=1277
+I (2134) touch: VOL+ GPIO27 baseline=1154
+I (2134) touch: VOL- GPIO13 baseline=848
+I (2134) touch: Ready: PLAY = answer / hang up / play-pause, SET = next (hold 2 s: reject / disconnect), VOL +/-
+W (2164) BT_BTC: A2DP Enable with AVRC
+I (2204) bt: READY: music (A2DP) + calls (HFP). Select 'blu2' in the phone's Bluetooth list
+I (2204) bt: 5 bonded phone(s); will try 50:49:b0:90:c5:33 (last connected) in 3 s, then the others in turn
+I (2204) console: Keys: a answer, h hangup/reject, m redial, c connect bonded phone, x disconnect, v list bonds, f forget bonds, i status, t ring tone test, l/r/z/b tones, ]/[ DAC +-1.5 dB, 0 reset DAC
+I (2224) boot: Initialized; free heap=70300 bytes
+I (2234) main_task: Returned from app_main()
+I (3204) bt: Radio: connectable, DISCOVERABLE (always visible in the phone's list)
+I (6194) audio: MUSIC 44100 Hz PA=0 in_peak=0 out_peak=0 mic_peak=0 frames=0 limited=0 P4
+I (6194) audio: music buffer=0 B drops=0 uerruns=0 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (6194) audio: supply raw=4095 quiet=4095 duck=1.00 sags=0 (REC line senses the 3.3 V rail)
+I (6204) bt: Reconnect attempt 1 to last connected phone 50:49:b0:90:c5:33 (next in 10 s)
+I (6214) bt: Opening music (A2DP) to 50:49:b0:90:c5:33 ourselves
+W (6224) BT_APPL: reset flags
+I (6224) music: A2DP connecting...
+W (9174) BT_HCI: hcif conn complete: hdl 0x81, st 0x0
+W (9184) BT_HCI: hcif link supv_to changed: hdl 0x81, supv_to 8000
+I (9184) bt: Radio link with 50:49:b0:90:c5:33: status 0x0
+I (9354) audio: Music PCM 44100 Hz, 2 channel(s)
+I (9354) es8388: DAC profile P4: -6.0 dB (reg 0x0c)
+I (9354) es8388: ADC/microphones OFF
+I (9354) i2s: TX clocks: source=160000000 MCLK=11289537 BCLK=2822400 Fs=44100 capture=0 (32-bit data and slots)
+I (9364) audio: Path: MUSIC at 44100 Hz
+W (9424) BT_APPL: new conn_srvc id:19, app_id:0
+I (9424) bt: Music (A2DP) connected to 50:49:b0:90:c5:33
+I (9904) BT_LOG: bta_av_link_role_ok hndl:x41 role:1 conn_audio:x1 bits:1 features:x864b
+W (9904) BT_APPL: new conn_srvc id:19, app_id:1
+I (9904) music: Music STARTED
+I (9914) es8388: DAC profile P4: -6.0 dB (reg 0x0c)
+I (9914) es8388: ADC/microphones OFF
+I (9914) i2s: TX clocks: source=160000000 MCLK=11289537 BCLK=2822400 Fs=44100 capture=0 (32-bit data and slots)
+I (9924) audio: Path: MUSIC at 44100 Hz
+I (10164) audio: Music volume 100%
+I (11214) audio: MUSIC 44100 Hz PA=1 in_peak=6832 out_peak=4399 mic_peak=0 frames=47104 limited=0 P4
+I (11214) audio: music buffer=16384 B drops=0 underruns=0 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (11224) audio: supply raw=4095 quiet=4095 duck=1.00 sags=0 (REC line senses the 3.3 V rail)
+I (11954) touch: VOL- GPIO13 pressed (raw=477)
+I (11954) audio: Music volume 95%
+I (12414) touch: VOL- GPIO13 pressed (raw=388)
+I (12414) audio: Music volume 90%
+I (14224) bt: Opening calls (HFP) to 50:49:b0:90:c5:33 ourselves
+W (14594) BT_APPL: new conn_srvc id:27, app_id:1
+I (14624) call: Link state 2 (3 = ready for calls), phone features 0x0
+I (14754) call: Call ended / none
+I (14754) call: Call setup: none
+I (14754) call: Phone network available
+I (14754) call: Phone signal 2/5
+I (14754) call: Roaming inactive
+I (14754) call: Phone battery 4/5
+I (14764) call: Call held status 0
+I (14804) call: Link state 3 (3 = ready for calls), phone features 0xfe7
+I (14804) bt: Calls (HFP) connected to 50:49:b0:90:c5:33
+I (16254) audio: MUSIC 44100 Hz PA=1 in_peak=15930 out_peak=12078 mic_peak=0 frames=222208 limited=0 P4
+I (16254) audio: music buffer=16384 B drops=0 underruns=0 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (16254) audio: supply raw=4095 quiet=4095 duck=1.00 sags=0 (REC line senses the 3.3 V rail)
+ets Jul 29 2019 12:21:46
+rst:0x1 (POWERON_RESET),boot:0x1f (SPI_FAST_FLASH_BOOT)
+configsip: 0, SPIWP:0xee
+clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+mode:DIO, clock div:2
+load:0x3fff0040,len:6272
+load:0x40078000,len:15824
+load:0x40080400,len:3988
+entry 0x40080644
+I (27) boot: ESP-IDF v6.1 2nd stage bootloader
+I (27) boot: compile time Oct 27 2026 16:03:24
+I (28) boot: Multicore bootloader
+I (29) boot: chip revision: v3.0
+I (31) boot.esp32: SPI Speed      : 40MHz
+I (35) boot.esp32: SPI Mode       : DIO
+I (39) boot.esp32: SPI Flash Size : 8MB
+I (42) boot: Enabling RNG early entropy source...
+I (47) boot: Partition Table:
+I (49) boot: ## Label            Usage          Type ST Offset   Length
+I (56) boot:  0 nvs              WiFi data        01 02 00009000 00006000
+I (62) boot:  1 phy_init         RF data          01 01 0000f000 00001000
+I (69) boot:  2 factory          factory app      00 00 00010000 00300000
+I (75) boot: End of partition table
+I (79) esp_image: segment 0: paddr=00010020 vaddr=3f400020 size=277cch (161740) map
+I (144) esp_image: segment 1: paddr=000377f4 vaddr=3ffbdb60 size=04fach ( 20396) load
+I (152) esp_image: segment 2: paddr=0003c7a8 vaddr=40080000 size=03870h ( 14448) load
+I (158) esp_image: segment 3: paddr=00040020 vaddr=400d0020 size=87f9ch (556956) map
+I (357) esp_image: segment 4: paddr=000c7fc4 vaddr=40083870 size=11d78h ( 73080) load
+I (387) esp_image: segment 5: paddr=000d9d44 vaddr=50000004 size=00028h (    40) load
+I (398) boot: Loaded app from partition at offset 0x10000
+I (398) boot: Disabling RNG early entropy source...
+I (409) cpu_start: Multicore app
+I (417) cpu_start: GPIO 3 and 1 are used as console UART I/O pins
+I (417) cpu_start: Pro cpu start user code
+I (417) cpu_start: cpu freq: 240000000 Hz
+I (419) app_init: Application information:
+I (423) app_init: Project name:     bleaudiocall
+I (427) app_init: App version:      9efee2c-dirty
+I (432) app_init: Compile time:     Oct 27 2026 16:53:03
+I (437) app_init: ELF file SHA256:  cb0f296c1...
+I (441) app_init: ESP-IDF:          v6.1
+I (445) efuse_init: Min chip rev:     v0.0
+I (449) efuse_init: Max chip rev:     v3.99 
+I (453) efuse_init: Chip rev:         v3.0
+I (457) heap_init: Initializing. RAM available for dynamic allocation:
+I (463) heap_init: At 3FFAFF10 len 000000F0 (0 KiB): DRAM
+I (468) heap_init: At 3FFB6BF8 len 00001408 (5 KiB): DRAM
+I (473) heap_init: At 3FFB9A20 len 00004108 (16 KiB): DRAM
+I (478) heap_init: At 3FFCD3B0 len 00012C50 (75 KiB): DRAM
+I (483) heap_init: At 3FFE0440 len 00003AE0 (14 KiB): D/IRAM
+I (489) heap_init: At 3FFE4350 len 0001BCB0 (111 KiB): D/IRAM
+I (494) heap_init: At 400955E8 len 0000AA18 (42 KiB): IRAM
+W (501) spi_flash: Detected boya flash chip but using generic driver. For optimal functionality, enable `SPI_FLASH_SUPPORT_BOYA_CHIP` in menuconfig
+I (512) spi_flash: detected chip: generic
+I (516) spi_flash: flash io: dio
+I (520) coexist: coex firmware version: a830d28
+I (524) main_task: Started on CPU0
+I (524) main_task: Calling app_main()
+I (524) boot: bleaudiocall: music + calls; reset reason=1 (power-on / EN pin)
+I (554) bt: Starting Bluetooth radio before codec/I2S/touch initialization
+I (554) BTDM_INIT: BT controller compile version [4a0f94d]
+I (554) BTDM_INIT: Using main XTAL as clock source
+I (554) BTDM_INIT: Bluetooth MAC: 08:3a:f2:31:29:3e
+I (564) phy_init: phy_version 4863,a3a4459,Oct 28 2025,14:30:06
+I (634) phy_init: Saving new calibration data due to checksum failure or outdated calibration data, mode(0)
+I (1104) bt: Radio and host enabled, own address 08:3a:f2:31:29:3e
+W (1114) gpio: conflict found for GPIO[21]
+I (1224) es8388: Ready: DAC P4 (-6.0 dB) -> LOUT1 0 dB -> PA; mics LIN1/RIN1 PGA reg 0x88 (ADC off until a call)
+W (1224) i2s_common: the rx channel on I2S0 is switched from master to slave for full-duplex mode
+I (1224) i2s: TX clocks: source=160000000 MCLK=11289537 BCLK=2822400 Fs=44100 capture=0 (32-bit data and slots)
+I (1234) supply: Guard: sensing the 3.3 V rail on GPIO36 (REC line), raw=4095; sag = 200 counts below the quiet baseline
+I (1244) audio: Engine: music 1x gain + limiter, DAC P4, call volume 10/15, mic gain 2.0x
+I (1264) es8388: DAC profile P4: -6.0 dB (reg 0x0c)
+I (1264) touch: Calibration: do not touch pads for 1 second
+I (1264) es8388: ADC/microphones OFF
+I (1274) i2s: TX clocks: source=160000000 MCLK=11289537 BCLK=2822400 Fs=44100 capture=0 (32-bit data and slots)
+I (1274) audio: Path: MUSIC at 44100 Hz
+I (2204) touch: PLAY GPIO33 baseline=1276
+I (2204) touch: SET GPIO32 baseline=1276
+I (2204) touch: VOL+ GPIO27 baseline=1154
+I (2204) touch: VOL- GPIO13 baseline=848
+I (2204) touch: Ready: PLAY = answer / hang up / play-pause, SET = next (hold 2 s: reject / disconnect), VOL +/-
+W (2234) BT_BTC: A2DP Enable with AVRC
+I (2264) bt: READY: music (A2DP) + calls (HFP). Select 'blu2' in the phone's Bluetooth list
+I (2274) bt: 5 bonded phone(s); will try 50:49:b0:90:c5:33 (last connected) in 3 s, then the others in turn
+I (2274) console: Keys: a answer, h hangup/reject, m redial, c connect bonded phone, x disconnect, v list bonds, f forget bonds, i status, t ring tone test, l/r/z/b tones, ]/[ DAC +-1.5 dB, 0 reset DAC
+I (2284) boot: Initialized; free heap=70408 bytes
+I (2294) main_task: Returned from app_main()
+I (3274) bt: Radio: connectable, DISCOVERABLE (always visible in the phone's list)
+I (6264) audio: MUSIC 44100 Hz PA=0 in_peak=0 out_peak=0 mic_peak=0 frames=0 limited=0 P4
+I (6264) audio: music buffer=0 B drops=0 uerruns=0 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (6264) audio: supply raw=4095 quiet=4095 duck=1.00 sags=0 (REC line senses the 3.3 V rail)
+I (6274) bt: Reconnect attempt 1 to last connected phone 50:49:b0:90:c5:33 (next in 10 s)
+I (6284) bt: Openg music (A2DP) to 50:49:b0:90:c5:33 ourselves
+W (6294) BT_APPL: reset flags
+I (6294) music: A2DP connecting...
+W (7194) BT_HCI: hcif conn complete: hdl 0x81, st 0x0
+W (7214) BT_HCI: hcif link supv_to changed: hdl 0x81, supv_to 8000
+I (7214) bt: Radio link with 50:49:b0:90:c5:33: status 0x0
+I (7434) audio: Music PCM 44100 Hz, 2 channel(s)
+I (7444) es8388: DAC profile P4: -6.0 dB (reg 0x0c)
+I (7444) es8388: ADC/microphones OFF
+I (7444) i2s: TX clocks: source=160000000 MCLK=11289537 BCLK=2822400 Fs=44100 capture=0 (32-bit data and slots)
+I (7454) audio: Path: MUSIC at 44100 Hz
+W (7494) BT_APPL: new conn_srvc id:19, app_id:0
+I (7494) bt: Music (A2DP) connected to 50:49:b0:90:c5:33
+I (7964) BT_LOG: bta_av_link_role_ok hndl:x41 role:1 conn_audio:x1 bits:1 features:x864b
+W (7964) BT_APPL: new conn_srvc id:19, app_id:1
+I (7974) music: Music STARTED
+I (7984) es8388: DAC profile P4: -6.0 dB (reg 0x0c)
+I (7984) es8388: ADC/microphones OFF
+I (7984) i2s: TX clocks: urce=160000000 MCLK=11289537 BCLK=2822400 Fs=44100 capture=0 (32-bit data and slots)
+I (7994) audio: Path: MUSIC at 44100 Hz
+I (8164) audio: Music volume 90%
+ets Jul 29 2019 12:21:46
+rst:0x1 (POWERON_RESET),boot:0x1f (SPI_FAST_FLASH_BOOT)
+configsip: 0, SPIWP:0xee
+clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+mode:DIO, clock div:2
+load:0x3fff0040,len:6272
+load:0x40078000,len:15824
+load:0x40080400,len:3988
+entry 0x40080644
+I (27) boot: ESP-IDF v6.1 2nd stage bootloader
+I (27) boot: compile time Oct 27 2026 16:03:24
+I (28) boot: Multicore bootloader
+I (29) boot: chip revision: v3.0
+I (31) boot.esp32: SPI Speed      : 40MHz
+I (35) boot.esp32: SPI Mode       : DIO
+I (39) boot.esp32: SPI Flash Size : 8MB
+I (42) boot: Enabling RNG early entropy source...
+I (47) boot: Partition Table:
+I (49) boot: ## Label            Usage          Type ST Offset   Length
+I (56) boot:  0 nvs              WiFi data        01 02 00009000 00006000
+I (62) boot:  1 phy_init         RF data          01 01 0000f000 00001000
+I (69) boot:  2 factory          factory app      00 00 00010000 00300000
+I (75) boot: End of partition table
+I (79) esp_image: segment 0: paddr=00010020 vaddr=3f400020 size=277cch (161740) map
+I (144) esp_image: segment 1: paddr=000377f4 vaddr=3ffbdb60 size=04fach ( 20396) load
+I (152) esp_image: segment 2: paddr=0003c7a8 vaddr=40080000 size=03870h ( 14448) load
+I (158) esp_image: segment 3: paddr=00040020 vaddr=400d0020 size=87f9ch (556956) map
+I (357) esp_image: segment 4: paddr=000c7fc4 vaddr=40083870 size=11d78h ( 73080) load
+I (387) esp_image: segment 5: paddr=000d9d44 vaddr=50000004 size=00028h (    40) load
+I (398) boot: Loaded app from partition at offset 0x10000
+I (398) boot: Disabling RNG early entropy source...
+I (409) cpu_start: Multicore app
+I (417) cpu_start: GPIO 3 and 1 are used as console UART I/O pins
+I (417) cpu_start: Pro cpu start user code
+I (417) cpu_start: cpu freq: 240000000 Hz
+I (419) app_init: Application information:
+I (423) app_init: Project name:     bleaudiocall
+I (427) app_init: App version:      9efee2c-dirty
+I (432) app_init: Compile time:     Oct 27 2026 16:53:03
+I (437) app_init: ELF file SHA256:  cb0f296c1...
+I (441) app_init: ESP-IDF:          v6.1
+I (445) efuse_init: Min chip rev:     v0.0
+I (449) efuse_init: Max chip rev:     v3.99 
+I (453) efuse_init: Chip rev:         v3.0
+I (457) heap_init: Initializing. RAM available for dynamic allocation:
+I (463) heap_init: At 3FFAFF10 len 000000F0 (0 KiB): DRAM
+I (468) heap_init: At 3FFB6BF8 len 00001408 (5 KiB): DRAM
+I (473) heap_init: At 3FFB9A20 len 00004108 (16 KiB): DRAM
+I (478) heap_init: At 3FFCD3B0 len 00012C50 (75 KiB): DRAM
+I (483) heap_init: At 3FFE0440 len 00003AE0 (14 KiB): D/IRAM
+I (489) heap_init: At 3FFE4350 len 0001BCB0 (111 KiB): D/IRAM
+I (494) heap_init: At 400955E8 len 0000AA18 (42 KiB): IRAM
+W (501) spi_flash: Detected boya flash chip but using generic driver. For optimal functionality, enable `SPI_FLASH_SUPPORT_BOYA_CHIP` in menuconfig
+I (512) spi_flash: detected chip: generic
+I (516) spi_flash: flash io: dio
+I (520) coexist: coex firmware version: a830d28
+I (524) main_task: Started on CPU0
+I (524) main_task: Calling app_main()
+I (524) boot: bleaudiocall: music + calls; reset reason=1 (power-on / EN pin)
+I (554) bt: Starting Bluetooth radio before codec/I2S/touch initialization
+I (554) BTDM_INIT: BT controller compile version [4a0f94d]
+I (554) BTDM_INIT: Using main XTAL as clock source
+I (554) BTDM_INIT: Bluetooth MAC: 08:3a:f2:31:29:3e
+I (564) phy_init: phy_version 4863,a3a4459,Oct 28 2025,14:30:06
+I (634) phy_init: Saving new calibration data due to checksum failure or outdated calibration data, mode(0)
+I (1044) bt: Radio and host enabled, own address 08:3a:f2:31:29:3e
+W (1054) gpio: conflict found for GPIO[21]
+I (1164) es8388: Ready: DAC P4 (-6.0 dB) -> LOUT1 0 dB -> PA; mics LIN1/RIN1 PGA reg 0x88 (ADC off until a call)
+W (1164) i2s_common: the rx channel on I2S0 is switched from master to slave for full-duplex mode
+I (1164) i2s: TX clocks: source=160000000 MCLK=11289537 BCLK=2822400 Fs=44100 capture=0 (32-bit data and slots)
+I (1174) supply: Guard: sensing the 3.3 V rail on GPIO36 (REC line), raw=4095; sag = 200 counts below the quiet baseline
+I (1184) audio: Engine: music 1x gain + limiter, DAC P4, call volume 10/15, mic gain 2.0x
+I (1204) es8388: DAC profile P4: -6.0 dB (reg 0x0c)
+I (1204) touch: Calibration: do not touch pads for 1 second
+I (1204) es8388: ADC/microphones OFF
+I (1214) i2s: TX clocks: source=160000000 MCLK=11289537 BCLK=2822400 Fs=44100 capture=0 (32-bit data and slots)
+I (1214) audio: Path: MUSIC at 44100 Hz
+I (2144) touch: PLAY GPIO33 baseline=1277
+I (2144) touch: SET GPIO32 baseline=1277
+I (2144) touch: VOL+ GPIO27 baseline=1154
+I (2144) touch: VOL- GPIO13 baseline=848
+I (2144) touch: Ready: PLAY = answer / hang up / play-pause, SET = next (hold 2 s: reject / disconnect), VOL +/-
+W (2174) BT_BTC: A2DP Enable with AVRC
+I (2214) bt: READY: music (A2DP) + calls (HFP). Select 'blu2' in the phone's Bluetooth list
+I (2214) bt: 5 bonded phone(s); will try 50:49:b0:90:c5:33 (last connected) in 3 s, then the others in turn
+I (2214) console: Keys: a answer, h hangup/reject, m redial, c connect bonded phone, x disconnect, v list bonds, f forget bonds, i status, t ring tone test, l/r/z/b tones, ]/[ DAC +-1.5 dB, 0 reset DAC
+I (2234) boot: Initialized; free heap=70204 bytes
+I (2234) main_task: Returned from app_main()
+I (3214) bt: Radio: connectable, DISCOVERABLE (always visible in the phone's list)
+I (6204) audio: MUSIC 44100 Hz PA=0 in_peak=0 out_peak=0 mic_peak=0 frames=0 limited=0 P4
+I (6204) audio: music buffer=0 B drops=0 uerruns=0 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (6204) audio: supply raw=4095 quiet=4095 duck=1.00 sags=0 (REC line senses the 3.3 V rail)
+I (6214) bt: Reconnect attempt 1 to last connected phone 50:49:b0:90:c5:33 (next in 10 s)
+I (6224) bt: Openng music (A2DP) to 50:49:b0:90:c5:33 ourselves
+W (6234) BT_APPL: reset flags
+I (6244) music: A2DP connecting...
+W (7644) BT_HCI: hcif conn complete: hdl 0x81, st 0x0
+I (7664) bt: Radio link with 50:49:b0:90:c5:33: status 0x0
+W (7684) BT_HCI: hcif link supv_to changed: hdl 0x81, supv_to 8000
+I (7864) audio: Music PCM 44100 Hz, 2 channel(s)
+I (7874) es8388: DAC profile P4: -6.0 dB (reg 0x0c)
+I (7874) es8388: ADC/microphones OFF
+I (7874) i2s: TX clocks: source=160000000 MCLK=289537 BCLK=2822400 Fs=44100 capture=0 (32-bit data and slots)
+I (7874) audio: Path: MUSIC at 44100 Hz
+W (7914) BT_APPL: new conn_srvc id:19, app_id:0
+I (7914) bt: Music (A2DP) connected to 50:49:b0:90:c5:33
+I (8374) BT_LOG: bta_av_link_role_ok hndl:x41 role:1 conn_audio:x1 bits:1 features:x864b
+W (8374) BT_APPL: new conn_srvc id:19, app_id:1
+I (8384) music: Music STARTED
+I (8384) es8388: DAC profile P4: -6.0 dB (reg 0x0c)
+I (8384) es8388: ADC/microphones OFF
+I (8384) i2s: TX clocks: source=160000000 MCLK=11289537 BCLK=2822400 Fs=44100 capture=0 (32-bit data and slots)
+I (8394) audio: Path: MUSIC at 44100 Hz
+I (8554) audio: Music volume 90%
+ets Jul 29 2019 12:21:46
+rst:0x1 (POWERON_RESET),boot:0x1f (SPI_FAST_FLASH_BOOT)
+configsip: 0, SPIWP:0xee
+clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+mode:DIO, clock div:2
+load:0x3fff0040,len:6272
+load:0x40078000,len:15824
+load:0x40080400,len:3988
+entry 0x40080644
+I (27) boot: ESP-IDF v6.1 2nd stage bootloader
+I (27) boot: compile time Oct 27 2026 16:03:24
+I (28) boot: Multicore bootloader
+I (29) boot: chip revision: v3.0
+I (31) boot.esp32: SPI Speed      : 40MHz
+I (35) boot.esp32: SPI Mode       : DIO
+I (39) boot.esp32: SPI Flash Size : 8MB
+I (42) boot: Enabling RNG early entropy source...
+I (47) boot: Partition Table:
+I (49) boot: ## Label            Usage          Type ST Offset   Length
+I (56) boot:  0 nvs              WiFi data        01 02 00009000 00006000
+I (62) boot:  1 phy_init         RF data          01 01 0000f000 00001000
+I (69) boot:  2 factory          factory app      00 00 00010000 00300000
+I (75) boot: End of partition table
+I (79) esp_image: segment 0: paddr=00010020 vaddr=3f400020 size=277cch (161740) map
+I (144) esp_image: segment 1: paddr=000377f4 vaddr=3ffbdb60 size=04fach ( 20396) load
+I (152) esp_image: segment 2: paddr=0003c7a8 vaddr=40080000 size=03870h ( 14448) load
+I (158) esp_image: segment 3: paddr=00040020 vaddr=400d0020 size=87f9ch (556956) map
+I (357) esp_image: segment 4: paddr=000c7fc4 vaddr=40083870 size=11d78h ( 73080) load
+I (387) esp_image: segment 5: paddr=000d9d44 vaddr=50000004 size=00028h (    40) load
+I (398) boot: Loaded app from partition at offset 0x10000
+I (398) boot: Disabling RNG early entropy source...
+I (409) cpu_start: Multicore app
+I (417) cpu_start: GPIO 3 and 1 are used as console UART I/O pins
+I (417) cpu_start: Pro cpu start user code
+I (417) cpu_start: cpu freq: 240000000 Hz
+I (419) app_init: Application information:
+I (423) app_init: Project name:     bleaudiocall
+I (427) app_init: App version:      9efee2c-dirty
+I (432) app_init: Compile time:     Oct 27 2026 16:53:03
+I (437) app_init: ELF file SHA256:  cb0f296c1...
+I (441) app_init: ESP-IDF:          v6.1
+I (445) efuse_init: Min chip rev:     v0.0
+I (449) efuse_init: Max chip rev:     v3.99 
+I (453) efuse_init: Chip rev:         v3.0
+I (457) heap_init: Initializing. RAM available for dynamic allocation:
+I (463) heap_init: At 3FFAFF10 len 000000F0 (0 KiB): DRAM
+I (468) heap_init: At 3FFB6BF8 len 00001408 (5 KiB): DRAM
+I (473) heap_init: At 3FFB9A20 len 00004108 (16 KiB): DRAM
+I (478) heap_init: At 3FFCD3B0 len 00012C50 (75 KiB): DRAM
+I (483) heap_init: At 3FFE0440 len 00003AE0 (14 KiB): D/IRAM
+I (489) heap_init: At 3FFE4350 len 0001BCB0 (111 KiB): D/IRAM
+I (494) heap_init: At 400955E8 len 0000AA18 (42 KiB): IRAM
+W (501) spi_flash: Detected boya flash chip but using generic driver. For optimal functionality, enable `SPI_FLASH_SUPPORT_BOYA_CHIP` in menuconfig
+I (512) spi_flash: detected chip: generic
+I (516) spi_flash: flash io: dio
+I (520) coexist: coex firmware version: a830d28
+I (524) main_task: Started on CPU0
+I (524) main_task: Calling app_main()
+I (524) boot: bleaudiocall: music + calls; reset reason=1 (power-on / EN pin)
+I (554) bt: Starting Bluetooth radio before codec/I2S/touch initialization
+I (554) BTDM_INIT: BT controller compile version [4a0f94d]
+I (554) BTDM_INIT: Using main XTAL as clock source
+I (554) BTDM_INIT: Bluetooth MAC: 08:3a:f2:31:29:3e
+I (564) phy_init: phy_version 4863,a3a4459,Oct 28 2025,14:30:06
+I (1034) bt: Radio and host enabled, own address 08:3a:f2:31:29:3e
+W (1044) gpio: conflict found for GPIO[21]
+I (1154) es8388: Ready: DAC P4 (-6.0 dB) -> LOUT1 0 dB -> PA; mics LIN1/RIN1 PGA reg 0x88 (ADC off until a call)
+W (1154) i2s_common: the rx channel on I2S0 is switched from master to slave for full-duplex mode
+I (1154) i2s: TX clocks: source=160000000 MCLK=11289537 BCLK=2822400 Fs=44100 capture=0 (32-bit data and slots)
+I (1164) supply: Guard: sensing the 3.3 V rail on GPIO36 (REC line), raw=4095; sag = 200 counts below the quiet baseline
+I (1174) audio: Engine: music 1x gain + limiter, DAC P4, call volume 10/15, mic gain 2.0x
+I (1194) es8388: DAC profile P4: -6.0 dB (reg 0x0c)
+I (1194) touch: Calibration: do not touch pads for 1 second
+I (1194) es8388: ADC/microphones OFF
+I (1204) i2s: TX clocks: source=160000000 MCLK=11289537 BCLK=2822400 Fs=44100 capture=0 (32-bit data and slots)
+I (1204) audio: Path: MUSIC at 44100 Hz
+I (2134) touch: PLAY GPIO33 baseline=1277
+I (2134) touch: SET GPIO32 baseline=1276
+I (2134) touch: VOL+ GPIO27 baseline=1154
+I (2134) touch: VOL- GPIO13 baseline=848
+I (2134) touch: Ready: PLAY = answer / hang up / play-pause, SET = next (hold 2 s: reject / disconnect), VOL +/-
+W (2164) BT_BTC: A2DP Enable with AVRC
+I (2194) bt: READY: music (A2DP) + calls (HFP). Select 'blu2' in the phone's Bluetooth list
+I (2204) bt: 5 bonded phone(s); will try 50:49:b0:90:c5:33 (last connected) in 3 s, then the others in turn
+I (2204) console: Keys: a answer, h hangup/reject, m redial, c connect bonded phone, x disconnect, v list bonds, f forget bonds, i status, t ring tone test, l/r/z/b tones, ]/[ DAC +-1.5 dB, 0 reset DAC
+I (2224) boot: Initialized; free heap=70200 bytes
+I (2224) main_task: Returned from app_main()
+I (3204) bt: Radio: connectable, DISCOVERABLE (always visible in the phone's list)
+I (6194) audio: MUSIC 44100 Hz PA=0 in_peak=0 out_peak=0 mic_peak=0 frames=0 limited=0 P4
+I (6194) audio: music buffer=0 B drops=0 uerruns=0 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (6194) audio: supply raw=4095 quiet=4095 duck=1.00 sags=0 (REC line senses the 3.3 V rail)
+I (6204) bt: Reconnect attempt 1 to last connected phone 50:49:b0:90:c5:33 (next in 10 s)
+I (6214) bt: Openg music (A2DP) to 50:49:b0:90:c5:33 ourselves
+W (6224) BT_APPL: reset flags
+I (6234) music: A2DP connecting...
+W (6754) BT_HCI: hcif conn complete: hdl 0x81, st 0x0
+W (6774) BT_HCI: hcif link supv_to changed: hdl 0x81, supv_to 8000
+I (6784) bt: Radio link with 50:49:b0:90:c5:33: status 0x0
+I (6974) audio: Music PCM 44100 Hz, 2 channel(s)
+I (6974) es8388: DAC profile P4: -6.0 dB (reg 0x0c)
+I (6974) es8388: ADC/microphones OFF
+I (6974) i2s: TX clocks: source=160000000 MCLK=11289537 BCLK=2822400 Fs=44100 capture=0 (32-bit data and slots)
+I (6984) audio: Path: MUSIC at 44100 Hz
+W (7054) BT_APPL: new conn_srvc id:19, app_id:0
+I (7064) bt: Music (A2DP) connected to 50:49:b0:90:c5:33
+I (7524) BT_LOG: bta_av_link_role_ok hndl:x41 role:1 conn_audio:x1 bits:1 features:x864b
+W (7524) BT_APPL: new conn_srvc id:19, app_id:1
+I (7534) music: Music STARTED
+I (7534) es8388: DAC profile P4: -6.0 dB (reg 0x0c)
+I (7544) es8388: ADC/microphones OFF
+I (7544) i2s: TX clocks: source=160000000 MCLK=11289537 BCLK=2822400 Fs=44100 capture=0 (32-bit data and slots)
+I (7544) audio: Path: MUSIC at 44100 Hz
+I (7734) audio: Music volume 90%
+ets Jul 29 2019 12:21:46
+rst:0x1 (POWERON_RESET),boot:0x1f (SPI_FAST_FLASH_BOOT)
+configsip: 0, SPIWP:0xee
+clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+mode:DIO, clock div:2
+load:0x3fff0040,len:6272
+load:0x40078000,len:15824
+load:0x40080400,len:3988
+entry 0x40080644
+I (27) boot: ESP-IDF v6.1 2nd stage bootloader
+I (27) boot: compile time Oct 27 2026 16:03:24
+I (28) boot: Multicore bootloader
+I (29) boot: chip revision: v3.0
+I (31) boot.esp32: SPI Speed      : 40MHz
+I (35) boot.esp32: SPI Mode       : DIO
+I (39) boot.esp32: SPI Flash Size : 8MB
+I (42) boot: Enabling RNG early entropy source...
+I (47) boot: Partition Table:
+I (49) boot: ## Label            Usage          Type ST Offset   Length
+I (56) boot:  0 nvs              WiFi data        01 02 00009000 00006000
+I (62) boot:  1 phy_init         RF data          01 01 0000f000 00001000
+I (69) boot:  2 factory          factory app      00 00 00010000 00300000
+I (75) boot: End of partition table
+I (79) esp_image: segment 0: paddr=00010020 vaddr=3f400020 size=277cch (161740) map
+I (144) esp_image: segment 1: paddr=000377f4 vaddr=3ffbdb60 size=04fach ( 20396) load
+I (152) esp_image: segment 2: paddr=0003c7a8 vaddr=40080000 size=03870h ( 14448) load
+I (158) esp_image: segment 3: paddr=00040020 vaddr=400d0020 size=87f9ch (556956) map
+I (357) esp_image: segment 4: paddr=000c7fc4 vaddr=40083870 size=11d78h ( 73080) load
+I (387) esp_image: segment 5: paddr=000d9d44 vaddr=50000004 size=00028h (    40) load
+I (398) boot: Loaded app from partition at offset 0x10000
+I (398) boot: Disabling RNG early entropy source...
+I (409) cpu_start: Multicore app
+I (417) cpu_start: GPIO 3 and 1 are used as console UART I/O pins
+I (417) cpu_start: Pro cpu start user code
+I (417) cpu_start: cpu freq: 240000000 Hz
+I (419) app_init: Application information:
+I (423) app_init: Project name:     bleaudiocall
+I (427) app_init: App version:      9efee2c-dirty
+I (432) app_init: Compile time:     Oct 27 2026 16:53:03
+I (437) app_init: ELF file SHA256:  cb0f296c1...
+I (441) app_init: ESP-IDF:          v6.1
+I (445) efuse_init: Min chip rev:     v0.0
+I (449) efuse_init: Max chip rev:     v3.99 
+I (453) efuse_init: Chip rev:         v3.0
+I (457) heap_init: Initializing. RAM available for dynamic allocation:
+I (463) heap_init: At 3FFAFF10 len 000000F0 (0 KiB): DRAM
+I (468) heap_init: At 3FFB6BF8 len 00001408 (5 KiB): DRAM
+I (473) heap_init: At 3FFB9A20 len 00004108 (16 KiB): DRAM
+I (478) heap_init: At 3FFCD3B0 len 00012C50 (75 KiB): DRAM
+I (483) heap_init: At 3FFE0440 len 00003AE0 (14 KiB): D/IRAM
+I (489) heap_init: At 3FFE4350 len 0001BCB0 (111 KiB): D/IRAM
+I (494) heap_init: At 400955E8 len 0000AA18 (42 KiB): IRAM
+W (501) spi_flash: Detected boya flash chip but using generic driver. For optimal functionality, enable `SPI_FLASH_SUPPORT_BOYA_CHIP` in menuconfig
+I (512) spi_flash: detected chip: generic
+I (516) spi_flash: flash io: dio
+I (520) coexist: coex firmware version: a830d28
+I (524) main_task: Started on CPU0
+I (524) main_task: Calling app_main()
+I (524) boot: bleaudiocall: music + calls; reset reason=1 (power-on / EN pin)
+I (554) bt: Starting Bluetooth radio before codec/I2S/touch initialization
+I (554) BTDM_INIT: BT controller compile version [4a0f94d]
+I (554) BTDM_INIT: Using main XTAL as clock source
+I (554) BTDM_INIT: Bluetooth MAC: 08:3a:f2:31:29:3e
+I (564) phy_init: phy_version 4863,a3a4459,Oct 28 2025,14:30:06
+I (1034) bt: Radio and host enabled, own address 08:3a:f2:31:29:3e
+W (1034) gpio: conflict found for GPIO[21]
+I (1154) es8388: Ready: DAC P4 (-6.0 dB) -> LOUT1 0 dB -> PA; mics LIN1/RIN1 PGA reg 0x88 (ADC off until a call)
+W (1154) i2s_common: the rx channel on I2S0 is switched from master to slave for full-duplex mode
+I (1154) i2s: TX clocks: source=160000000 MCLK=11289537 BCLK=2822400 Fs=44100 capture=0 (32-bit data and slots)
+I (1164) supply: Guard: sensing the 3.3 V rail on GPIO36 (REC line), raw=4095; sag = 200 counts below the quiet baseline
+I (1174) audio: Engine: music 1x gain + limiter, DAC P4, call volume 10/15, mic gain 2.0x
+I (1194) es8388: DAC profile P4: -6.0 dB (reg 0x0c)
+I (1194) touch: Calibration: do not touch pads for 1 second
+I (1194) es8388: ADC/microphones OFF
+I (1204) i2s: TX clocks: source=160000000 MCLK=11289537 BCLK=2822400 Fs=44100 capture=0 (32-bit data and slots)
+I (1204) audio: Path: MUSIC at 44100 Hz
+I (2134) touch: PLAY GPIO33 baseline=1277
+I (2134) touch: SET GPIO32 baseline=1276
+I (2134) touch: VOL+ GPIO27 baseline=1154
+I (2134) touch: VOL- GPIO13 baseline=848
+I (2134) touch: Ready: PLAY = answer / hang up / play-pause, SET = next (hold 2 s: reject / disconnect), VOL +/-
+W (2164) BT_BTC: A2DP Enable with AVRC
+I (2204) bt: READY: music (A2DP) + calls (HFP). Select 'blu2' in the phone's Bluetooth list
+I (2204) bt: 5 bonded phone(s); will try 50:49:b0:90:c5:33 (last connected) in 3 s, then the others in turn
+I (2204) console: Keys: a answer, h hangup/reject, m redial, c connect bonded phone, x disconnect, v list bonds, f forget bonds, i status, t ring tone test, l/r/z/b tones, ]/[ DAC +-1.5 dB, 0 reset DAC
+I (2224) boot: Initialized; free heap=70212 bytes
+I (2224) main_task: Returned from app_main()
+I (3204) bt: Radio: connectable, DISCOVERABLE (always visible in the phone's list)
+I (6194) audio: MUSIC 44100 Hz PA=0 in_peak=0 out_peak=0 mic_peak=0 frames=0 limited=0 P4
+I (6194) audio: music buffer=0 B drops=0 uderruns=0 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (6194) audio: supply raw=4095 quiet=4095 duck=1.00 sags=0 (REC line senses the 3.3 V rail)
+I (6204) bt: Reconnect attempt 1 to last connected phone 50:49:b0:90:c5:33 (next in 10 s)
+I (6214) bt: Opening music (A2DP) to 50:49:b0:90:c5:33 ourselves
+W (6224) BT_APPL: reset flags
+I (6234) music: A2DP connecting...
+W (8184) BT_HCI: hcif conn complete: hdl 0x81, st 0x0
+I (8184) bt: Radio link with 50:49:b0:90:c5:33: status 0x0
+W (8204) BT_HCI: hcif link supv_to changed: hdl 0x81, supv_to 8000
+W (8284) BT_BTC: BTA_AV_OPEN_EVT::FAILED status: 2
+I (8284) bt: Music (A2DP) attempt failed (phone reachable); trying the other profile
+I (9224) bt: Opening calls (HFP) to 50:49:b0:90:c5:33 ourselves
+I (9284) call: Link state 0 (3 = ready for calls), phone features 0x0
+W (9284) call: HFP link attempt ended before service level connection (phone off, out of range, or no hands-free support)
+I (9294) bt: Calls (HFP) attempt failed (phone reachable)
+I (11204) audio: MUSIC 44100 Hz PA=0 in_peak=0 out_peak=0 mic_peak=0 frames=0 limited=0 P4
+I (11204) audio: music buffer=0 B drops=0 underruns=0 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (11214) audio: supply raw=4095 quiet=4095 duck=1.00 sags=0 (REC line senses the 3.3 V rail)
+W (13284) BT_HCI: hci cmd send: disconnect: hdl 0x81, rsn:0x13
+W (13284) BT_HCI: opcode=0x0406, status= 0c: Cmd Disallowed
+W (13344) BT_HCI: hcif disc complete: hdl 0x81, rsn 0x13 dev_find 1
+I (13344) bt: Radio link closed by 50:49:b0:90:c5:33: reason 0x113 (0x13 phone, 0x16 us, 0x08 timeout/out of range)
+I (16224) bt: Reconnect attempt 2 to other bonded phone 2c:d0:66:b0:8c:74 (next in 10 s)
+I (16224) bt: Opening music (A2DP) to 2c:d0:66:b0:8c:74 oursees
+I (16224) audio: MUSIC 44100 Hz PA=0 in_peak=0 out_peak=0 mic_peak=0 frames=0 limited=0 P4
+W (16224) BT_APPL: reset flags
+I (16224) music: A2DP connecting...
+I (16234) audio: music buffer=0 B drops=0 underruns=0 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (16244) audio: supply raw=4095 quiet=4095 duck=1.00 sags=0 (REC line senses the 3.3 V rail)
+W (18944) BT_HCI: hcif conn complete: hdl 0x81, st 0x0
+I (18944) bt: Radio link with 2c:d0:66:b0:8c:74: status 0x0
+E (19584) BT_BTM: tBTM_SEC_DEV:0x3ffd3a58 rs_disc_pending=0
+W (19604) BT_HCI: hcif link supv_to changed: hdl 0x81, supv_to 8000
+I (19664) audio: Music PCM 44100 Hz, 2 channel(s)
+I (19664) es8388: DAC profile P4: -6.0 dB (reg 0x0c)
+I (19664) es8388: ADC/microphones OFF
+I (19664) i2s: TX clocks: source=160000000 MCLK=11289537 BCLK=2822400 Fs=44100 capture=0 (32-bit data and slots)
+I (19674) audio: Path: MUSIC at 44100 Hz
+W (19944) BT_APPL: new conn_srvc id:19, app_id:0
+I (19964) bt: Remembered 2c:d0:66:b0:8c:74 as the phone to reconnect to
+I (19964) bt: Music (A2DP) connected to 2c:d0:66:b0:8c:74
+I (21254) audio: MUSIC 44100 Hz PA=0 in_peak=0 out_peak=0 mic_peak=0 frames=0 limited=0 P4
+I (21264) audio: music buffer=0 B drops=0 underruns=0 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (21264) audio: supply raw=4095 quiet=4095 duck=1.00 sags=0 (REC line senses the 3.3 V rail)
+W (23154) BT_HCI: hci cmd send: sniff: hdl 0x81, intv(400 800)
+W (23194) BT_HCI: hcif mode change: hdl 0x81, mode 2, intv 800, status 0x0
+I (24224) bt: Opening calls (HFP) to 2c:d0:66:b0:8c:74 ourselves
+W (24224) BT_HCI: hci cmd send: unsniff: hdl 0x81
+W (24544) BT_HCI: hcif mode change: hdl 0x81, mode 0, intv 0, status 0x0
+W (25584) BT_APPL: new conn_srvc id:27, app_id:1
+I (25594) call: Link state 2 (3 = ready for calls), phone features 0x0
+I (25974) call: Call ended / none
+I (25974) call: Call setup: none
+I (25974) call: Phone network available
+I (25974) call: Phone signal 3/5
+I (25974) call: Roaming inactive
+I (25974) call: Phone battery 2/5
+I (25984) call: Call held status 0
+I (26104) call: Link state 3 (3 = ready for calls), phone features 0xf67
+I (26114) bt: Calls (HFP) connected to 2c:d0:66:b0:8c:74
+I (26274) audio: MUSIC 44100 Hz PA=0 in_peak=0 out_peak=0 mic_peak=0 frames=0 limited=0 P4
+I (26274) audio: music buffer=0 B drops=0 underruns=0 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (26284) audio: supply raw=4095 quiet=4095 duck=1.00 sags=0 (REC line senses the 3.3 V rail)
+I (31294) audio: MUSIC 44100 Hz PA=0 in_peak=0 out_peak=0 mic_peak=0 frames=0 limited=0 P4
+I (31294) audio: music buffer=0 B drops=0 underruns=0 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (31294) audio: supply raw=4095 quiet=4095 duck=1.00 sags=0 (REC line senses the 3.3 V rail)
+W (33434) BT_HCI: hcif mode change: hdl 0x81, mode 2, intv 800, status 0x0
+I (36304) audio: MUSIC 44100 Hz PA=0 in_peak=0 out_peak=0 mic_peak=0 frames=0 limited=0 P4
+I (36304) audio: music buffer=0 B drops=0 underruns=0 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (36314) audio: supply raw=4095 quiet=4095 duck=1.00 sags=0 (REC line senses the 3.3 V rail)
+I (41324) audio: MUSIC 44100 Hz PA=0 in_peak=0 out_peak=0 mic_peak=0 frames=0 limited=0 P4
+I (41324) audio: music buffer=0 B drops=0nderruns=0 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (41324) audio: supply raw=4095 quiet=4095 duck=1.00 sags=0 (REC line senses the 3.3 V rail)
+I (46334) audio: MUSIC 44100 Hz PA=0 in_peak=0 out_peak=0 mic_peak=0 frames=0 limited=0 P4
+I (46334) audio: music buffer=0 B drops=0 underruns=0 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (46344) audio: supply raw=4095 quiet=4095 duck=1.00 sags=0 (REC line senses the 3.3 V rail)
+I (51354) audio: MUSIC 44100 Hz PA=0 in_peak=0 out_peak=0 mic_peak=0 frames=0 limited=0 P4
+I (51354) audio: music buffer=0 B drops=0 underruns=0 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (51354) audio: supply raw=4095 quiet=4095 duck=1.00 sags=0 (REC line senses the 3.3 V rail)
+I (56364) audio: MUSIC 44100 Hz PA=0 in_peak=0 out_peak=0 mic_peak=0 frames=0 limited=0 P4
+I (56364) audio: music buffer=0 B drops=0 underruns=0 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (56374) audio: supply raw=4095 quiet=4095 duck=1.00 sags=0 (REC line senses the 3.3 V rail)
+I (61384) audio: MUSIC 44100 Hz PA=0 in_peak=0 out_peak=0 mic_peak=0 frames=0 limited=0 P4
+I (61384) audio: music buffer=0 B drops=0nderruns=0 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (61394) audio: supply raw=4095 quiet=4095 duck=1.00 sags=0 (REC line senses the 3.3 V rail)
+I (66394) audio: MUSIC 44100 Hz PA=0 in_peak=0 out_peak=0 mic_peak=0 frames=0 limited=0 P4
+I (66404) audio: music buffer=0 B drops=0 underruns=0 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (66404) audio: supply raw=4095 quiet=4095 duck=1.00 sags=0 (REC line senses the 3.3 V rail)
+I (71414) audio: MUSIC 44100 Hz PA=0 in_peak=0 out_peak=0 mic_peak=0 frames=0 limited=0 P4
+I (71414) audio: music buffer=0 B drops=0underruns=0 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (1424) audio: supply raw=4095 quiet=4095 duck=1.00 sags=0 (REC line senses the 3.3 V rail)
+W (72044) BT_HCI: hcif mode change: hdl 0x81, mode 0, intv 0, status 0x0
+I (72114) BT_LOG: bta_av_link_role_ok hndl:x41 role:1 conn_audio:x1 bits:1 features:x864b
+W (72114) BT_APPL: new conn_srvc id:19, app_id:1
+I (72124) music: Music STARTED
+I (72134) es8388: DAC profile P4: -6.0 dB (reg 0x0c)
+I (72134) es8388: ADC/microphones OFF
+I (72134) i2s: TX clocks: source=60000000 MCLK=11289537 BCLK=2822400 Fs=44100 capture=0 (32-bit data and slots)
+I (72144) audio: Path: MUSIC at 44100 Hz
+I (76414) music: Music SUSPENDED
+I (76434) audio: MUSIC 44100 Hz PA=1 in_peak=6667 out_peak=3264 mic_peak=0 frames=185088 limited=0 P4
+I (76434) audio: music buffer=3584 B drops=0 underruns=2 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (6444) audio: supply raw=4095 quiet=4095 duck=1.00 sags=0 (REC line senses the 3.3 V rail)
+I (76454) es8388: DAC profile P4: -6.0 dB (g 0x0c)
+I (76454) es8388: ADC/microphones OFF
+I (76454) i2s: TX clocks: source=160000000 MCLK=11289537 BCLK=2822400 Fs=44100 capture=0 (32-bit data and slots)
+I (76464) audio: Path: MUSIC at 44100 Hz
+W (79614) BT_HCI: hci cmd send: sniff: hdl 0x81, intv(30 54)
+W (79734) BT_HCI: hcif mode change: hdl 0x81, mode 2, intv 54, status 0x0
+W (79964) BT_HCI: hcif ssr evt: st 0x0, hdl 0x81, tx_lat 54 rx_lat 1188
+I (81454) audio: MUSIC 44100 Hz PA=0 in_peak=0 out_peak=0 mic_peak=0 frames=0 limited=0 P4
+I (81454) audio: music buffer=0 B drops=0 underruns=2 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (81454) audio: supply raw=4095 quiet=4095 duck=1.00 sags=0 (REC line senses the 3.3 V rail)
+I (86464) audio: MUSIC 44100 Hz PA=0 in_peak=0 out_peak=0 mic_peak=0 frames=0 limited=0 P4
+I (86464) audio: music buffer=0 B drops=0 underruns=2 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (86474) audio: supply raw=4095 quiet=4095 duck=1.00 sags=0 (REC line senses the 3.3 V rail)
+I (91484) audio: MUSIC 44100 Hz PA=0 in_peak=0 out_peak=0 mic_peak=0 frames=0 limited=0 P4
+I (91484) audio: music buffer=0 B drops=0nderruns=2 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (91484) audio: supply raw=4095 quiet=4095 duck=1.00 sags=0 (REC line senses the 3.3 V rail)
+I (96494) audio: MUSIC 44100 Hz PA=0 in_peak=0 out_peak=0 mic_peak=0 frames=0 limited=0 P4
+I (96494) audio: music buffer=0 B drops=0 underruns=2 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (96504) audio: supply raw=4095 quiet=4095 duck=1.00 sags=0 (REC line senses the 3.3 V rail)
+I (101514) audio: MUSIC 44100 Hz PA=0 in_peak=0 out_peak=0 mic_peak=0 frames=0 limited=0 P4
+I (101514) audio: music buffer=0 B drops=0 underruns=2 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (101524) audio: supply raw=4095 quiet=4095 duck=1.00 sags=0 (REC line senses the 3.3 V rail)
+I (106524) audio: MUSIC 44100 Hz PA=0 in_peak=0 out_peak=0 mic_peak=0 frames=0 limited=0 P4
+I (106524) audio: music buffer=0 B drops=0 underruns=2 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (106534) audio: supply raw=4095 quiet=4095 duck=1.00 sags=0 (REC line senses the 3.3 V rail)
+I (111544) audio: MUSIC 44100 Hz PA=0 in_peak=0 out_peak=0 mic_peak=0 frames=0 limited=0 P4
+I (111544) audio: music buffer=0 B drops=0 underruns=2 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (111554) audio: supply raw=4095 quiet=4095 duck=1.00 sags=0 (REC line senses the 3.3 V rail)
+I (116554) audio: MUSIC 44100 Hz PA=0 in_peak=0 out_peak=0 mic_peak=0 frames=0 limited=0 P4
+I (116564) audio: music buffer=0 B drops=0 underruns=2 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (116564) audio: supply raw=4095 quiet=4095 duck=1.00 sags=0 (REC line senses the 3.3 V rail)
+I (121574) audio: MUSIC 44100 Hz PA=0 in_peak=0 out_peak=0 mic_peak=0 frames=0 limited=0 P4
+I (121574) audio: music buffer=0 B drops=0 underruns=2 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (121584) audio: supply raw=4095 quiet=4095 duck=1.00 sags=0 (REC line senses the 3.3 V rail)
+I (126594) audio: MUSIC 44100 Hz PA=0 in_peak=0 out_peak=0 mic_peak=0 frames=0 limited=0 P4
+I (126594) audio: music buffer=0 B drops=0 underruns=2 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (126594) audio: supply raw=4095 quiet=4095 duck=1.00 sags=0 (REC line senses the 3.3 V rail)
+I (131604) audio: MUSIC 44100 Hz PA=0 in_peak=0 out_peak=0 mic_peak=0 frames=0 limited=0 P4
+I (131604) audio: music buffer=0 B drops=0 underruns=2 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (131614) audio: supply raw=4095 quiet=4095 duck=1.00 sags=0 (REC line senses the 3.3 V rail)
+I (136624) audio: MUSIC 44100 Hz PA=0 in_peak=0 out_peak=0 mic_peak=0 frames=0 limited=0 P4
+I (136624) audio: music buffer=0 B drops=0 underruns=2 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (136624) audio: supply raw=4095 quiet=4095 duck=1.00 sags=0 (REC line senses the 3.3 V rail)
+I (141634) audio: MUSIC 44100 Hz PA=0 in_peak=0 out_peak=0 mic_peak=0 frames=0 limited=0 P4
+I (141634) audio: music buffer=0 B drops=0 underruns=2 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (141644) audio: supply raw=4095 quiet=4095 duck=1.00 sags=0 (REC line senses the 3.3 V rail)
+I (146654) audio: MUSIC 44100 Hz PA=0 in_peak=0 out_peak=0 mic_peak=0 frames=0 limited=0 P4
+I (146654) audio: music buffer=0 B drops0 underruns=2 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (146654) audio: supply raw=4095 quiet=4095 duck=1.00 sags=0 (REC line senses the 3.3 V rail)
+W (149764) BT_HCI: hci cmd send: unsniff: hdl 0x81
+I (149764) call: Phone signal 2/5
+W (150494) BT_HCI: hcif mode change: hdl 0x81, mode 0, intv 0, status 0x0
+I (151664) audio: MUSIC 44100 Hz PA=0 in_peak=0 out_peak=0 mic_peak=0 frames=0 limited=0 P4
+I (151664) audio: music buffer=0 B drops=0 underruns=2 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (151674) audio: supply raw=4095 quiet=4095 duck=1.00 sags=0 (REC line senses the 3.3 V rail)
+W (153694) BT_HCI: hci cmd send: sniff: hdl 0x81, intv(30 54)
+W (153774) BT_HCI: hcif mode change: hdl 0x81, mode 2, intv 54, status 0x0
+W (153974) BT_HCI: hcif ssr evt: st 0x0, hdl 0x81, tx_lat 54 rx_lat 1188
+W (154714) BT_HCI: hci cmd send: unsniff: hdl 0x81
+I (154724) call: Phone signal 3/5
+W (155464) BT_HCI: hcif mode change: hdl 0x81, mode 0, intv 0, status 0x0
+I (156684) audio: MUSIC 44100 Hz PA=0 in_peak=0 out_peak=0 mic_peak=0 frames=0 limited=0 P4
+I (156684) audio: music buffer=0 B drops underruns=2 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (156694) audio: supply raw=4095 quiet=4095 duck=1.00 sags=0 (REC line senses the 3.3 V rail)
+I (157194) call: Phone signal 2/5
+I (159864) call: Phone signal 3/5
+I (161694) audio: MUSIC 44100 Hz PA=0 in_peak=0 out_peak=0 mic_peak=0 frames=0 limited=0 P4
+I (161694) audio: music buffer=0 B drops=0 underruns=2 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (161704) audio: supply raw=4095 quiet=4095 duck=1.00 sags=0 (REC line senses the 3.3 V rail)
+W (162474) BT_HCI: hcif mode change: hdl 0x81, mode 2, intv 800, status 0x0
+I (166714) audio: MUSIC 44100 Hz PA=0 in_peak=0 out_peak=0 mic_peak=0 frames=0 limited=0 P4
+I (166714) audio: music buffer=0 B drops=0 underruns=2 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (66724) audio: supply raw=4095 quiet=4095 duck=1.00 sags=0 (REC line senses the 3.3 V rail)
+I (171734) audio: MUSIC 44100 Hz PA=0 in_peak=0 out_peak=0 mic_peak=0 frames=0 limited=0 P4
+I (171734) audio: music buffer=0 B drops=0 underruns=2 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (171734) audio: supply raw=4095 quiet=4095 duck=1.00 sags=0 (REC line senses the 3.3 V rail)
+W (174044) BT_HCI: hcif mode change: hdl 0x81, mode 0, intv 0, status 0x0
+I (174154) BT_LOG: bta_av_link_role_ok hndl:x41 role:1 conn_audio:x1 bits:1 features:x864b
+I (174154) music: Music STARTED
+I (174164) es8388: DAC profile P4: -6.0 dB (reg 0x0c)
+I (174164) es8388: ADC/microphones OFF
+I (174164) i2s: TX clocks: source=160000000 MCLK=11289537 BCLK=2822400 Fs=44100 capture=0 (32-bit data and slots)I (174174) audio: Path: MUSIC at 44100 Hz
+I (176764) audio: MUSIC 44100 Hz PA=1 in_peak=274 out_peak=27 mic_peak=0 frames=108416 limited=0 P4
+I (176764) audio: music buffer=68 B drops=0 underruns=2 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (176764) audio: supply raw=4095 quiet=4095 duck=1.00 sags=0 (REC line senses the 3.3 V rail)
+I (177694) music: Music SUSPENDED
+I (177704) es8388: DAC profile P4: -6.0 dB (reg 0x0c)
+I (177704) es8388: ADC/microphones OFF
+I (177704) i2s: TX clocks: source=160000000 MCLK=11289537 BCLK=2822400 Fs=44100 capture=0 (32-bit data and slots)
+I (177714) audio: Path: MUSIC at 44100 Hz
+W (180894) BT_HCI: hci cmd send: sniff: hdl 0x81, intv(30 54)
+W (180944) BT_HCI: hcif mode change: hdl 0x81, mode 2, intv 54, status 0x0
+W (181144) BT_HCI: hcif ssr evt: st 0x0, hdl 0x81, tx_lat 54 rx_lat 1188
+I (181784) audio: MUSIC 44100 Hz PA=0 in_peak=0 out_peak=0 mic_peak=0 frames=41472 limited=0 P4
+I (181784) audio: music buffer=0 B drops=0 underruns=2 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (181784) audio: supply raw=4095 quiet=4095 duck=1.00 sags=0 (REC line senses the 3.3 V rail)
+W (184244) BT_HCI: hcif mode change: hdl 0x81, mode 0, intv 0, status 0x0
+I (184304) BT_LOG: bta_av_link_role_ok hndl:x41 role:1 conn_audio:x1 bits:1 features:x864b
+I (184314) music: Music STARTED
+I (184314) es8388: DAC profile P4: -6.0 dB (reg 0x0c)
+I (184314) es8388: ADC/microphones OFF
+I (184314) i2s: TX clocks: source=160000000 MCLK=11289537 BCLK=2822400 Fs=44100 capture=0 (32-bit data and slots)
+I (184324) audio: Path: MUSIC at 44100 Hz
+I (186804) audio: MUSIC 44100 Hz PA=1 in_peak=18803 out_peak=9121 mic_peak=0 frames=104064 limited=0 P4
+I (186804) audio: music buffer=13824 B drops=0 underruns=3 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (186814) audio: supply raw=4095 quiet=4095 duck=1.00 sags=0 (REC line senses the 3.3 V rail)
+I (191844) audio: MUSIC 44100 Hz PA=1 in_peak=13277 out_peak=6497 mic_peak=0 frames=222208 limited=0 P4
+I (191844) audio: music buffer=20992 B drops=0 underruns=3 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (11854) audio: supply raw=4095 quiet=4095 duck=1.00 sags=0 (REC line senses the 3.3 V rail)
+I (195584) touch: VOL+ GPIO27 pressed (raw=621)
+I (195584) audio: Music volume 75%
+I (196094) touch: VOL+ GPIO27 pressed (raw=532)
+I (196094) audio: Music volume 80%
+I (196454) touch: VOL+ GPIO27 pressed (raw=688)
+I (196454) audio: Music volume 85%
+I (196694) touch: VOL+ GPIO27 pressed (raw=646)
+I (196694) audio: Music volume 90%
+ets Jul 29 2019 12:21:46
+rst:0x1 (POWERON_RESET),boot:0x1f (SPI_FAST_FLASH_BOOT)
+configsip: 0, SPIWP:0xee
+clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+mode:DIO, clock div:2
+load:0x3fff0040,len:6272
+load:0x40078000,len:15824
+load:0x40080400,len:3988
+entry 0x40080644
+I (27) boot: ESP-IDF v6.1 2nd stage bootloader
+I (27) boot: compile time Oct 27 2026 16:03:24
+I (28) boot: Multicore bootloader
+I (29) boot: chip revision: v3.0
+I (31) boot.esp32: SPI Speed      : 40MHz
+I (35) boot.esp32: SPI Mode       : DIO
+I (39) boot.esp32: SPI Flash Size : 8MB
+I (42) boot: Enabling RNG early entropy source...
+I (47) boot: Partition Table:
+I (49) boot: ## Label            Usage          Type ST Offset   Length
+I (56) boot:  0 nvs              WiFi data        01 02 00009000 00006000
+I (62) boot:  1 phy_init         RF data          01 01 0000f000 00001000
+I (69) boot:  2 factory          factory app      00 00 00010000 00300000
+I (75) boot: End of partition table
+I (79) esp_image: segment 0: paddr=00010020 vaddr=3f400020 size=277cch (161740) map
+I (144) esp_image: segment 1: paddr=000377f4 vaddr=3ffbdb60 size=04fach ( 20396) load
+I (152) esp_image: segment 2: paddr=0003c7a8 vaddr=40080000 size=03870h ( 14448) load
+I (158) esp_image: segment 3: paddr=00040020 vaddr=400d0020 size=87f9ch (556956) map
+I (357) esp_image: segment 4: paddr=000c7fc4 vaddr=40083870 size=11d78h ( 73080) load
+I (387) esp_image: segment 5: paddr=000d9d44 vaddr=50000004 size=00028h (    40) load
+I (398) boot: Loaded app from partition at offset 0x10000
+I (398) boot: Disabling RNG early entropy source...
+I (409) cpu_start: Multicore app
+I (417) cpu_start: GPIO 3 and 1 are used as console UART I/O pins
+I (417) cpu_start: Pro cpu start user code
+I (417) cpu_start: cpu freq: 240000000 Hz
+I (419) app_init: Application information:
+I (423) app_init: Project name:     bleaudiocall
+I (427) app_init: App version:      9efee2c-dirty
+I (432) app_init: Compile time:     Oct 27 2026 16:53:03
+I (437) app_init: ELF file SHA256:  cb0f296c1...
+I (441) app_init: ESP-IDF:          v6.1
+I (445) efuse_init: Min chip rev:     v0.0
+I (449) efuse_init: Max chip rev:     v3.99 
+I (453) efuse_init: Chip rev:         v3.0
+I (457) heap_init: Initializing. RAM available for dynamic allocation:
+I (463) heap_init: At 3FFAFF10 len 000000F0 (0 KiB): DRAM
+I (468) heap_init: At 3FFB6BF8 len 00001408 (5 KiB): DRAM
+I (473) heap_init: At 3FFB9A20 len 00004108 (16 KiB): DRAM
+I (478) heap_init: At 3FFCD3B0 len 00012C50 (75 KiB): DRAM
+I (483) heap_init: At 3FFE0440 len 00003AE0 (14 KiB): D/IRAM
+I (489) heap_init: At 3FFE4350 len 0001BCB0 (111 KiB): D/IRAM
+I (494) heap_init: At 400955E8 len 0000AA18 (42 KiB): IRAM
+W (501) spi_flash: Detected boya flash chip but using generic driver. For optimal functionality, enable `SPI_FLASH_SUPPORT_BOYA_CHIP` in menuconfig
+I (512) spi_flash: detected chip: generic
+I (516) spi_flash: flash io: dio
+I (520) coexist: coex firmware version: a830d28
+I (524) main_task: Started on CPU0
+I (524) main_task: Calling app_main()
+I (524) boot: bleaudiocall: music + calls; reset reason=1 (power-on / EN pin)
+I (554) bt: Starting Bluetooth radio before codec/I2S/touch initialization
+I (554) BTDM_INIT: BT controller compile version [4a0f94d]
+I (554) BTDM_INIT: Using main XTAL as clock source
+I (554) BTDM_INIT: Bluetooth MAC: 08:3a:f2:31:29:3e
+I (564) phy_init: phy_version 4863,a3a4459,Oct 28 2025,14:30:06
+I (634) phy_init: Saving new calibration data due to checksum failure or outdated calibration data, mode(0)
+I (1114) bt: Radio and host enabled, own address 08:3a:f2:31:29:3e
+W (1114) gpio: conflict found for GPIO[21]
+I (1234) es8388: Ready: DAC P4 (-6.0 dB) -> LOUT1 0 dB -> PA; mics LIN1/RIN1 PGA reg 0x88 (ADC off until a call)
+W (1234) i2s_common: the rx channel on I2S0 is switched from master to slave for full-duplex mode
+I (1234) i2s: TX clocks: source=160000000 MCLK=11289537 BCLK=2822400 Fs=44100 capture=0 (32-bit data and slots)
+I (1244) supply: Guard: sensing the 3.3 V rail on GPIO36 (REC line), raw=4095; sag = 200 counts below the quiet baseline
+I (1254) audio: Engine: music 1x gain + limiter, DAC P4, call volume 10/15, mic gain 2.0x
+I (1274) es8388: DAC profile P4: -6.0 dB (reg 0x0c)
+I (1274) touch: Calibration: do not touch pads for 1 second
+I (1274) es8388: ADC/microphones OFF
+I (1284) i2s: TX clocks: source=160000000 MCLK=11289537 BCLK=2822400 Fs=44100 capture=0 (32-bit data and slots)
+I (1284) audio: Path: MUSIC at 44100 Hz
+I (2214) touch: PLAY GPIO33 baseline=1278
+I (2214) touch: SET GPIO32 baseline=1277
+I (2214) touch: VOL+ GPIO27 baseline=1154
+I (2214) touch: VOL- GPIO13 baseline=848
+I (2214) touch: Ready: PLAY = answer / hang up / play-pause, SET = next (hold 2 s: reject / disconnect), VOL +/-
+W (2244) BT_BTC: A2DP Enable with AVRC
+I (2284) bt: READY: music (A2DP) + calls (HFP). Select 'blu2' in the phone's Bluetooth list
+I (2284) bt: 5 bonded phone(s); will try 2c:d0:66:b0:8c:74 (last connected) in 3 s, then the others in turn
+I (2284) console: Keys: a answer, h hangup/reject, m redial, c connect bonded phone, x disconnect, v list bonds, f forget bonds, i status, t ring tone test, l/r/z/b tones, ]/[ DAC +-1.5 dB, 0 reset DAC
+I (2304) boot: Initialized; free heap=70224 bytes
+I (2304) main_task: Returned from app_main()
+I (3284) bt: Radio: connectable, DISCOVERABLE (always visible in the phone's list)
+I (6274) audio: MUSIC 44100 Hz PA=0 in_peak=0 out_peak=0 mic_peak=0 frames=0 limited=0 P4
+I (6274) audio: music buffer=0 B drops=0 uerruns=0 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (6274) audio: supply raw=4095 quiet=4095 duck=1.00 sags=0 (REC line senses the 3.3 V rail)
+I (6284) bt: Reconnect attempt 1 to last connected phone 2c:d0:66:b0:8c:74 (next in 10 s)
+I (6294) bt: Opening music (A2DP) to 2c:d0:66:b0:8c:74 ourselves
+W (6304) BT_APPL: reset flags
+I (6304) music: A2DP connecting...
+W (7234) BT_HCI: hcif conn complete: hdl 0x81, st 0x0
+I (7244) bt: Radio link with 2c:d0:66:b0:8c:74: status 0x0
+E (8104) BT_BTM: tBTM_SEC_DEV:0x3ffd3a58 rs_disc_pending=0
+W (8124) BT_HCI: hcif link supv_to changed: hdl 0x81, supv_to 8000
+I (8134) audio: Music PCM 44100 Hz, 2 channel(s)
+I (8144) es8388: DAC profile P4: -6.0 dB (reg 0x0c)
+I (8144) es8388: ADC/microphones OFF
+I (8144) i2s: TX clocks: source=160000000 MCLK=11289537 BCLK=2822400 Fs=44100 capture=0 (32-bit data and slots)
+I (8154) audio: Path: MUSIC at 44100 Hz
+W (8284) BT_APPL: new conn_srvc id:19, app_id:0
+I (8294) bt: Music (A2DP) connected to 2c:d0:66:b0:8c:74
+I (11294) audio: MUSIC 44100 Hz PA=0 in_peak=0 out_peak=0 mic_peak=0 frames=0 limited=0 P4
+I (11294) audio: music buffer=0 B drops=0 underruns=0 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (11294) audio: supply raw=4095 quiet=4095 duck=1.00 sags=0 (REC line senses the 3.3 V rail)
+W (11484) BT_HCI: hci cmd send: sniff: hdl 0x81, intv(400 800)
+W (11504) BT_HCI: hcif mode change: hdl 0x81, mode 2, intv 800, status 0x0
+I (12304) bt: Opening calls (HFP) to 2c:d0:66:b0:8c:74 ourselves
+W (12304) BT_HCI: hci cmd send: unsniff: hdl 0x81
+W (12464) BT_HCI: hcif mode change: hdl 0x81, mode 0, intv 0, status 0x0
+W (12784) BT_APPL: new conn_srvc id:27, app_id:1
+I (12794) call: Link state 2 (3 = ready for calls), phone features 0x0
+I (13034) call: Call ended / none
+I (13034) call: Call setup: none
+I (13034) call: Phone network available
+I (13044) call: Phone signal 3/5
+I (13044) call: Roaming inactive
+I (13044) call: Phone battery 2/5
+I (13044) call: Call held status 0
+I (13174) call: Link state 3 (3 = ready for calls), phone features 0xf67
+I (13174) bt: Calls (HFP) connected to 2c:d0:66:b0:8c:74
+I (16304) audio: MUSIC 44100 Hz PA=0 in_peak=0 out_peak=0 mic_peak=0 frames=0 limited=0 P4
+I (16304) audio: music buffer=0 B drops=0 underruns=0 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (16314) audio: supply raw=4095 quiet=4095 duck=1.00 sags=0 (REC line senses the 3.3 V rail)
+W (20464) BT_HCI: hcif mode change: hdl 0x81, mode 2, intv 800, status 0x0
+I (21324) audio: MUSIC 44100 Hz PA=0 in_peak=0 out_peak=0 mic_peak=0 frames=0 limited=0 P4
+I (21324) audio: music buffer=0 B drops=0nderruns=0 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (21324) audio: supply raw=4095 quiet=4095 duck=1.00 sags=0 (REC line senses the 3.3 V rail)
+W (24454) BT_HCI: hcif mode change: hdl 0x81, mode 0, intv 0, status 0x0
+I (24524) BT_LOG: bta_av_link_role_ok hndl:x41 role:1 conn_audio:x1 bits:1 features:x864b
+W (24524) BT_APPL: new conn_srvc id:19, app_id:1
+I (24534) music: Music STARTED
+I (24544) es8388: DAC profile P4: -6.0 dB (reg 0x0c)
+I (24544) es8388: ADC/microphones OFF
+I (24544) i2s: TX clocks: source=160000000 MCLK=11289537 BCLK=2822400 Fs=44100 capture=0 (32-bit data and slots)
+I (24554) audio: Path: MUSIC at 44100 Hz
+I (26344) audio: MUSIC 44100 Hz PA=1 in_peak=19051 out_peak=9334 mic_peak=0 frames=75776 limited=0 P4
+I (26344) audio: music buffer=752 B drops=0 underruns=0 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (26344) audio: supply raw=4095 quiet=4095 duck=1.00 sags=0 (REC line senses the 3.3 V rail)
+I (31364) audio: MUSIC 44100 Hz PA=1 in_peak=18730 out_peak=9120 mic_peak=0 frames=220544 limited=0 P4
+I (31364) audio: music buffer=17408 B drops=0 underruns=2 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (31374) audio: supply raw=4095 quiet=4095 duck=1.00 sags=0 (REC line senses the 3.3 V rail)
+I (36404) audio: MUSIC 44100 Hz PA=1 in_peak=18820 out_peak=9221 mic_peak=0 frames=220416 limited=0 P4
+I (36404) audio: music buffer=20992 B drops=0 underruns=3 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (36414) audio: supply raw=4095 quiet=4095 duck=1.00 sags=0 (REC line senses the 3.3 V rail)
+I (38484) touch: VOL+ GPIO27 pressed (raw=565)
+I (38484) audio: Music volume 75%
+I (39384) touch: VOL+ GPIO27 pressed (raw=588)
+I (39384) audio: Music volume 80%
+I (39854) touch: VOL+ GPIO27 pressed (raw=568)
+I (39854) audio: Music volume 85%
+I (40384) touch: VOL+ GPIO27 pressed (raw=652)
+I (40384) audio: Music volume 90%
+ets Jul 29 2019 12:21:46
+rst:0x1 (POWERON_RESET),boot:0x1f (SPI_FAST_FLASH_BOOT)
+configsip: 0, SPIWP:0xee
+clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+mode:DIO, clock div:2
+load:0x3fff0040,len:6272
+load:0x40078000,len:15824
+load:0x40080400,len:3988
+entry 0x40080644
+I (27) boot: ESP-IDF v6.1 2nd stage bootloader
+I (27) boot: compile time Oct 27 2026 16:03:24
+I (28) boot: Multicore bootloader
+I (29) boot: chip revision: v3.0
+I (31) boot.esp32: SPI Speed      : 40MHz
+I (35) boot.esp32: SPI Mode       : DIO
+I (39) boot.esp32: SPI Flash Size : 8MB
+I (42) boot: Enabling RNG early entropy source...
+I (47) boot: Partition Table:
+I (49) boot: ## Label            Usage          Type ST Offset   Length
+I (56) boot:  0 nvs              WiFi data        01 02 00009000 00006000
+I (62) boot:  1 phy_init         RF data          01 01 0000f000 00001000
+I (69) boot:  2 factory          factory app      00 00 00010000 00300000
+I (75) boot: End of partition table
+I (79) esp_image: segment 0: paddr=00010020 vaddr=3f400020 size=277cch (161740) map
+I (144) esp_image: segment 1: paddr=000377f4 vaddr=3ffbdb60 size=04fach ( 20396) load
+I (152) esp_image: segment 2: paddr=0003c7a8 vaddr=40080000 size=03870h ( 14448) load
+I (158) esp_image: segment 3: paddr=00040020 vaddr=400d0020 size=87f9ch (556956) map
+I (357) esp_image: segment 4: paddr=000c7fc4 vaddr=40083870 size=11d78h ( 73080) load
+I (387) esp_image: segment 5: paddr=000d9d44 vaddr=50000004 size=00028h (    40) load
+I (398) boot: Loaded app from partition at offset 0x10000
+I (398) boot: Disabling RNG early entropy source...
+I (409) cpu_start: Multicore app
+I (417) cpu_start: GPIO 3 and 1 are used as console UART I/O pins
+I (417) cpu_start: Pro cpu start user code
+I (417) cpu_start: cpu freq: 240000000 Hz
+I (419) app_init: Application information:
+I (423) app_init: Project name:     bleaudiocall
+I (427) app_init: App version:      9efee2c-dirty
+I (432) app_init: Compile time:     Oct 27 2026 16:53:03
+I (437) app_init: ELF file SHA256:  cb0f296c1...
+I (441) app_init: ESP-IDF:          v6.1
+I (445) efuse_init: Min chip rev:     v0.0
+I (449) efuse_init: Max chip rev:     v3.99 
+I (453) efuse_init: Chip rev:         v3.0
+I (457) heap_init: Initializing. RAM available for dynamic allocation:
+I (463) heap_init: At 3FFAFF10 len 000000F0 (0 KiB): DRAM
+I (468) heap_init: At 3FFB6BF8 len 00001408 (5 KiB): DRAM
+I (473) heap_init: At 3FFB9A20 len 00004108 (16 KiB): DRAM
+I (478) heap_init: At 3FFCD3B0 len 00012C50 (75 KiB): DRAM
+I (483) heap_init: At 3FFE0440 len 00003AE0 (14 KiB): D/IRAM
+I (489) heap_init: At 3FFE4350 len 0001BCB0 (111 KiB): D/IRAM
+I (494) heap_init: At 400955E8 len 0000AA18 (42 KiB): IRAM
+W (501) spi_flash: Detected boya flash chip but using generic driver. For optimal functionality, enable `SPI_FLASH_SUPPORT_BOYA_CHIP` in menuconfig
+I (512) spi_flash: detected chip: generic
+I (516) spi_flash: flash io: dio
+I (520) coexist: coex firmware version: a830d28
+I (524) main_task: Started on CPU0
+I (524) main_task: Calling app_main()
+I (524) boot: bleaudiocall: music + calls; reset reason=1 (power-on / EN pin)
+I (554) bt: Starting Bluetooth radio before codec/I2S/touch initialization
+I (554) BTDM_INIT: BT controller compile version [4a0f94d]
+I (554) BTDM_INIT: Using main XTAL as clock source
+I (554) BTDM_INIT: Bluetooth MAC: 08:3a:f2:31:29:3e
+I (564) phy_init: phy_version 4863,a3a4459,Oct 28 2025,14:30:06
+I (644) phy_init: Saving new calibration data due to checksum failure or outdated calibration data, mode(0)
+I (1044) bt: Radio and host enabled, own address 08:3a:f2:31:29:3e
+W (1044) gpio: conflict found for GPIO[21]
+I (1164) es8388: Ready: DAC P4 (-6.0 dB) -> LOUT1 0 dB -> PA; mics LIN1/RIN1 PGA reg 0x88 (ADC off until a call)
+W (1164) i2s_common: the rx channel on I2S0 is switched from master to slave for full-duplex mode
+I (1164) i2s: TX clocks: source=160000000 MCLK=11289537 BCLK=2822400 Fs=44100 capture=0 (32-bit data and slots)
+I (1174) supply: Guard: sensing the 3.3 V rail on GPIO36 (REC line), raw=4095; sag = 200 counts below the quiet baseline
+I (1184) audio: Engine: music 1x gain + limiter, DAC P4, call volume 10/15, mic gain 2.0x
+I (1204) es8388: DAC profile P4: -6.0 dB (reg 0x0c)
+I (1204) touch: Calibration: do not touch pads for 1 second
+I (1204) es8388: ADC/microphones OFF
+I (1214) i2s: TX clocks: source=160000000 MCLK=11289537 BCLK=2822400 Fs=44100 capture=0 (32-bit data and slots)
+I (1214) audio: Path: MUSIC at 44100 Hz
+I (2144) touch: PLAY GPIO33 baseline=1276
+I (2144) touch: SET GPIO32 baseline=1276
+I (2144) touch: VOL+ GPIO27 baseline=1154
+I (2144) touch: VOL- GPIO13 baseline=848
+I (2144) touch: Ready: PLAY = answer / hang up / play-pause, SET = next (hold 2 s: reject / disconnect), VOL +/-
+W (2174) BT_BTC: A2DP Enable with AVRC
+I (2204) bt: READY: music (A2DP) + calls (HFP). Select 'blu2' in the phone's Bluetooth list
+I (2214) bt: 5 bonded phone(s); will try 2c:d0:66:b0:8c:74 (last connected) in 3 s, then the others in turn
+I (2214) console: Keys: a answer, h hangup/reject, m redial, c connect bonded phone, x disconnect, v list bonds, f forget bonds, i status, t ring tone test, l/r/z/b tones, ]/[ DAC +-1.5 dB, 0 reset DAC
+I (2234) boot: Initialized; free heap=70208 bytes
+I (2234) main_task: Returned from app_main()
+I (3214) bt: Radio: connectable, DISCOVERABLE (always visible in the phone's list)
+I (6204) audio: MUSIC 44100 Hz PA=0 in_peak=0 out_peak=0 mic_peak=0 frames=0 limited=0 P4
+I (6204) audio: music buffer=0 B drops=0 uerruns=0 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (6204) audio: supply raw=4095 quiet=4095 duck=1.00 sags=0 (REC line senses the 3.3 V rail)
+I (6214) bt: Reconnect attempt 1 to last connected phone 2c:d0:66:b0:8c:74 (next in 10 s)
+I (6224) bt: Opening music (A2DP) to 2c:d0:66:b0:8c:74 ourselves
+W (6234) BT_APPL: reset flags
+I (6234) music: A2DP connecting...
+W (9924) BT_HCI: hcif conn complete: hdl 0x81, st 0x0
+I (9924) bt: Radio link with 2c:d0:66:b0:8c:74: status 0x0
+E (10534) BT_BTM: tBTM_SEC_DEV:0x3ffd3a58 rs_disc_pending=0
+W (10544) BT_HCI: hcif link supv_to changed: hdl 0x81, supv_to 8000
+I (10574) audio: Music PCM 44100 Hz, 2 channel(s)
+I (10584) es8388: DAC profile P4: -6.0 dB (reg 0x0c)
+I (10584) es8388: ADC/microphones OFF
+I (10584) i2s: TX clocks: source60000000 MCLK=11289537 BCLK=2822400 Fs=44100 capture=0 (32-bit data and slots)
+I (10594) audio: Path: MUSIC at 44100 Hz
+W (10744) BT_APPL: new conn_srvc id:19, app_id:0
+I (10754) bt: Music (A2DP) connected to 2c:d0:66:b0:8c:74
+I (11224) audio: MUSIC 44100 Hz PA=0 in_peak=0 out_peak=0 mic_peak=0 frames=0 limited=0 P4
+I (11224) audio: music buffer=0 B drops=0underruns=0 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (11224) audio: supply raw=4095 quiet=4095 duck=1.00 sags=0 (REC line senses the 3.3 V rail)
+I (12114) BT_LOG: bta_av_link_role_ok hndl:x41 role:1 conn_audio:x1 bits:1 features:x864b
+W (12124) BT_APPL: new conn_srvc id:19, app_id:1
+I (12124) music: Music STARTED
+I (12124) es8388: DAC profile P4: -6.0 dB (reg 0x0c)
+I (12134) es8388: ADC/microphones OFF
+I (12134i2s: TX clocks: source=160000000 MCLK=11289537 BCLK=2822400 Fs=44100 capture=0 (32-bit data and slots)
+I (12144) audio: Path: MUSIC at 44100 Hz
+I (15234) bt: Opening calls (HFP) to 2c:d0:66:b0:8c:74 ourselves
+W (15554) BT_APPL: new conn_srvc id:27, app_id:1
+I (15554) call: Link state 2 (3 = ready for calls), phone features 0x0
+I (15904) call: Call ended / none
+I (15904) call: Call setup: none
+I (15904) call: Phone network available
+I (15904) call: Phone signal 3/5
+I (15904) call: Roaming inactive
+I (15914) call: Phone battery 2/5
+I (15914) call: Call held status 0
+I (15974) call: Link state 3 (3 = ready for calls), phone features 0xf67
+I (15984) bt: Calls (HFP) connected to 2c:d0:66:b0:8c:74
+I (16244) audio: MUSIC 44100 Hz PA=1 in_peak=9413 out_peak=4612 mic_peak=0 frames=175360 limited=0 P4
+I (16244) audio: music buffer=17920 B drops=0 underruns=1 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (16254) audio: supply raw=4095 quiet=4095 duck=1.00 sags=0 (REC line senses the 3.3 V rail)
+I (21264) audio: MUSIC 44100 Hz PA=1 in_peak=9487 out_peak=4635 mic_peak=0 frames=221440 limited=0 P4
+I (21264) audio: music buffer=17408 B drops=0 underruns=1 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (21274) audio: supply raw=4095 quiet=4095 duck=1.00 sags=0 (REC line senses the 3.3 V rail)
+I (26304) audio: MUSIC 44100 Hz PA=1 in_peak=9467 out_peak=4638 mic_peak=0 frames=219520 limited=0 P4
+I (26304) audio: music buffer4576 B drops=1 underruns=2 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (26304) audio: supply raw=4095 quiet=4095 duck=1.00 sags=0 (REC line senses the 3.3 V rail)
+I (31344) audio: MUSIC 44100 Hz PA=1 in_peak=18308 out_peak=8940 mic_peak=0 frames=222208 limited=0 P4
+I (31344) audio: music buffer=21504 B drops=1 underruns=2 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (31344) audio: supply raw=4095 quiet=4095 duck=1.00 sags=0 (REC line senses the 3.3 V rail)
+I (32244) touch: VOL+ GPIO27 pressed (raw=608)
+I (32244) audio: Music volume 75%
+I (34434) touch: VOL+ GPIO27 pressed (raw=527)
+I (34434) audio: Music volume 80%
+I (36364) audio: MUSIC 44100 Hz PA=1 in_peak=18650 out_peak=11936 mic_peak=0 frames=221440 limited=0 P4
+I (36364) audio: music buffe20992 B drops=1 underruns=2 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (36364) audio: supply raw=4095 quiet=4095 duck=1.00 sags=0 (REC line senses the 3.3 V rail)
+I (41404) audio: MUSIC 44100 Hz PA=1 in_peak=18823 out_peak=12044 mic_peak=0 frames=222208 limited=0 P4
+I (41404) audio: music buffer=25088 B drops=1 underruns=2 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (41404) audio: supply raw=4095 quiet=4095 duck=1.00 sags=0 (REC line senses the 3.3 V rail)
+I (46434) audio: MUSIC 44100 Hz PA=1 in_peak=18767 out_peak=11961 mic_peak=0 frames=222208 limited=0 P4
+I (46434) audio: music buffer=25088 B drops=1 underruns=2 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (46444) audio: supply raw=4095 quiet=4095 duck=1.00 sags=0 (REC line senses the 3.3 V rail)
+I (51474) audio: MUSIC 44100 Hz PA=1 in_peak=18729 out_peak=11978 mic_peak=0 frames=222208 limited=0 P4
+I (51474) audio: music buffer=25088 B drops=1 underruns=2 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (51484) audio: supply raw=4095 quiet=4095 duck=1.00 sags=0 (REC line senses the 3.3 V rail)
+I (56494) audio: MUSIC 44100 Hz PA=1 in_peak=18663 out_peak=11907 mic_peak=0 frames=221440 limited=0 P4
+I (56494) audio: music buffer=24576 B drops=1 underruns=2 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (56504) audio: supply raw=4095 quiet=4095 duck=1.00 sags=0 REC line senses the 3.3 V rail)
+ets Jul 29 2019 12:21:46
+rst:0x1 (POWERON_RESET),boot:0x1f (SPI_FAST_FLASH_BOOT)
+configsip: 0, SPIWP:0xee
+clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+mode:DIO, clock div:2
+load:0x3fff0040,len:6272
+load:0x40078000,len:15824
+load:0x40080400,len:3988
+entry 0x40080644
+I (27) boot: ESP-IDF v6.1 2nd stage bootloader
+I (27) boot: compile time Oct 27 2026 16:03:24
+I (28) boot: Multicore bootloader
+I (29) boot: chip revision: v3.0
+I (31) boot.esp32: SPI Speed      : 40MHz
+I (35) boot.esp32: SPI Mode       : DIO
+I (39) boot.esp32: SPI Flash Size : 8MB
+I (42) boot: Enabling RNG early entropy source...
+I (47) boot: Partition Table:
+I (49) boot: ## Label            Usage          Type ST Offset   Length
+I (56) boot:  0 nvs              WiFi data        01 02 00009000 00006000
+I (62) boot:  1 phy_init         RF data          01 01 0000f000 00001000
+I (69) boot:  2 factory          factory app      00 00 00010000 00300000
+I (75) boot: End of partition table
+I (79) esp_image: segment 0: paddr=00010020 vaddr=3f400020 size=277cch (161740) map
+I (144) esp_image: segment 1: paddr=000377f4 vaddr=3ffbdb60 size=04fach ( 20396) load
+I (152) esp_image: segment 2: paddr=0003c7a8 vaddr=40080000 size=03870h ( 14448) load
+I (158) esp_image: segment 3: paddr=00040020 vaddr=400d0020 size=87f9ch (556956) map
+I (357) esp_image: segment 4: paddr=000c7fc4 vaddr=40083870 size=11d78h ( 73080) load
+I (387) esp_image: segment 5: paddr=000d9d44 vaddr=50000004 size=00028h (    40) load
+I (398) boot: Loaded app from partition at offset 0x10000
+I (398) boot: Disabling RNG early entropy source...
+I (409) cpu_start: Multicore app
+I (417) cpu_start: GPIO 3 and 1 are used as console UART I/O pins
+I (417) cpu_start: Pro cpu start user code
+I (417) cpu_start: cpu freq: 240000000 Hz
+I (419) app_init: Application information:
+I (423) app_init: Project name:     bleaudiocall
+I (427) app_init: App version:      9efee2c-dirty
+I (432) app_init: Compile time:     Oct 27 2026 16:53:03
+I (437) app_init: ELF file SHA256:  cb0f296c1...
+I (441) app_init: ESP-IDF:          v6.1
+I (445) efuse_init: Min chip rev:     v0.0
+I (449) efuse_init: Max chip rev:     v3.99 
+I (453) efuse_init: Chip rev:         v3.0
+I (457) heap_init: Initializing. RAM available for dynamic allocation:
+I (463) heap_init: At 3FFAFF10 len 000000F0 (0 KiB): DRAM
+I (468) heap_init: At 3FFB6BF8 len 00001408 (5 KiB): DRAM
+I (473) heap_init: At 3FFB9A20 len 00004108 (16 KiB): DRAM
+I (478) heap_init: At 3FFCD3B0 len 00012C50 (75 KiB): DRAM
+I (483) heap_init: At 3FFE0440 len 00003AE0 (14 KiB): D/IRAM
+I (489) heap_init: At 3FFE4350 len 0001BCB0 (111 KiB): D/IRAM
+I (494) heap_init: At 400955E8 len 0000AA18 (42 KiB): IRAM
+W (501) spi_flash: Detected boya flash chip but using generic driver. For optimal functionality, enable `SPI_FLASH_SUPPORT_BOYA_CHIP` in menuconfig
+I (512) spi_flash: detected chip: generic
+I (516) spi_flash: flash io: dio
+I (520) coexist: coex firmware version: a830d28
+I (524) main_task: Started on CPU0
+I (524) main_task: Calling app_main()
+I (524) boot: bleaudiocall: music + calls; reset reason=1 (power-on / EN pin)
+I (554) bt: Starting Bluetooth radio before codec/I2S/touch initialization
+I (554) BTDM_INIT: BT controller compile version [4a0f94d]
+I (554) BTDM_INIT: Using main XTAL as clock source
+I (554) BTDM_INIT: Bluetooth MAC: 08:3a:f2:31:29:3e
+I (564) phy_init: phy_version 4863,a3a4459,Oct 28 2025,14:30:06
+I (1024) bt: Radio and host enabled, own address 08:3a:f2:31:29:3e
+W (1024) gpio: conflict found for GPIO[21]
+I (1144) es8388: Ready: DAC P4 (-6.0 dB) -> LOUT1 0 dB -> PA; mics LIN1/RIN1 PGA reg 0x88 (ADC off until a call)
+W (1144) i2s_common: the rx channel on I2S0 is switched from master to slave for full-duplex mode
+I (1144) i2s: TX clocks: source=160000000 MCLK=11289537 BCLK=2822400 Fs=44100 capture=0 (32-bit data and slots)
+I (1154) supply: Guard: sensing the 3.3 V rail on GPIO36 (REC line), raw=4095; sag = 200 counts below the quiet baseline
+I (1164) audio: Engine: music 1x gain + limiter, DAC P4, call volume 10/15, mic gain 2.0x
+I (1184) es8388: DAC profile P4: -6.0 dB (reg 0x0c)
+I (1184) touch: Calibration: do not touch pads for 1 second
+I (1184) es8388: ADC/microphones OFF
+I (1194) i2s: TX clocks: source=160000000 MCLK=11289537 BCLK=2822400 Fs=44100 capture=0 (32-bit data and slots)
+I (1194) audio: Path: MUSIC at 44100 Hz
+I (2124) touch: PLAY GPIO33 baseline=1276
+I (2124) touch: SET GPIO32 baseline=1276
+I (2124) touch: VOL+ GPIO27 baseline=1152
+I (2124) touch: VOL- GPIO13 baseline=846
+I (2124) touch: Ready: PLAY = answer / hang up / play-pause, SET = next (old 2 s: reject / disconnect), VOL +/-
+W (2154) BT_BTC: A2DP Enable with AVRC
+I (2184) bt: READY: music (A2DP) + calls (HFP). Select 'blu2' in the phone's Bluetooth list
+I (2194) bt: 5 bonded phone(s); will try 2c:d0:66:b0:8c:74 (last connected) in 3 s, then the others in turn
+I (2194) console: Keys: a answer, h hangup/reject, m redial, c connect bonded phone, x disconnect, v list bonds, f forget bonds, i status, t ring tone test, l/r/z/b tones, ]/[ DAC +-1.5 dB, 0 reset DAC
+I (2204) boot: Initialized; free heap=70408 bytes
+I (2214) main_task: Returned from app_main()
+I (3194) bt: Radio: connectable, DISCOVERABLE (always visible in the phone's list)
+I (6184) audio: MUSIC 44100 Hz PA=0 in_peak=0 out_peak=0 mic_peak=0 frames=0 limited=0 P4
+I (6184) audio: music buffer=0 B drops=0 uerruns=0 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (6184) audio: supply raw=4095 quiet=4095 duck=1.00 sags=0 (REC line senses the 3.3 V rail)
+I (6194) bt: Reconnect attempt 1 to last connected phone 2c:d0:66:b0:8c:74 (next in 10 s)
+I (6204) bt: Openg music (A2DP) to 2c:d0:66:b0:8c:74 ourselves
+W (6214) BT_APPL: reset flags
+I (6214) music: A2DP connecting...
+W (6624) BT_HCI: hcif conn complete: hdl 0x81, st 0x0
+I (6624) bt: Radio link with 2c:d0:66:b0:8c:74: status 0x0
+E (7024) BT_BTM: tBTM_SEC_DEV:0x3ffd3a58 rs_disc_pending=0
+W (7044) BT_HCI: hcif link supv_to changed: hdl 0x81, supv_to 8000
+I (7134) audio: Music PCM 44100 Hz, 2 channel(s)
+I (7144) es8388: DAC profile P4: -6.0 dB (reg 0x0c)
+I (7144) es8388: ADC/microphones OFF
+I (7144) i2s: TX clocks: source=160000000 MCLK=11289537 BCLK=2822400 Fs=44100 capture=0 (32-bit data and slots)
+I (7154) audio: Path: MUSIC at 44100 Hz
+W (7254) BT_APPL: new conn_srvc id:19, app_id:0
+I (7254) bt: Music (A2DP) connected to 2c:d0:66:b0:8c:74
+I (8514) BT_LOG: bta_av_link_role_ok hndl:x41 role:1 conn_audio:x1 bits:1 features:x864b
+W (8514) BT_APPL: new conn_srvc id:19, app_id:1
+I (8514) music: Music STARTED
+I (8524) es8388: DAC profile P4: -6.0 dB (reg 0x0c)
+I (8524) es8388: ADC/microphones OFF
+I (8524) i2s: TX clocks: source=160000000 MCLK=11289537 BCLK=2822400 Fs=44100 capture=0 (32-bit data and slots)
+I (8534) audio: Path: MUSIC at 44100 Hz
+I (11204) audio: MUSIC 44100 Hz PA=1 in_peak=9475 out_peak=4578 mic_peak=0 frames=111104 limited=0 P4
+I (11204) audio: music buffer=17408 B drops=0 underruns=1 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (11204) audio: supply raw=4095 quiet=4095 duck=1.00 sags=0 (REC line senses the 3.3 V rail)
+I (12214) bt: Opening calls (HFP) to 2c:d0:66:b0:8c:74 ourselves
+W (12424) BT_APPL: new conn_srvc id:27, app_id:1
+I (12424) call: Link state 2 (3 = ready for calls), phone features 0x0
+I (12584) call: Call ended / none
+I (12584) call: Call setup: none
+I (12584) call: Phone network available
+I (12594) call: Phone signal 3/5
+I (12594) call: Roaming inactive
+I (12594) call: Phone battery 2/5
+I (12594) call: Call held status 0
+I (12654) call: Link state 3 (3 = ready for calls), phone features 0xf67
+I (12654) bt: Calls (HFP) connected to 2c:d0:66:b0:8c:74
+I (14054) call: Phone signal 4/5
+I (16224) audio: MUSIC 44100 Hz PA=1 in_peak=9598 out_peak=4703 mic_peak=0 frames=221312 limited=0 P4
+I (16224) audio: music buffer=7408 B drops=0 underruns=1 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (16224) audio: supply raw=4095 quiet=4095 duck=1.00 sags=0 (REC line senses the 3.3 V rail)
+I (21244) audio: MUSIC 44100 Hz PA=1 in_peak=9503 out_peak=4635 mic_peak=0 frames=221440 limited=0 P4
+I (21244) audio: music buffer=20992 B drops=0 underruns=1 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (21254) audio: supply raw=4095 quiet=4095 duck=1.00 sags=0 (REC line senses the 3.3 V rail)
+I (21724) call: Phone signal 3/5
+I (26284) audio: MUSIC 44100 Hz PA=1 in_peak=9489 out_peak=4649 mic_peak=0 frames=222208 limited=0 P4
+I (26284) audio: music buffer=10240 B drops=0 underruns=1 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (26284) audio: supply raw=4095 quiet=4095 duck=1.00 sags=0 (REC line senses the 3.3 V rail)
+I (31324) audio: MUSIC 44100 Hz PA=1 in_peak=9586 out_peak=4697 mic_peak=0 frames=222208 limited=0 P4
+I (31324) audio: music buffer=10240 B drops=0 underruns=1 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (31324) audio: supply raw=4095 quiet=4095 duck=1.00 sags=0 (REC line senses the 3.3 V rail)
+I (36354) audio: MUSIC 44100 Hz PA=1 in_peak=9469 out_peak=4632 mic_peak=0 frames=222208 limited=0 P4
+I (36354) audio: music buffer=17920 B drops=0 underruns=1 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (36364) audio: supply raw=4095 quiet=4095 duck=1.00 sags=0 (REC line senses the 3.3 V rail)
+I (41394) audio: MUSIC 44100 Hz PA=1 in_peak=9476 out_peak=4643 mic_peak=0 frames=222208 limited=0 P4
+I (41394) audio: music buffer=17920 B drops=0 underruns=1 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (41404) audio: supply raw=4095 quiet=4095 duck=1.00 sags=0 (REC line senses the 3.3 V rail)I (46434) audio: MUSIC 44100 Hz PA=1 in_peak=9373 out_peak=4442 mic_peak=0 frames=222208 limited=0 P4
+I (46434) audio: music buffer=17920 B drops=0 underruns=1 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (46444) audio: supply raw=4095 quiet=4095 duck=1.00 sags=0 (REC line senses the 3.3 V rail)
+I (51454) audio: MUSIC 44100 Hz PA=1 in_peak=8817 out_peak=3961 mic_peak=0 frames=221440 limited=0 P4
+I (51454) audio: music buffer=17408 B drops=0 underruns=1 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (51464) audio: supply raw=4095 quiet=4095 duck=1.00 sags=0 (REC line senses the 3.3 V rail)
+I (56494) audio: MUSIC 44100 Hz PA=1 in_peak=9472 out_peak=4641 mic_peak=0 frames=222208 limited=0 P4
+I (56494) audio: music buffer=17408 B drops=0 underruns=1 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (6504) audio: supply raw=4095 quiet=4095 duck=1.00 sags=0 (REC line senses the 3.3 V rail)
+I (61534) audio: MUSIC 44100 Hz PA=1 in_peak=9412 out_peak=4611 mic_peak=0 frames=222208 limited=0 P4
+I (61534) audio: music buffer=17920 B drops=0 underruns=1 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (61544) audio: supply raw=4095 quiet=4095 duck=1.00 sags=0 (REC line senses the 3.3 V rail)
+I (66574) audio: MUSIC 44100 Hz PA=1 in_peak=9455 out_peak=4632 mic_peak=0 frames=222208 limited=0 P4
+I (66574) audio: music buffer=17920 B drops=0 underruns=1 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0I (66584) audio: supply raw=4095 quiet=4095 duck=1.00 sags=0 (REC line senses the 3.3 V rail)
+I (71594) audio: MUSIC 44100 Hz PA=1 in_peak=9415 out_peak=4581 mic_peak=0 frames=221440 limited=0 P4
+I (71594) audio: music buffer=17408 B drops=0 underruns=1 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (1604) audio: supply raw=4095 quiet=4095 duck=1.00 sags=0 (REC line senses the 3.3 V rail)
+I (76634) audio: MUSIC 44100 Hz PA=1 in_peak=9447 out_peak=4602 mic_peak=0 frames=222208 limited=0 P4
+I (76634) audio: music buffer=17408 B drops=0 underruns=1 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (6644) audio: supply raw=4095 quiet=4095 duck=1.00 sags=0 (REC line senses the 3.3 V rail)
+I (81674) audio: MUSIC 44100 Hz PA=1 in_peak=9471 out_peak=4583 mic_peak=0 frames=222208 limited=0 P4
+I (81674) audio: music buffer=17920 B drops=0 underruns=1 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (81684) audio: supply raw=4095 quiet=4095 duck=1.00 sags=0 (REC line senses the 3.3 V rail)
+I (86714) audio: MUSIC 44100 Hz PA=1 in_peak=9467 out_peak=4638 mic_peak=0 frames=222208 limited=0 P4
+I (86714) audio: music buffer7920 B drops=0 underruns=1 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (86714) audio: supply raw=4095 quiet=4095 duck=1.00 sags=0 (REC line senses the 3.3 V rail)
+I (91754) audio: MUSIC 44100 Hz PA=1 in_peak=9386 out_peak=4518 mic_peak=0 frames=222208 limited=0 P4
+I (91754) audio: music buffer=14336 B drops=0 underruns=1 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (91754) audio: supply raw=4095 quiet=4095 duck=1.00 sags=0 (REC line senses the 3.3 V rail)
+I (95954) call: Phone signal 4/5
+I (96774) audio: MUSIC 44100 Hz PA=1 in_peak=9468 out_peak=4630 mic_peak=0 frames=221440 limited=0 P4
+I (96774) audio: music buffer=13824 B drops=0 underruns=1 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (96784) audio: supply raw=4095 quiet=4095 duck=1.00 sags=0 (REC line senses the 3.3 V rail)
+I (97864) call: Phone signal 3/5
+I (101814) audio: MUSIC 44100 Hz PA=1 in_peak=9473 out_peak=4623 mic_peak=0 frames=222208 limited=0 P4
+I (101814) audio: music buffer=17408 B drops=0 underruns=1 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (101814) audio: supply raw=4095 quiet=4095 duck=1.00 sags=0 (REC line senses the 3.3 V rail)
+I (106834) audio: MUSIC 44100 Hz PA=1 in_peak=9517 out_peak=4630 mic_peak=0 frames=219520 limited=0 P4
+I (106834) audio: music buffer=20992 B drops=1 underruns=2 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (106844) audio: supply raw=4095 quiet=4095 duck=1.00 sags=0 (REC line senses the 3.3 V rail)
+I (111854) audio: MUSIC 44100 Hz PA=1 in_peak=9544 out_peak=4676 mic_peak=0 frames=221312 limited=0 P4
+I (111854) audio: music buffer=14336 B drops=1 underruns=2 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (111864) audio: supply raw=4095 quiet=4095 duck=1.00 sags=0 (REC line senses the 3.3 V rail)
+I (116884) audio: MUSIC 44100 Hz PA=1 in_peak=9516 out_peak=4620 mic_peak=0 frames=221440 limited=0 P4
+I (116884) audio: music buffer=17408 B drops=1 underruns=2 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (116884) audio: supply raw=4095 quiet=4095 duck=1.00 sags=0 (REC line senses the 3.3 V rail)
+I (121914) audio: MUSIC 44100 Hz PA=1 in_peak=9535 out_peak=4672 mic_peak=0 frames=222208 limited=0 P4
+I (121914) audio: music buffer=20992 B drops=1 underruns=2 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (121924) audio: supply raw=4095 quiet=4095 duck=1.00 sags=0 (REC line senses the 3.3 V rail)
+I (126954) audio: MUSIC 44100 Hz PA=1 in_peak=9498 out_peak=4642 mic_peak=0 frames=222208 limited=0 P4
+I (126954) audio: music buffer=21504 B drops=1 underruns=2 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (126964) audio: supply raw=4095 quiet=4095 duck=1.00 sags=0 (REC line senses the 3.3 V rail)
+I (129054) call: Phone signal 2/5
+I (131794) call: Phone signal 3/5
+I (131994) audio: MUSIC 44100 Hz PA=1 in_peak=9513 out_peak=4647 mic_peak=0 frames=222208 limited=0 P4
+I (131994) audio: music buffer=17920 B drops=1 underruns=2 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (132004) audio: supply raw=4095 quiet=4095 duck=1.00 sags=0 (REC line senses the 3.3 V rail)
+I (137014) audio: MUSIC 44100 Hz PA=1 in_peak=9439 out_peak=4625 mic_peak=0 frames=221440 limited=0 P4
+I (137014) audio: music buffer=20992 B drops=1 underruns=2 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (137024) audio: supply raw=4095 quiet=4095 duck=1.00 sags=0 (REC line senses the 3.3 V rail)
+I (142054) audio: MUSIC 44100 Hz PA=1 in_peak=9410 out_peak=4610 mic_peak=0 frames=222208 limited=0 P4
+I (142054) audio: music buffer=17408 B drops=1 underruns=2 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (142064) audio: supply raw=4095 quiet=4095 duck=1.00 sags=0 (REC line senses the 3.3 V rail)I (147094) audio: MUSIC 44100 Hz PA=1 in_peak=9381 out_peak=4524 mic_peak=0 frames=222208 limited=0 P4
+I (147094) audio: music buffer=17408 B drops=1 underruns=2 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (147104) audio: supply raw=4095 quiet=4095 duck=1.00 sags=0 (REC line senses the 3.3 V rail)
+I (152124) audio: MUSIC 44100 Hz PA=1 in_peak=7118 out_peak=3487 mic_peak=0 frames=221312 limited=0 P4
+I (152124) audio: music buffer=21504 B drops=1 underruns=3 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (152134) audio: supply raw=4095 quiet=4095 duck=1.00 sags=0 (REC line senses the 3.3 V rail)
+I (157144) audio: MUSIC 44100 Hz PA=1 in_peak=7739 out_peak=3651 mic_peak=0 frames=221440 limited=0 P4
+I (157144) audio: music buffer=20992 B drops=1 underruns=3 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (157154) audio: supply raw=4095 quiet=4095 duck=1.00 sags=0 (REC line senses the 3.3 V rail)
+I (162164) audio: MUSIC 44100 Hz PA=1 in_peak=7434 out_peak=3642 mic_peak=0 frames=221312 limited=0 P4
+I (162164) audio: music buffer=24576 B drops=1 underruns=3 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (162174) audio: supply raw=4095 quiet=4095 duck=1.00 sags=0 (REC line senses the 3.3 V rail)
+I (167204) audio: MUSIC 44100 Hz PA=1 in_peak=7843 out_peak=3828 mic_peak=0 frames=222208 limited=0 P4
+I (167204) audio: music buffe20992 B drops=1 underruns=3 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (167214) audio: supply raw=4095 quiet=4095 duck=1.00 sags=0 (REC line senses the 3.3 V rail)
+I (172224) audio: MUSIC 44100 Hz PA=1 in_peak=8838 out_peak=4330 mic_peak=0 frames=221440 limited=0 P4
+I (172224) audio: music buffer=20992 B drops=1 underruns=3 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (172234) audio: supply raw=4095 quiet=4095 duck=1.00 sags=0 (REC line senses the 3.3 V rail)
+I (176624) call: Phone signal 2/5
+I (177264) audio: MUSIC 44100 Hz PA=1 in_peak=11349 out_peak=5561 mic_peak=0 frames=222208 limited=0 P4
+I (177264) audio: music buffer=20992 B drops=1 underruns=3 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (177274) audio: supply raw=4095 quiet=4095 duck=1.00 sags=0 (REC line senses the 3.3 V rail)
+I (182304) audio: MUSIC 44100 Hz PA=1 in_peak=11184 out_peak=5480 mic_peak=0 frames=222208 limited=0 P4
+I (182304) audio: music bufr=24576 B drops=1 underruns=3 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (182314) audio: supply raw=4095 quiet=4095 duck=1.00 sags=0 (REC line senses the 3.3 V rail)
+I (187344) audio: MUSIC 44100 Hz PA=1 in_peak=11147 out_peak=5444 mic_peak=0 frames=222208 limited=0 P4
+I (187344) audio: music bufer=17920 B drops=1 underruns=3 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (187354) audio: supply raw=4095 quiet=4095 duck=1.00 sags=0 (REC line senses the 3.3 V rail)
+I (192384) audio: MUSIC 44100 Hz PA=1 in_peak=10091 out_peak=4944 mic_peak=0 frames=222208 limited=0 P4
+I (192384) audio: music buffer=21504 B drops=1 underruns=3 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (192384) audio: supply raw=4095 quiet=4095 duck=1.00 sags=0 (REC line senses the 3.3 V rail)
+I (197404) audio: MUSIC 44100 Hz PA=1 in_peak=9953 out_peak=4876 mic_peak=0 frames=221440 limited=0 P4
+I (197404) audio: music buffe20992 B drops=1 underruns=3 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (197414) audio: supply raw=4095 quiet=4095 duck=1.00 sags=0 (REC line senses the 3.3 V rail)
+I (202424) audio: MUSIC 44100 Hz PA=1 in_peak=10176 out_peak=4986 mic_peak=0 frames=218624 limited=0 P4
+I (202424) audio: music buffer=20992 B drops=4 underruns=4 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (2434) audio: supply raw=4095 quiet=4095 duck=1.00 sags=0 (REC line senses the 3.3 V rail)
+I (207464) audio: MUSIC 44100 Hz PA=1 in_peak=9860 out_peak=4816 mic_peak=0 frames=222208 limited=0 P4
+I (207464) audio: music buffer=17920 B drops=4 underruns=4 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (207474) audio: supply raw=4095 quiet=4095 duck=1.00 sags=0 (REC line senses the 3.3 V rail)
+I (212504) audio: MUSIC 44100 Hz PA=1 in_peak=9918 out_peak=4790 mic_peak=0 frames=222208 limited=0 P4
+I (212504) audio: music buffer=17920 B drops=4 underruns=4 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (212504) audio: supply raw=4095 quiet=4095 duck=1.00 sags=0 (REC line senses the 3.3 V rail)
+I (217534) audio: MUSIC 44100 Hz PA=1 in_peak=9426 out_peak=4459 mic_peak=0 frames=222208 limited=0 P4
+I (217544) audio: music buffer=24576 B drops=4 underruns=4 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (217544) audio: supply raw=4095 quiet=4095 duck=1.00 sags=0 (REC line senses the 3.3 V rail)
+I (222564) audio: MUSIC 44100 Hz PA=1 in_peak=10578 out_peak=4764 mic_peak=0 frames=221440 limited=0 P4
+I (222564) audio: music buffer=20992 B drops=4 underruns=4 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (222564) audio: supply raw=4095 quiet=4095 duck=1.00 sags=0 (REC line senses the 3.3 V rail)
+I (227594) audio: MUSIC 44100 Hz PA=1 in_peak=10025 out_peak=4741 mic_peak=0 frames=222208 limited=0 P4
+I (227604) audio: music buffer=20992 B drops=4 underruns=4 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (227604) audio: supply raw=4095 quiet=4095 duck=1.00 sags=0 (REC line senses the 3.3 V rail)
+I (230454) call: Phone signal 3/5
+I (232634) audio: MUSIC 44100 Hz PA=1 in_peak=10749 out_peak=5267 mic_peak=0 frames=222208 limited=0 P4
+I (232634) audio: music buffer=17920 B drops=4 underruns=4 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (232644) audio: supply raw=4095 quiet=4095 duck=1.00 sags=0 (REC line senses the 3.3 V rail)
+I (237664) audio: MUSIC 44100 Hz PA=1 in_peak=10182 out_peak=4717 mic_peak=0 frames=221440 limited=0 P4
+I (237664) audio: music buffer=13824 B drops=4 underruns=4 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (237664) audio: supply raw=4095 quiet=4095 duck=1.00 sags=0 (REC line senses the 3.3 V rail)
+I (242694) audio: MUSIC 44100 Hz PA=1 in_peak=10365 out_peak=4944 mic_peak=0 frames=222208 limited=0 P4
+I (242694) audio: music buffer=20992 B drops=4 underruns=4 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (242704) audio: supply raw=4095 quiet=4095 duck=1.00 sags=0 (REC line senses the 3.3 V rail)
+I (242944) call: Phone signal 2/5
+I (247734) audio: MUSIC 44100 Hz PA=1 in_peak=9895 out_peak=4794 mic_peak=0 frames=222208 limited=0 P4
+I (247734) audio: music buffer=20992 B drops=4 underruns=4 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (247744) audio: supply raw=4095 quiet=4095 duck=1.00 sags=0 (REC line senses the 3.3 V rail)
+I (252774) audio: MUSIC 44100 Hz PA=1 in_peak=9884 out_peak=4843 mic_peak=0 frames=222208 limited=0 P4
+I (252774) audio: music buffer=21504 B drops=4 underruns=4 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0I (252784) audio: supply raw=4095 quiet=4095 duck=1.00 sags=0 (REC line senses the 3.3 V rail)
+I (254664) call: Phone signal 3/5
+I (257794) audio: MUSIC 44100 Hz PA=1 in_peak=6285 out_peak=2785 mic_peak=0 frames=221440 limited=0 P4
+I (257794) audio: music buffer=17408 B drops=4 underruns=4 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (257804) audio: supply raw=4095 quiet=4095 duck=1.00 sags=0 (REC line senses the 3.3 V rail)
+I (262834) audio: MUSIC 44100 Hz PA=1 in_peak=6041 out_peak=2586 mic_peak=0 frames=222080 limited=0 P4
+I (262834) audio: music buffer=17920 B drops=4 underruns=4 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (262834) audio: supply raw=4095 quiet=4095 duck=1.00 sags=0 (REC line senses the 3.3 V rail)
+I (267544) call: Phone signal 2/5
+I (267854) audio: MUSIC 44100 Hz PA=1 in_peak=7279 out_peak=3042 mic_peak=0 frames=221440 limited=0 P4
+I (267854) audio: music buff=20992 B drops=4 underruns=4 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (267864) audio: supply raw=4095 quiet=4095 duck=1.00 sags=0 (REC line senses the 3.3 V rail)
+I (272874) audio: MUSIC 44100 Hz PA=1 in_peak=5949 out_peak=2883 mic_peak=0 frames=221312 limited=0 P4
+I (272874) audio: music buffe20992 B drops=4 underruns=4 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (272884) audio: supply raw=4095 quiet=4095 duck=1.00 sags=0 (REC line senses the 3.3 V rail)
+
+--- Monitor opened 2026-10-27T17:30:45 ---
+I (155073) audio: MUSIC 44100 Hz PA=0 in_peak=0 out_peak=0 mic_peak=0 frames=0 limited=0 P4
+I (155073) audio: music buffer=0 B drop176 underruns=0 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (160083) audio: MUSIC 44100 Hz PA=0 in_peak=0 out_peak=0 mic_peak=0 frames=0 limited=0 P4
+I (160083) audio: music buffer=0 B drop=176 underruns=0 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (165093) audio: MUSIC 44100 Hz PA=0 in_peak=0 out_peak=0 mic_peak=0 frames=0 limited=0 P4
+I (165093) audio: music buffer=0 B drops=176 underruns=0 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+W (166503) BT_HCI: hcif mode change: hdl 0x81, mode 0, intv 0, status 0x0
+I (166553) BT_LOG: bta_av_link_role_ok hndl:x41 role:1 conn_audio:x1 bits:1 features:x864b
+I (166563) music: Music STARTED
+I (166563) es8388: DAC profile P4: -6.0 dB (reg 0x0c)
+I (166563) es8388: ADC/microphones OFF
+I (166563) i2s: TX clocks: source=160000000 MCLK=11289537 BCLK=2822400 Fs=44100 capture=0 (32-bit data and slots)
+I (166573) audio: Path: MUSIC at 44100 Hz
+I (170103) audio: MUSIC 44100 Hz PA=1 in_peak=274 out_peak=27 mic_peak=0 frames=149888 limited=0 P4
+I (170103) audio: music buffer=6144 B drops=176 underruns=1 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (170133) music: Music SUSPENDED
+I (170153) es8388: DAC profile P4: -6.0 dB (reg 0x0c)
+I (170153) es8388: ADC/microphones OFF
+I (170153) i2s: TX clocks: source=160000000 MCLK=11289537 BCLK=2822400 Fs=44100 capture=0 (32-bit data and slots)
+I (170163) audio: Path: MUSIC at 44100 Hz
+W (173333) BT_HCI: hci cmd send: sniff: hdl 0x81, intv(30 54)
+W (173383) BT_HCI: hcif mode change: hdl 0x81, mode 2, intv 54, status 0x0
+W (173593) BT_HCI: hcif ssr evt: st 0x0, hdl 0x81, tx_lat 54 rx_lat 1188
+I (175113) audio: MUSIC 44100 Hz PA=0 in_peak=0 out_peak=0 mic_peak=0 frames=1536 limited=0 P4
+I (175113) audio: music buffer=0 B drops=176 underruns=2 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+W (177103) BT_HCI: hcif mode change: hdl 0x81, mode 0, intv 0, status 0x0
+I (177153) BT_LOG: bta_av_link_role_ok hndl:x41 role:1 conn_audio:x1 bits:1 features:x864b
+I (177163) music: Music STARTED
+I (177163) es8388: DAC profile P4: -6.0 dB (reg 0x0c)
+I (177163) es8388: ADC/microphones OFF
+I (177163) i2s: TX clocks: source=160000000 MCLK=11289537 BCLK=2822400 Fs=44100 capture=0 (32-bit data and slots)
+I (177173) audio: Path: MUSIC at 44100 Hz
+I (180133) audio: MUSIC 44100 Hz PA=1 in_peak=20540 out_peak=10064 mic_peak=0 frames=124288 limited=0 P4
+I (180133) audio: music bufer=10752 B drops=176 underruns=2 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (180403) call: Phone signal 2/5
+I (181403) touch: VOL+ GPIO27 pressed (raw=536)
+I (181403) audio: Music volume 75%
+I (182123) touch: VOL+ GPIO27 pressed (raw=580)
+I (182133) audio: Music volume 80%
+I (182923) call: Phone signal 3/5
+I (183073) touch: VOL+ GPIO27 pressed (raw=539)
+I (183073) audio: Music volume 85%
+I (183693) touch: VOL+ GPIO27 pressed (raw=649)
+I (183693) audio: Music volume 90%
+I (184413) touch: VOL+ GPIO27 pressed (raw=655)
+I (184413) audio: Music volume 95%
+I (185113) touch: VOL+ GPIO27 pressed (raw=713)
+I (185113) audio: Music volume 100%
+I (185143) audio: MUSIC 44100 Hz PA=1 in_peak=20537 out_peak=16384 mic_peak=0 frames=220416 limited=4534 P4
+I (185143) audio: music buffer=14336 B drops=176 underruns=3 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+ets Jul 29 2019 12:21:46
+rst:0x1 (POWERON_RESET),boot:0x1f (SPI_FAST_FLASH_BOOT)
+configsip: 0, SPIWP:0xee
+clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+mode:DIO, clock div:2
+load:0x3fff0040,len:6272
+load:0x40078000,len:15824
+load:0x40080400,len:3988
+entry 0x40080644
+I (27) boot: ESP-IDF v6.1 2nd stage bootloader
+I (27) boot: compile time Oct 27 2026 16:03:24
+I (28) boot: Multicore bootloader
+I (29) boot: chip revision: v3.0
+I (31) boot.esp32: SPI Speed      : 40MHz
+I (35) boot.esp32: SPI Mode       : DIO
+I (39) boot.esp32: SPI Flash Size : 8MB
+I (42) boot: Enabling RNG early entropy source...
+I (47) boot: Partition Table:
+I (49) boot: ## Label            Usage          Type ST Offset   Length
+I (56) boot:  0 nvs              WiFi data        01 02 00009000 00006000
+I (62) boot:  1 phy_init         RF data          01 01 0000f000 00001000
+I (69) boot:  2 factory          factory app      00 00 00010000 00300000
+I (75) boot: End of partition table
+I (79) esp_image: segment 0: paddr=00010020 vaddr=3f400020 size=27614h (161300) map
+I (143) esp_image: segment 1: paddr=0003763c vaddr=3ffbdb60 size=04fach ( 20396) load
+I (152) esp_image: segment 2: paddr=0003c5f0 vaddr=40080000 size=03a28h ( 14888) load
+I (158) esp_image: segment 3: paddr=00040020 vaddr=400d0020 size=8743ch (554044) map
+I (356) esp_image: segment 4: paddr=000c7464 vaddr=40083a28 size=11bc0h ( 72640) load
+I (386) esp_image: segment 5: paddr=000d902c vaddr=50000000 size=00028h (    40) load
+I (397) boot: Loaded app from partition at offset 0x10000
+I (397) boot: Disabling RNG early entropy source...
+I (408) cpu_start: Multicore app
+I (416) cpu_start: GPIO 3 and 1 are used as console UART I/O pins
+I (416) cpu_start: Pro cpu start user code
+I (416) cpu_start: cpu freq: 240000000 Hz
+I (418) app_init: Application information:
+I (422) app_init: Project name:     bleaudiocall
+I (426) app_init: App version:      df773b5-dirty
+I (431) app_init: Compile time:     Oct 27 2026 17:22:04
+I (436) app_init: ELF file SHA256:  5f67f7233...
+I (440) app_init: ESP-IDF:          v6.1
+I (444) efuse_init: Min chip rev:     v0.0
+I (447) efuse_init: Max chip rev:     v3.99 
+I (451) efuse_init: Chip rev:         v3.0
+I (455) heap_init: Initializing. RAM available for dynamic allocation:
+I (462) heap_init: At 3FFAFF10 len 000000F0 (0 KiB): DRAM
+I (467) heap_init: At 3FFB6BF8 len 00001408 (5 KiB): DRAM
+I (472) heap_init: At 3FFB9A20 len 00004108 (16 KiB): DRAM
+I (477) heap_init: At 3FFCD398 len 00012C68 (75 KiB): DRAM
+I (482) heap_init: At 3FFE0440 len 00003AE0 (14 KiB): D/IRAM
+I (487) heap_init: At 3FFE4350 len 0001BCB0 (111 KiB): D/IRAM
+I (493) heap_init: At 400955E8 len 0000AA18 (42 KiB): IRAM
+W (499) spi_flash: Detected boya flash chip but using generic driver. For optimal functionality, enable `SPI_FLASH_SUPPORT_BOYA_CHIP` in menuconfig
+I (511) spi_flash: detected chip: generic
+I (515) spi_flash: flash io: dio
+I (519) coexist: coex firmware version: a830d28
+I (523) main_task: Started on CPU0
+I (523) main_task: Calling app_main()
+I (523) boot: bleaudiocall: music + calls; reset reason=1 (power-on / EN pin)
+I (553) bt: Starting Bluetooth radio before codec/I2S/touch initialization
+I (553) BTDM_INIT: BT controller compile version [4a0f94d]
+I (553) BTDM_INIT: Using main XTAL as clock source
+I (553) BTDM_INIT: Bluetooth MAC: 08:3a:f2:31:29:3e
+I (563) phy_init: phy_version 4863,a3a4459,Oct 28 2025,14:30:06
+I (1023) bt: Radio and host enabled, own address 08:3a:f2:31:29:3e
+W (1043) audio: POWER TRIP: the board reset while the amplifier was on (reset reason 1). DAC profile lowered to P3 (-7.5 dB) and saved; '0' re-runs the self-test
+I (1043) audio: DAC profile P3 (-7.5 dB): limit found by the power self-test for this supply
+W (1053) gpio: conflict found for GPIO[21]
+I (1163) es8388: Ready: DAC P2 (-9.0 dB) -> LOUT1 0 dB -> PA; mics LIN1/RIN1 PGA reg 0x88 (ADC off until a call)
+W (1163) i2s_common: the rx channel on I2S0 is switched from master to slave for full-duplex mode
+I (1163) i2s: TX clocks: source=160000000 MCLK=11289537 BCLK=2822400 Fs=44100 capture=0 (32-bit data and slots)
+I (1173) audio: Engine: music 1x gain + limiter, DAC P3, call volume 10/15, mic gain 2.0x
+I (1183) es8388: DAC profile P3: -7.5 dB (reg 0x0f)
+I (1193) es8388: ADC/microphones OFF
+I (1193) touch: Calibration: do not touch pads for 1 second
+I (1193) i2s: TX clocks: source=160000000 MCLK=11289537 BCLK=2822400 Fs=44100 capture=0 (32-bit data and slots)
+I (1203) audio: Path: MUSIC at 44100 HzI (2133) touch: PLAY GPIO33 baseline=1286
+I (2133) touch: SET GPIO32 baseline=1285
+I (2133) touch: VOL+ GPIO27 baseline=1156
+I (2133) touch: VOL- GPIO13 baseline=842
+I (2133) touch: Ready: PLAY = answer / hang up / play-pause, SET = next (hold 2 s: reject / disconnect), VOL +/-
+W (2163) BT_BTC: A2DP Enable with AVRC
+I (2183) bt: READY: music (A2DP) + calls (HFP). Select 'blu2' in the phone's Bluetooth list
+I (2193) bt: 5 bonded phone(s); will try 2c:d0:66:b0:8c:74 (last connected) in 3 s, then the others in turn
+I (2203) console: Keys: a answer, h hangup/reject, m redial, c connect bonded phone, x disconnect, v list bonds, f forget bonds, i status, t ring tone test, l/r/z/b tones, ]/[ DAC +-1.5 dB, 0 reset DAC + self-test, k power self-test
+I (2223) boot: Initialized; free heap=70556 bytes
+I (2223) main_task: Returned from app_main()
+I (3203) bt: Radio: connectable, DISCOVERABLE (visible in the phone's list)
+I (5203) bt: Reconnect attempt 1 to last connected phone 2c:d0:66:b0:8c:74 (next in 10 s)
+I (5203) bt: Opening music (A2DP) to 2c:d0:66:b0:8c:74 ourselves
+W (5203) BT_APPL: reset flags
+I (5213) music: A2DP connecting...
+I (6183) audio: MUSIC 44100 Hz PA=0 in_peak=0 out_peak=0 mic_peak=0 frames=0 limited=0 P3
+I (6183) audio: music buffer=0 B drops=0 underruns=0 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+W (6643) BT_HCI: hcif conn complete: hdl 0x81, st 0x0
+I (6653) bt: Radio link with 2c:d0:66:b0:8c:74: status 0x0
+E (7133) BT_BTM: tBTM_SEC_DEV:0x3ffd3a40 rs_disc_pending=0
+W (7183) BT_HCI: hcif link supv_to changed: hdl 0x81, supv_to 8000
+I (7203) audio: Music PCM 44100 Hz, 2 channel(s)
+I (7213) es8388: DAC profile P3: -7.5 dB (reg 0x0f)
+I (7213) es8388: ADC/microphones OFF
+I (7213) i2s: TX clocks: source=1600000 MCLK=11289537 BCLK=2822400 Fs=44100 capture=0 (32-bit data and slots)
+I (7213) audio: Path: MUSIC at 44100 Hz
+W (7303) BT_APPL: new conn_srvc id:19, app_id:0
+I (7303) bt: Music (A2DP) connected to 2c:d0:66:b0:8c:74
+I (8203) bt: Radio: connectable, hidden while a phone is connected
+W (10503) BT_HCI: hci cmd send: sniff: hdl 0x81, intv(400 800)
+W (10633) BT_HCI: hcif mode change: hdl 0x81, mode 2, intv 800, status 0x0
+I (11193) audio: MUSIC 44100 Hz PA=0 in_peak=0 out_peak=0 mic_peak=0 frames=0 limited=0 P3
+I (11193) audio: music buffer=0 B drops=0 underruns=0 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (12203) bt: Opening calls (HFP) to 2c:d0:66:b0:8c:74 ourselves
+W (12203) BT_HCI: hci cmd send: unsniff: hdl 0x81
+W (12623) BT_HCI: hcif mode change: hdl 0x81, mode 0, intv 0, status 0x0
+W (12913) BT_APPL: new conn_srvc id:27, app_id:1
+I (12913) call: Link state 2 (3 = ready for calls), phone features 0x0
+I (13173) call: Call ended / none
+I (13173) call: Call setup: none
+I (13173) call: Phone network available
+I (13173) call: Phone signal 2/5
+I (13173) call: Roaming inactive
+I (13183) call: Phone battery 2/5
+I (13183) call: Call held status 0
+I (13283) call: Link state 3 (3 = ready for calls), phone features 0xf67
+I (13283) bt: Calls (HFP) connected to 2c:d0:66:b0:8c:74
+I (13443) call: Phone signal 3/5
+I (16203) audio: MUSIC 44100 Hz PA=0 in_peak=0 out_peak=0 mic_peak=0 frames=0 limited=0 P3
+I (16203) audio: music buffer=0 B drops=underruns=0 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+W (20573) BT_HCI: hcif mode change: hdl 0x81, mode 2, intv 800, status 0x0
+I (21213) audio: MUSIC 44100 Hz PA=0 in_peak=0 out_peak=0 mic_peak=0 frames=0 limited=0 P3
+I (21213) audio: music buffer=0 B drops=0 underruns=0 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (26223) audio: MUSIC 44100 Hz PA=0 in_peak=0 out_peak=0 mic_peak=0 frames=0 limited=0 P3
+I (26223) audio: music buffer=0 B drops=underruns=0 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+W (30113) BT_HCI: hcif mode change: hdl 0x81, mode 0, intv 0, status 0x0
+I (30163) BT_LOG: bta_av_link_role_ok hndl:x41 role:1 conn_audio:x1 bits:1 features:x864b
+W (30163) BT_APPL: new conn_srvc id:19, app_id:1
+I (30163) music: Music STARTED
+I (30173) es8388: DAC profile P3: -7.5 dB (reg 0x0f)
+I (30173) es8388: ADC/microphones OFF
+I (30173) i2s: TX clocks: source=160000000 MCLK=11289537 BCLK=2822400 Fs=44100 capture=0 (32-bit data and slots)
+I (30183) audio: Path: MUSIC at 44100 Hz
+I (31243) audio: MUSIC 44100 Hz PA=1 in_peak=20330 out_peak=9961 mic_peak=0 frames=40448 limited=0 P3
+I (31243) audio: music buffer=17920 B drops=0 underruns=1 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (36263) audio: MUSIC 44100 Hz PA=1 in_peak=20824 out_peak=10203 mic_peak=0 frames=221440 limited=0 P3
+I (36263) audio: music buffer=14336 B drops=0 underruns=1 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0I (41283) audio: MUSIC 44100 Hz PA=1 in_peak=20627 out_peak=10004 mic_peak=0 frames=221312 limited=0 P3
+I (41283) audio: music buffe=17920 B drops=0 underruns=1 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (46303) audio: MUSIC 44100 Hz PA=1 in_peak=20973 out_peak=10276 mic_peak=0 frames=221312 limited=0 P3
+I (46303) audio: music buffer=14336 B drops=0 underruns=1 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (51293) call: Phone signal 2/5
+I (51323) audio: MUSIC 44100 Hz PA=1 in_peak=20757 out_peak=10170 mic_peak=0 frames=221440 limited=0 P3
+I (51323) audio: music buffe13824 B drops=0 underruns=1 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (54393) touch: VOL+ GPIO27 pressed (raw=496)
+I (54393) audio: Music volume 75%
+I (56033) touch: VOL+ GPIO27 pressed (raw=498)
+I (56033) audio: Music volume 80%
+I (56343) audio: MUSIC 44100 Hz PA=1 in_peak=21376 out_peak=13120 mic_peak=0 frames=221312 limited=0 P3
+I (56343) audio: music buffer=13824 B drops=0 underruns=1 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (56953) touch: VOL+ GPIO27 pressed (raw=556)
+I (56953) audio: Music volume 85%
+I (57903) touch: VOL+ GPIO27 pressed (raw=536)
+I (57903) audio: Music volume 90%
+I (59733) touch: VOL+ GPIO27 pressed (raw=595)
+I (59733) audio: Music volume 95%
+I (60773) touch: VOL+ GPIO27 pressed (raw=563)
+I (60773) audio: Music volume 100%
+I (61353) audio: MUSIC 44100 Hz PA=1 in_peak=20718 out_peak=16384 mic_peak=0 frames=221312 limited=33873 P3
+I (61353) audio: music buffer=14336 B drops=0 underruns=1 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (62733) call: Phone signal 3/5
+I (66383) audio: MUSIC 44100 Hz PA=1 in_peak=21914 out_peak=16384 mic_peak=0 frames=221440 limited=137885 P3
+I (66383) audio: music buffer=13824 B drops=0 underruns=1 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (71403) audio: MUSIC 44100 Hz PA=1 in_peak=21380 out_peak=16384 mic_peak=0 frames=221312 limited=144921 P3
+I (71403) audio: music buffer=13824 B drops=0 underruns=1 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (76423) audio: MUSIC 44100 Hz PA=1 in_peak=20835 out_peak=16384 mic_peak=0 frames=221312 limited=107796 P3
+I (76423) audio: music buffer=17920 B drops=0 underruns=2 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (81443) audio: MUSIC 44100 Hz PA=1 in_peak=9964 out_peak=9964 mic_peak=0 frames=221312 limited=0 P3
+I (81443) audio: music buffer=14336 B drops=0 underruns=2 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (86463) audio: MUSIC 44100 Hz PA=1 in_peak=10078 out_peak=10048 mic_peak=0 frames=221440 limited=0 P3
+I (86463) audio: music buffer=17408 B drops=0 underruns=2 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (91483) audio: MUSIC 44100 Hz PA=1 in_peak=9969 out_peak=9969 mic_peak=0 frames=221312 limited=0 P3
+I (91483) audio: music buffer=17408 B drops=0 underruns=2 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (96503) audio: MUSIC 44100 Hz PA=1 in_peak=9934 out_peak=9814 mic_peak=0 frames=221440 limited=0 P3
+I (96503) audio: music buffer3824 B drops=0 underruns=2 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (101523) audio: MUSIC 44100 Hz PA=1 in_peak=9776 out_peak=9724 mic_peak=0 frames=218496 limited=0 P3
+I (101523) audio: music buffer=24576 B drops=1 underruns=3 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (101903) music: Music SUSPENDED
+I (101933) es8388: DAC profile P3: -7.5 dB (reg 0x0f)
+I (101933) es8388: ADC/microphones OFF
+I (101933) i2s: TX clocks: source=160000000 MCLK=11289537 BCLK=2822400 Fs=44100 capture=0 (32-bit data and slots)
+I (101943) audio: Path: MUSIC at 44100 Hz
+I (104633) BT_LOG: bta_av_link_role_ok hndl:x41 role:1 conn_audio:x1 bits:1 features:x864b
+I (104643) music: Music STARTED
+I (104643) es8388: DAC profile P3: -7.5 dB (reg 0x0f)
+I (104643) es8388: ADC/microphones OFF
+I (104643) i2s: TX clocks: source=160000000 MCLK=11289537 BCLK=2822400 Fs=44100 capture=0 (32-bit data and slots)
+I (104653) audio: Path: MUSIC at 44100 Hz
+I (106543) audio: MUSIC 44100 Hz PA=1 in_peak=7157 out_peak=7157 mic_peak=0 frames=97024 limited=0 P3
+I (106543) audio: music buffer=10240 B drops=1 underruns=4 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (111563) audio: MUSIC 44100 Hz PA=1 in_peak=5472 out_peak=5358 mic_peak=0 frames=220416 limited=0 P3
+I (111563) audio: music buffer=20992 B drops=1 underruns=5 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (116593) audio: MUSIC 44100 Hz PA=1 in_peak=7913 out_peak=6466 mic_peak=0 frames=221312 limited=0 P3
+I (116593) audio: music buffer=17920 B drops=1 underruns=5 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (121613) audio: MUSIC 44100 Hz PA=1 in_peak=7573 out_peak=7573 mic_peak=0 frames=221440 limited=0 P3
+I (121613) audio: music buffer=20992 B drops=1 underruns=5 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (126623) audio: MUSIC 44100 Hz PA=1 in_peak=7885 out_peak=7326 mic_peak=0 frames=221312 limited=0 P3
+I (126623) audio: music buffer=17408 B drops=1 underruns=5 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (131643) audio: MUSIC 44100 Hz PA=1 in_peak=8167 out_peak=7270 mic_peak=0 frames=221312 limited=0 P3
+I (131643) audio: music buffer=21504 B drops=1 underruns=5 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (136663) audio: MUSIC 44100 Hz PA=1 in_peak=14188 out_peak=14188 mic_peak=0 frames=221440 limited=0 P3
+I (136673) audio: music buffer=3584 B drops=1 underruns=5 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (139193) touch: VOL+ GPIO27 pressed (raw=560)
+I (139193) audio: Music volume 100%
+I (139993) touch: VOL+ GPIO27 pressed (raw=614)
+I (139993) audio: Music volume 100%
+I (141683) audio: MUSIC 44100 Hz PA=1 in_peak=19957 out_peak=16384 mic_peak=0 frames=220416 limited=9338 P3
+I (141683) audio: music buffer=17920 B drops=1 underruns=6 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (146703) audio: MUSIC 44100 Hz PA=1 in_peak=20493 out_peak=16384 mic_peak=0 frames=221440 limited=20865 P3
+I (146703) audio: music buffer=20992 B drops=1 underruns=6 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (151723) audio: MUSIC 44100 Hz PA=1 in_peak=20997 out_peak=16384 mic_peak=0 frames=221184 limited=56342 P3
+I (151723) audio: musibuffer=21504 B drops=1 underruns=6 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (156743) audio: MUSIC 44100 Hz PA=1 in_peak=21025 out_peak=16384 mic_peak=0 frames=221440 limited=65750 P3
+I (156743) audio: music buffer=20992 B drops=1 underruns=6 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (159873) music: Music SUSPENDED
+I (159883) es8388: DAC profile P3: -7.5 dB (reg 0x0f)
+I (159883) es8388: ADC/microphones OFF
+I (159883) i2s: TX clocks: source=160000000 MCLK=112837 BCLK=2822400 Fs=44100 capture=0 (32-bit data and slots)
+I (159893) audio: Path: MUSIC at 44100 Hz
+I (161753) audio: MUSIC 44100 Hz PA=0 in_peak=14379 out_peak=14379 mic_peak=0 frames=138368 limited=0 P3
+I (161753) audio: music buffer=0 B drops=1 underruns=6 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+W (163063) BT_HCI: hci cmd send: sniff: hdl 0x81, intv(30 54)
+W (163143) BT_HCI: hcif mode change: hdl 0x81, mode 2, intv 54, status 0x0
+W (163313) BT_HCI: hcif ssr evt: st 0x0, hdl 0x81, tx_lat 54 rx_lat 1188
+W (166283) BT_HCI: hcif mode change: hdl 0x81, mode 0, intv 0, status 0x0
+I (166283) call: Call setup: outgoing dialing
+I (166393) call: Voice link connected (mSBC 16 kHz)
+I (166393) audio: CALL audio start: 16000 Hz mono both ways
+I (166403) es8388: DAC profile P3: -7.5 dB (reg 0x0f)
+I (166403) es8388: ADC/microphones ON
+I (166403) i2s: TX clocks: urce=160000000 MCLK=4096000 BCLK=1024000 Fs=16000 capture=1 (32-bit data and slots)
+I (166413) audio: Path: CALL at 16000 Hz
+I (166563) call: Call setup: outgoing alerting
+I (166773) audio: CALL 16000 Hz PA=1 in_peak=0 out_peak=0 mic_peak=32768 frames=5760 limited=0 P3
+I (166773) audio: music buffer=0 B drops=1 underruns=6 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+W (169293) BT_HCI: hcif conn complete: hdl 0x80, st 0x0
+I (169303) bt: Radio link with 50:49:b0:90:c5:33: status 0x0
+I (169313) bt: Another phone 50:49:b0:90:c5:33 arrived while 2c:d0:66:b0:8c:74 is connected: switching to the new phone
+W (169323) BT_HCI: hci cmd send: disconnect: hdl 0x181, rsn:0x13
+W (169483) BT_HCI: hcif disc complete: hdl 0x181, rsn 0x16 dev_find 1
+I (169483) call: Voice link disconnected
+I (169483) audio: CALL audio stop; back to music path
+I (169503) es8388: DAC profile P3: -7.5 dB (reg 0x0f)
+I (169503) es8388: ADC/microphones OFF
+I (169503) i2s: TX clocks: source=160000000 MCLK=11289537 BCLK=2822400 Fs=44100 capture=0 (32-bit data and slots)
+I (169513) audio: Path: MUSIC at 44100 Hz
+W (169543) BT_RFCOMM: port_rfc_closed RFCOMM connection in server:0 state 3 closed: Closed (res: 19)
+W (169553) BT_HCI: hci cmd send: sniff: hdl 0x81, intv(30 54)
+W (169553) BT_APPL: BTA_HF_CLIENT_SCO_SHUTDOWN_ST: Ignoring event 3
+I (169563) call: Link state 0 (3 = ready for calls), phone features 0x0
+I (169563) bt: Calls (HFP) disconnected from 2c:d0:66:b0:8c:74
+W (169623) BT_HCI: hcif mode change: hdl 0x81, mode 2, intv 54, status 0x0
+W (169693) BT_HCI: hci cmd send: unsniff: hdl 0x81
+W (169793) BT_HCI: hcif ssr evt: st 0x0, hdl 0x81, tx_lat 54 rx_lat 1188
+W (169803) BT_HCI: hcif mode change: hdl 0x81, mode 0, intv 0, status 0x0
+W (169843) BT_HCI: hci cmd send: disconnect: hdl 0x81, rsn:0x13
+W (169853) BT_HCI: hci cmd send: sniff: hdl 0x81, intv(30 54)
+W (169853) BT_HCI: opcode=0x0803, status= 02: No Connection
+I (169853) bt: Music (A2DP) disconnected from 2c:d0:66:b0:8c:74
+W (169933) BT_HCI: hcif disc complete: hdl 0x81, rsn 0x16 dev_find 1
+I (169933) bt: Radio link closed by 2c:d0:66:b0:8c:74: reason 0x116 (0x13 phone, 0x16 us, 0x08 timeout/out of range)
+I (170203) bt: Radio: connectable, DISCOVERABLE (visible in the phone's list)
+W (171283) BT_APPL: new conn_srvc id:27, app_id:1
+I (171293) call: Link state 2 (3 = ready for calls), phone features 0x0
+I (171783) audio: MUSIC 44100 Hz PA=0 in_peak=0 out_peak=47 mic_peak=15740 frames=43520 limited=0 P3
+I (171783) audio: music buffer=0 B drops=1 underruns=6 | call rx_drops=0 tx_drops=0 underruns=15 | i2s_errors=0
+I (171813) call: Call ended / none
+I (171813) call: Call setup: INCOMING -> PLAY = answer, SET hold = reject
+I (171813) call: Phone network available
+I (171823) call: Phone signal 3/5
+I (171823) call: Roaming inactive
+I (171823) call: Phone battery 4/5
+I (171833) call: Call held status 0
+I (171973) call: Link state 3 (3 = ready for calls), phone features 0xfe7
+I (171983) bt: Remembered 50:49:b0:90:c5:33 as the phone to reconnect to
+I (171983) bt: Calls (HFP) connected to 50:49:b0:90:c5:33
+I (172203) bt: Radio: connectable, hidden while a phone is connected
+I (172333) music: A2DP connecting...
+I (172363) call: Call setup: none
+I (172363) call: Call setup: INCOMING -> PLAY = answer, SET hold = reject
+I (172363) audio: Local ring tone ON
+I (172373) call: RING
+I (172373) es8388: DAC profile P3: -7.5 dB (reg 0x0f)
+I (172373) es8388: ADC/microphones OFF
+I (172383) i2s: TX clocks: source=160000000 MCLK=11289537 BCLK=2822400 Fs=44100 capture=0 (32-bit data and slots)
+I (172393) audio: Path: MUSIC at 44100 Hz + ring tone
+I (172613) audio: Music PCM 44100 Hz, 2 channel(s)
+I (172633) es8388: DAC profile P3: -7.5 dB (reg 0x0f)
+I (172633) es8388: ADC/microphones OFF
+I (172633) i2s: TX clocks: source=160000000 MCLK=11289537 BCLK=2822400 Fs=44100 capture=0 (32-bit data and slots)
+I (172643) audio: Path: MUSIC at 44100 Hz + ring tone
+W (172723) BT_APPL: new conn_srvc id:19, app_id:0
+I (172723) bt: Music (A2DP) connected to 50:49:b0:90:c5:33
+I (173523) audio: Music volume 90%
+W (175653) BT_RFCOMM: port_rfc_closed RFCOMM connection in server:1 state 2 closed: Closed (res: 19)
+W (175653) BT_HCI: hci cmd send: sniff: hdl 0x80, intv(400 800)
+W (175653) BT_APPL: bta_dm_act no entry for connected service cbs
+W (175663) BT_HCI: hcif mode change: hdl 0x80, mode 2, intv 800, status 0x0
+I (175673) bt: Music (A2DP) disconnected from 50:49:b0:90:c5:33
+I (175673) call: Link state 0 (3 = ready for calls), phone features 0x0
+I (175673) audio: Local ring tone OFF
+I (175683) bt: Calls (HFP) disconnected from 50:49:b0:90:c5:33
+I (175693) es8388: DAC profile P3: -7.5 dB (reg 0x0f)
+I (175693) es8388: ADC/microphones OFF
+I (175693) i2s: TX clocks: source=160000000 MCLK=11289537 BCLK=2822400 Fs=44100 capture=0 (32-bit data and slots)
+I (175703) audio: Path: MUSIC at 44100 Hz
+I (176203) bt: Radio: connectable, DISCOVERABLE (visible in the phone's list)
+I (176793) audio: MUSIC 44100 Hz PA=0 in_peak=0 out_peak=0 mic_peak=0 frames=0 limited=0 P3
+I (176793) audio: music buffer=0 B drops1 underruns=6 | call rx_drops=0 tx_drops=0 underruns=15 | i2s_errors=0
+W (176963) BT_HCI: hci cmd send: unsniff: hdl 0x80
+W (176963) BT_RFCOMM: rfc_find_lcid_mcb LCID reused LCID:0x41 current:0x0
+W (176963) BT_RFCOMM: RFCOMM_DisconnectInd LCID:0x41
+W (176973) BT_HCI: opcode=0x0804, status= 0c: Cmd Disallowed
+W (177463) BT_HCI: hcif mode change: hdl 0x80, mode 0, intv 0, status 0x0
+W (177703) BT_HCI: hcif disc complete: hdl 0x80, rsn 0x13 dev_find 1
+I (177703) bt: Radio link closed by 50:49:b0:90:c5:33: reason 0x113 (0x13 phone, 0x16 us, 0x08 timeout/out of range)
+I (181203) bt: Reconnect attempt 1 to last connected phone 50:49:b0:90:c5:33 (next in 10 s)
+I (181203) bt: Opening music (A2DP) to 50:49:b0:90:c5:33 ourselves
+W (181203) BT_APPL: reset flags
+I (181213) music: A2DP connecting...
+I (181803) audio: MUSIC 44100 Hz PA=0 in_peak=0 out_peak=0 mic_peak=0 frames=0 limited=0 P3
+I (181803) audio: music buffer=0 B drops underruns=6 | call rx_drops=0 tx_drops=0 underruns=15 | i2s_errors=0
+W (186333) BT_SDP: SDP - Rcvd conn cnf with error: 0x4  CID 0x40
+W (186333) BT_HCI: hcif conn complete: hdl 0xfff, st 0x4
+I (186333) bt: Radio link with 50:49:b0:90:c5:33: status 0x104 (0x104 = page timeout: phone off / out of range)
+W (186343) BT_BTC: BTA_AV_OPEN_EVT::FAILED status: 2
+I (186353) bt: Music (A2DP) attempt failed (phone not reachable)
+I (186813) audio: MUSIC 44100 Hz PA=0 in_peak=0 out_peak=0 mic_peak=0 frames=0 limited=0 P3
+I (186813) audio: music buffer=0 B drop1 underruns=6 | call rx_drops=0 tx_drops=0 underruns=15 | i2s_errors=0
+I (191823) audio: MUSIC 44100 Hz PA=0 in_peak=0 out_peak=0 mic_peak=0 frames=0 limited=0 P3
+I (191823) audio: music buffer=0 B drops=1 underruns=6 | call rx_drops=0 tx_drops=0 underruns=15 | i2s_errors=0
+I (192203) bt: Reconnect attempt 2 to other bonded phone 2c:d0:66:b0:8c:74 (next in 10 s)
+I (192203) bt: Opening music (A2DP) to 2c:d0:66:b0:8c:74 ourselves
+W (192203) BT_APPL: reset flags
+I (192213) music: A2DP connecting...
+W (193563) BT_HCI: hcif conn complete: hdl 0x80, st 0x0
+I (193563) bt: Radio link with 2c:d0:66:b0:8c:74: status 0x0
+E (194563) BT_BTM: tBTM_SEC_DEV:0x3ffd3a40 rs_disc_pending=0
+W (194603) BT_HCI: hcif link supv_to changed: hdl 0x80, supv_to 8000
+I (194793) audio: Music PCM 44100 Hz, 2 channel(s)
+I (194793) es8388: DAC profile P3: -7.5 dB (reg 0x0f)
+I (194793) es8388: ADC/microphones OFF
+I (194793) i2s: TX clocks: source=160000000 MCLK=11289537 BCLK=2822400 Fs=44100 capture=0 (32-bit data and slots)
+I (194803) audio: Path: MUSIC at 44100 Hz
+W (194913) BT_APPL: new conn_srvc id:19, app_id:0
+I (194923) bt: Remembered 2c:d0:66:b0:8c:74 as the phone to reconnect to
+I (194923) bt: Music (A2DP) connected to 2c:d0:66:b0:8c:74
+I (195203) bt: Radio: connectable, hidden while a phone is connected
+I (196823) audio: MUSIC 44100 Hz PA=0 in_peak=0 out_peak=0 mic_peak=0 frames=0 limited=0 P3
+I (196823) audio: music buffer=0 B drops=1 underruns=6 | call rx_drops=0 tx_drops=0 underruns=15 | i2s_errors=0
+W (198113) BT_HCI: hci cmd send: sniff: hdl 0x80, intv(400 800)
+W (198123) BT_HCI: hci cmd send: unsniff: hdl 0x80
+W (198123) BT_HCI: hcif mode change: hdl 0x80, mode 2, intv 800, status 0x0
+W (198623) BT_HCI: hcif mode change: hdl 0x80, mode 0, intv 0, status 0x0
+I (199203) bt: Opening calls (HFP) to 2c:d0:66:b0:8c:74 ourselves
+W (199493) BT_APPL: new conn_srvc id:27, app_id:1
+I (199503) call: Link state 2 (3 = ready for calls), phone features 0x0
+I (199663) call: Call ACTIVE
+I (199663) call: Call setup: none
+I (199663) call: Phone network available
+I (199663) call: Phone signal 3/5
+I (199673) call: Roaming inactive
+I (199673) call: Phone battery 2/5
+I (199673) call: Call held status 0
+I (199783) call: Link state 3 (3 = ready for calls), phone features 0xf67
+I (199793) bt: Calls (HFP) connected to 2c:d0:66:b0:8c:74
+I (199873) call: Phone signal 2/5
+I (200253) call: Voice link connected (mSBC 16 kHz)
+I (200253) audio: CALL audio start: 16000 Hz mono both ways
+I (200253) es8388: DAC profile P3: -7.5 dB (reg 0x0f)
+I (200253) es8388: ADC/microphones ON
+I (200263) i2s: TX clocks: source=160000000 MCLK=4096000 BCLK=1024000 Fs=16000 capture=1 (32-bit data and slots)
+I (200273) audio: Path: CALL at 16000 Hz
+I (201843) audio: CALL 16000 Hz PA=1 in_peak=0 out_peak=3984 mic_peak=32768 frames=25120 limited=0 P3
+I (201843) audio: music buffer=0 B drops=1 underruns=6 | call rx_drops=0 tx_drops=0 underruns=17 | i2s_errors=0
+I (206863) audio: CALL 16000 Hz PA=1 in_peak=0 out_peak=16432 mic_peak=5694 frames=80480 limited=0 P3
+I (206873) audio: music buffer=0 B drops=1 underruns=6 | call rx_drops=0 tx_drops=0 underruns=17 | i2s_errors=0
+W (207453) BT_HCI: hci cmd send: sniff: hdl 0x80, intv(50 150)
+W (207453) BT_HCI: hcif mode change: hdl 0x80, mode 0, intv 0, status 0x20
+E (207453) BT_APPL: bta_dm_pm_btm_status hci_status=32
+I (211873) audio: CALL 16000 Hz PA=1 in_peak=0 out_peak=5397 mic_peak=2896 frames=80160 limited=0 P3
+I (211873) audio: music buffer=0 B drops=1 underruns=6 | call rx_drops=0 tx_drops=0 underruns=17 | i2s_errors=0
+W (216093) BT_HCI: hcif disc complete: hdl 0x180, rsn 0x13 dev_find 1
+I (216093) call: Voice link disconnected
+I (216093) audio: CALL audio stop; back to music path
+E (216103) BT_APPL: bta_hf_client_sco_co_out_data invalid air mode: 255
+I (216113) es8388: DAC profile P3: -7.5 dB (reg 0x0f)
+I (216113) es8388: ADC/microphones OFF
+I (216113) i2s: TX clocks: source=160000000 MCLK=11289537 BCLK=2822400 Fs=44100 capture=0 (32-bit data and slots)
+I (216123) audio: Path: MUSIC at 44100 Hz
+I (216153) call: Call ended / none
+I (216883) audio: MUSIC 44100 Hz PA=0 in_peak=0 out_peak=13009 mic_peak=2112 frames=67520 limited=0 P3
+I (216883) audio: music buffer=0 B drops=1 underruns=6 | call rx_drops=0 tx_drops=0 underruns=17 | i2s_errors=0
+I (221893) audio: MUSIC 44100 Hz PA=0 in_peak=0 out_peak=0 mic_peak=0 frames=0 limited=0 P3
+I (221893) audio: music buffer=0 B drops=1 underruns=6 | call rx_drops=0 tx_drops=0 underruns=17 | i2s_errors=0
+W (223143) BT_HCI: hcif mode change: hdl 0x80, mode 2, intv 800, status 0x0
+I (226903) audio: MUSIC 44100 Hz PA=0 in_peak=0 out_peak=0 mic_peak=0 frames=0 limited=0 P3
+I (226903) audio: music buffer=0 B drops=1 underruns=6 | call rx_drops=0 tx_drops=0 underruns=17 | i2s_errors=0
+W (229123) BT_HCI: hci cmd send: unsniff: hdl 0x80
+I (229133) call: Phone battery 1/5
+W (229623) BT_HCI: hcif mode change: hdl 0x80, mode 0, intv 0, status 0x0
+I (229643) BT_LOG: bta_av_link_role_ok hndl:x41 role:1 conn_audio:x1 bits:1 features:x864b
+W (229643) BT_APPL: new conn_srvc id:19, app_id:1
+I (229653) music: Music STARTED
+I (229653) es8388: DAC profile P3: -7.5 dB (reg 0x0f)
+I (229653) es8388: ADC/microphones OFF
+I (229653) i2s: TX clocks: source=160000000 MCLK=11289537 BCLK=2822400 Fs=44100 capture=0 (32-bit data and slots)
+I (229663) audio: Path: MUSIC at 44100 Hz
+I (231923) audio: MUSIC 44100 Hz PA=1 in_peak=20820 out_peak=16384 mic_peak=0 frames=94336 limited=387 P3
+I (231923) audio: music buffer=17408 B drops=1 underruns=7 | call rx_drops=0 tx_drops=0 underruns=17 | i2s_errors=0
+I (236953) audio: MUSIC 44100 Hz PA=1 in_peak=20598 out_peak=16384 mic_peak=0 frames=220416 limited=290 P3
+I (236953) audio: music buffer=21504 B drops=1 underruns=8 | call rx_drops=0 tx_drops=0 underruns=17 | i2s_errors=0
+W (239903) BT_APPL: bta_av_str_stopped status 0
+W (239903) BT_HCI: hci cmd send: sniff: hdl 0x80, intv(30 54)
+I (239903) music: Music SUSPENDED
+I (239903) bt: Music (A2DP) disconnected from 2c:d0:66:b0:8c:74
+I (239923) es8388: DAC profile P3: -7.5 dB (reg 0x0f)
+I (239923) es8388: ADC/microphones OFF
+I (239923) i2s: TX clocks: source=160000000 MCLK=11289537 BCLK=2822400 Fs=44100 capture=0 (32-bit data and slots)
+I (239933) audio: Path: MUSIC at 44100 Hz
+W (239933) BT_RFCOMM: port_rfc_closed RFCOMM connection in server:0 state 2 closed: Closed (res: 19)
+W (239943) BT_HCI: hci cmd send: unsniff: hdl 0x80
+W (239953) BT_HCI: hcif mode change: hdl 0x80, mode 2, intv 54, status 0x0
+I (239953) call: Link state 0 (3 = ready for calls), phone features 0x0
+I (239963) bt: Calls (HFP) disconnected from 2c:d0:66:b0:8c:74
+W (239963) BT_HCI: hcif mode change: hdl 0x80, mode 0, intv 0, status 0x0
+W (240013) BT_HCI: hcif disc complete: hdl 0x80, rsn 0x13 dev_find 1
+I (240013) bt: Radio link closed by 2c:d0:66:b0:8c:74: reason 0x113 (0x13 phone, 0x16 us, 0x08 timeout/out of range)
+I (240203) bt: Radio: connectable, DISCOVERABLE (visible in the phone's list)
+I (241963) audio: MUSIC 44100 Hz PA=0 in_peak=20642 out_peak=16384 mic_peak=0 frames=121728 limited=248 P3
+I (241963) audio: music bfer=0 B drops=1 underruns=9 | call rx_drops=0 tx_drops=0 underruns=17 | i2s_errors=0
+I (244813) touch: VOL+ GPIO27 pressed (raw=633)
+I (244813) audio: Music volume 95%
+I (245203) bt: Reconnect attempt 1 to last connected phone 2c:d0:66:b0:8c:74 (next in 10 s)
+I (245203) bt: Opening music (A2DP) to 2c:d0:66:b0:8c: ourselves
+W (245203) BT_APPL: reset flags
+I (245213) music: A2DP connecting...
+I (245753) touch: VOL+ GPIO27 pressed (raw=644)
+I (245753) audio: Music volume 100%
+I (246853) touch: VOL+ GPIO27 pressed (raw=578)
+I (246853) audio: Music volume 100%
+I (246973) audio: MUSIC 44100 Hz PA=0 in_peak=0 out_peak=0 mic_peak=0 frames=0 limited=0 P3
+I (246973) audio: music buffer=0 B drops underruns=9 | call rx_drops=0 tx_drops=0 underruns=17 | i2s_errors=0
+W (250333) BT_SDP: SDP - Rcvd conn cnf with error: 0x4  CID 0x41
+W (250333) BT_HCI: hcif conn complete: hdl 0xfff, st 0x4
+I (250333) bt: Radio link with 2c:d0:66:b0:8c:74: status 0x104 (0x104 = page timeout: phone off / out of range)
+W (250343) BT_BTC: BTA_AV_OPEN_EVT::FAILED status: 2
+I (250353) bt: Music (A2DP) attempt failed (phone not reachable)
+W (251883) BT_HCI: hcif conn complete: hdl 0x81, st 0x0
+I (251893) bt: Radio link with 50:49:b0:90:c5:33: status 0x0
+W (251913) BT_HCI: hcif link supv_to changed: hdl 0x81, supv_to 8000
+I (251983) audio: MUSIC 44100 Hz PA=0 in_peak=0 out_peak=0 mic_peak=0 frames=0 limited=0 P3
+I (251983) audio: music buffer=0 B drops=1 underruns=9 | call rx_drops=0 tx_drops=0 underruns=17 | i2s_errors=0
+W (252743) BT_APPL: new conn_srvc id:27, app_id:1
+I (252743) call: Link state 2 (3 = ready for calls), phone features 0x0
+I (253013) call: Call ended / none
+I (253013) call: Call setup: none
+I (253013) call: Phone network available
+I (253013) call: Phone signal 2/5
+I (253013) call: Roaming inactive
+I (253023) call: Phone battery 4/5
+I (253023) call: Call held status 0
+I (253143) call: Link state 3 (3 = ready for calls), phone features 0xfe7
+I (253163) bt: Remembered 50:49:b0:90:c5:33 as the phone to reconnect to
+I (253163) bt: Calls (HFP) connected to 50:49:b0:90:c5:33
+I (253203) bt: Radio: connectable, hidden while a phone is connected
+I (253483) music: A2DP connecting...
+I (253573) audio: Music PCM 44100 Hz, 2 channel(s)
+I (253583) es8388: DAC profile P3: -7.5 dB (reg 0x0f)
+I (253583) es8388: ADC/microphones OFF
+I (253583) i2s: TX clocks: source=160000000 MCLK=11289537 BCLK=2822400 Fs=44100 capture=0 (32-bit data and slots)
+I (253583) audio: Path: MUSIC at 44100 Hz
+W (253733) BT_APPL: new conn_srvc id:19, app_id:0
+I (253733) bt: Music (A2DP) connected to 50:49:b0:90:c5:33
+I (254383) audio: Music volume 90%
+I (256273) call: Phone signal 3/5
+I (256983) audio: MUSIC 44100 Hz PA=0 in_peak=0 out_peak=0 mic_peak=0 frames=0 limited=0 P3
+I (256983) audio: music buffer=0 B drops=1 underruns=9 | call rx_drops=0 tx_drops=0 underruns=17 | i2s_errors=0
+I (260223) touch: VOL+ GPIO27 pressed (raw=605)
+I (260223) audio: Music volume 95%
+I (260383) BT_LOG: bta_av_link_role_ok hndl:x41 role:1 conn_audio:x1 bits:1 features:x864b
+W (260383) BT_APPL: new conn_srvc id:19, app_id:1
+I (260383) music: Music STARTED
+I (260393) es8388: DAC profile P3: -7.5 dB (reg 0x0f)
+I (260393) es8388: ADC/microphones OFF
+I (260393) i2s: TX clocks: source=160000000 MCLK=11289537 BCLK=2822400 Fs=44100 capture=0 (32-bit data and slots)
+I (260403) audio: Path: MUSIC at 44100 Hz
+I (261413) touch: VOL+ GPIO27 pressed (raw=676)
+I (261413) audio: Music volume 100%
+I (262013) audio: MUSIC 44100 Hz PA=1 in_peak=18457 out_peak=16384 mic_peak=0 frames=62464 limited=6260 P3
+I (262013) audio: music bffer=4096 B drops=1 underruns=10 | call rx_drops=0 tx_drops=0 underruns=17 | i2s_errors=0
+I (263003) call: Phone signal 2/5
+I (265123) touch: VOL+ GPIO27 pressed (raw=603)
+I (265123) audio: Music volume 100%
+I (265513) touch: VOL+ GPIO27 pressed (raw=577)
+I (265513) audio: Music volume 100%
+I (265823) touch: VOL+ GPIO27 pressed (raw=839)
+I (265823) audio: Music volume 100%
+I (266053) touch: VOL+ GPIO27 pressed (raw=746)
+I (266053) audio: Music volume 100%
+I (267033) audio: MUSIC 44100 Hz PA=1 in_peak=18562 out_peak=16384 mic_peak=0 frames=220160 limited=48342 P3
+I (267033) audio: music buffer=16384 B drops=1 underruns=12 | call rx_drops=0 tx_drops=0 underruns=17 | i2s_errors=0
+I (272053) audio: MUSIC 44100 Hz PA=1 in_peak=18642 out_peak=16384 mic_peak=0 frames=221184 limited=91546 P3
+I (272053) audio: music buffer=16384 B drops=1 underruns=12 | call rx_drops=0 tx_drops=0 underruns=17 | i2s_errors=0
+I (272293) call: Phone signal 3/5
+I (277063) audio: MUSIC 44100 Hz PA=1 in_peak=18556 out_peak=16384 mic_peak=0 frames=221184 limited=102376 P3
+I (277063) audio: music buffer=16384 B drops=1 underruns=12 | call rx_drops=0 tx_drops=0 underruns=17 | i2s_errors=0
+I (282083) audio: MUSIC 44100 Hz PA=1 in_peak=18446 out_peak=16384 mic_peak=0 frames=221184 limited=79562 P3
+I (282083) audio: music buffer=12288 B drops=1 underruns=12 | call rx_drops=0 tx_drops=0 underruns=17 | i2s_errors=0
+I (287103) audio: MUSIC 44100 Hz PA=1 in_peak=18474 out_peak=16384 mic_peak=0 frames=221184 limited=44219 P3
+I (287103) audio: music buffer=8192 B drops=1 underruns=12 | call rx_drops=0 tx_drops=0 underruns=17 | i2s_errors=0
+I (292113) audio: MUSIC 44100 Hz PA=1 in_peak=18452 out_peak=16384 mic_peak=0 frames=221184 limited=91205 P3
+I (292113) audio: music buffer=16384 B drops=1 underruns=12 | call rx_drops=0 tx_drops=0 underruns=17 | i2s_errors=0
+I (297133) audio: MUSIC 44100 Hz PA=1 in_peak=18655 out_peak=16384 mic_peak=0 frames=221184 limited=68502 P3
+I (297133) audio: music buffer=8192 B drops=1 underruns=12 | call rx_drops=0 tx_drops=0 underruns=17 | i2s_errors=0
+I (302143) audio: MUSIC 44100 Hz PA=1 in_peak=18463 out_peak=16384 mic_peak=0 frames=221184 limited=50755 P3
+I (302143) audio: music buffer=16384 B drops=1 underruns=12 | call rx_drops=0 tx_drops=0 underruns=17 | i2s_errors=0
+I (307163) audio: MUSIC 44100 Hz PA=1 in_peak=18889 out_peak=16384 mic_peak=0 frames=221184 limited=15421 P3
+I (307163) audio: music buffer=8192 B drops=1 underruns=12 | call rx_drops=0 tx_drops=0 underruns=17 | i2s_errors=0
+I (312173) audio: MUSIC 44100 Hz PA=1 in_peak=18361 out_peak=16384 mic_peak=0 frames=221184 limited=15816 P3
+I (312173) audio: music buffer=16384 B drops=1 underruns=12 | call rx_drops=0 tx_drops=0 underruns=17 | i2s_errors=0
+I (317193) audio: MUSIC 44100 Hz PA=1 in_peak=18397 out_peak=16384 mic_peak=0 frames=221184 limited=22510 P3
+I (317193) audio: music buffer=8192 B drops=1 underruns=12 | call rx_drops=0 tx_drops=0 underruns=17 | i2s_errors=0
+I (322203) audio: MUSIC 44100 Hz PA=1 in_peak=18344 out_peak=16384 mic_peak=0 frames=221184 limited=26126 P3
+I (322203) audio: music buffer=12288 B drops=1 underruns=12 | call rx_drops=0 tx_drops=0 underruns=17 | i2s_errors=0
+I (327223) audio: MUSIC 44100 Hz PA=1 in_peak=18323 out_peak=16384 mic_peak=0 frames=221184 limited=29225 P3
+I (327223) audio: music buffer=12288 B drops=1 underruns=12 | call rx_drops=0 tx_drops=0 underruns=17 | i2s_errors=0I (332243) audio: MUSIC 44100 Hz PA=1 in_peak=18379 out_peak=16384 mic_peak=0 frames=221184 limited=30962 P3
+I (332243) audio: music buffer=16384 B drops=1 underruns=12 | call rx_drops=0 tx_drops=0 underruns=17 | i2s_errors=0
+I (337253) audio: MUSIC 44100 Hz PA=1 in_peak=18565 out_peak=16384 mic_peak=0 frames=221184 limited=39812 P3
+I (337253) audio: music buffer=16384 B drops=1 underruns=12 | call rx_drops=0 tx_drops=0 underruns=17 | i2s_errors=0
+I (342273) audio: MUSIC 44100 Hz PA=1 in_peak=18578 out_peak=16384 mic_peak=0 frames=221184 limited=40920 P3
+I (342273) audio: music buffer=16384 B drops=1 underruns=12 | call rx_drops=0 tx_drops=0 underruns=17 | i2s_errors=0
+I (343603) call: Phone signal 2/5
+I (347283) audio: MUSIC 44100 Hz PA=1 in_peak=18452 out_peak=16384 mic_peak=0 frames=221184 limited=34555 P3
+I (347283) audio: music buffer=12288 B drops=1 underruns=12 | call rx_drops=0 tx_drops=0 underruns=17 | i2s_errors=0
+I (352303) audio: MUSIC 44100 Hz PA=1 in_peak=18398 out_peak=16384 mic_peak=0 frames=221184 limited=32907 P3
+I (352303) audio: music buffer=16384 B drops=1 underruns=12 | call rx_drops=0 tx_drops=0 underruns=17 | i2s_errors=0
+I (357313) audio: MUSIC 44100 Hz PA=1 in_peak=18525 out_peak=16384 mic_peak=0 frames=221184 limited=31423 P3
+I (357313) audio: music buffer=16384 B drops=1 underruns=12 | call rx_drops=0 tx_drops=0 underruns=17 | i2s_errors=0
+I (362333) audio: MUSIC 44100 Hz PA=1 in_peak=18411 out_peak=16384 mic_peak=0 frames=221184 limited=32752 P3
+I (362333) audio: musicbuffer=12288 B drops=1 underruns=12 | call rx_drops=0 tx_drops=0 underruns=17 | i2s_errors=0
+I (367343) audio: MUSIC 44100 Hz PA=1 in_peak=18552 out_peak=16384 mic_peak=0 frames=221184 limited=91240 P3
+I (367343) audio: music buffer=16384 B drops=1 underruns=12 | call rx_drops=0 tx_drops=0 underruns=17 | i2s_errors=0
+I (372363) audio: MUSIC 44100 Hz PA=1 in_peak=18471 out_peak=16384 mic_peak=0 frames=221184 limited=90664 P3
+I (372363) audio: music buffer=16384 B drops=1 underruns=12 | call rx_drops=0 tx_drops=0 underruns=17 | i2s_errors=0
+I (377383) audio: MUSIC 44100 Hz PA=1 in_peak=18546 out_peak=16384 mic_peak=0 frames=221184 limited=73168 P3
+I (377383) audio: music buffer=16384 B drops=1 underruns=12 | call rx_drops=0 tx_drops=0 underruns=17 | i2s_errors=0
+I (382393) audio: MUSIC 44100 Hz PA=1 in_peak=18420 out_peak=16384 mic_peak=0 frames=221184 limited=38474 P3
+I (382393) audio: music buffer=12288 B drops=1 underruns=12 | call rx_drops=0 tx_drops=0 underruns=17 | i2s_errors=0
+I (387413) audio: MUSIC 44100 Hz PA=1 in_peak=18578 out_peak=16384 mic_peak=0 frames=221184 limited=83581 P3
+I (387413) audio: music buffer=16384 B drops=1 underruns=12 | call rx_drops=0 tx_drops=0 underruns=17 | i2s_errors=0
+I (392423) audio: MUSIC 44100 Hz PA=1 in_peak=18484 out_peak=16384 mic_peak=0 frames=221184 limited=67343 P3
+I (392423) audio: music buffer=16384 B drops=1 underruns=12 | call rx_drops=0 tx_drops=0 underruns=17 | i2s_errors=0
+I (397443) audio: MUSIC 44100 Hz PA=1 in_peak=18257 out_peak=16384 mic_peak=0 frames=221184 limited=13462 P3
+I (397443) audio: music buffer=12288 B drops=1 underruns=12 | call rx_drops=0 tx_drops=0 underruns=17 | i2s_errors=0
+I (402453) audio: MUSIC 44100 Hz PA=1 in_peak=18366 out_peak=16384 mic_peak=0 frames=221184 limited=2106 P3
+I (402453) audio: music buffer=16384 B drops=1 underruns=12 | call rx_drops=0 tx_drops=0 underruns=17 | i2s_errors=0
+I (406793) call: Phone signal 3/5
+I (407473) audio: MUSIC 44100 Hz PA=1 in_peak=18305 out_peak=16384 mic_peak=0 frames=221184 limited=15689 P3
+I (407473) audio: music buffer=16384 B drops=1 underruns=12 | call rx_drops=0 tx_drops=0 underruns=17 | i2s_errors=0
+I (412483) audio: MUSIC 44100 Hz PA=1 in_peak=18307 out_peak=16384 mic_peak=0 frames=221184 limited=20500 P3
+I (412483) audio: music buffer=16384 B drops=1 underruns=12 | call rx_drops=0 tx_drops=0 underruns=17 | i2s_errors=0
+I (417503) audio: MUSIC 44100 Hz PA=1 in_peak=18383 out_peak=16384 mic_peak=0 frames=221184 limited=16947 P3
+I (417503) audio: music buffer=12288 B drops=1 underruns=12 | call rx_drops=0 tx_drops=0 underruns=17 | i2s_errors=0
+I (422523) audio: MUSIC 44100 Hz PA=1 in_peak=18541 out_peak=16384 mic_peak=0 frames=221184 limited=27626 P3
+I (422523) audio: music buffer=12288 B drops=1 underruns=12 | call rx_drops=0 tx_drops=0 underruns=17 | i2s_errors=0
+I (427533) audio: MUSIC 44100 Hz PA=1 in_peak=18367 out_peak=16384 mic_peak=0 frames=221184 limited=23105 P3
+I (427533) audio: music buffer=12288 B drops=1 underruns=12 | call rx_drops=0 tx_drops=0 underruns=17 | i2s_errors=0
+I (432553) audio: MUSIC 44100 Hz PA=1 in_peak=18519 out_peak=16384 mic_peak=0 frames=221184 limited=46275 P3
+I (432553) audio: music buffer=16384 B drops=1 underruns=12 | call rx_drops=0 tx_drops=0 underruns=17 | i2s_errors=0
+I (437563) audio: MUSIC 44100 Hz PA=1 in_peak=18371 out_peak=16384 mic_peak=0 frames=221184 limited=44396 P3
+I (437563) audio: music buffer=16384 B drops=1 underruns=12 | call rx_drops=0 tx_drops=0 underruns=17 | i2s_errors=0
+I (442583) audio: MUSIC 44100 Hz PA=1 in_peak=18258 out_peak=16384 mic_peak=0 frames=221184 limited=14073 P3
+I (442583) audio: music buffer=16384 B drops=1 underruns=12 | call rx_drops=0 tx_drops=0 underruns=17 | i2s_errors=0
+I (447593) audio: MUSIC 44100 Hz PA=1 in_peak=18440 out_peak=16384 mic_peak=0 frames=221184 limited=20587 P3
+I (447593) audio: music buffer=16384 B drops=1 underruns=12 | call rx_drops=0 tx_drops=0 underruns=17 | i2s_errors=0
+I (452613) audio: MUSIC 44100 Hz PA=1 in_peak=18396 out_peak=16384 mic_peak=0 frames=221184 limited=31281 P3
+I (452613) audio: music buffer=16384 B drops=1 underruns=12 | call rx_drops=0 tx_drops=0 underruns=17 | i2s_errors=0
+I (457623) audio: MUSIC 44100 Hz PA=1 in_peak=18408 out_peak=16384 mic_peak=0 frames=221184 limited=27489 P3
+I (457623) audio: music buffer=16384 B drops=1 underruns=12 | call rx_drops=0 tx_drops=0 underruns=17 | i2s_errors=0
+I (462643) audio: MUSIC 44100 Hz PA=1 in_peak=18593 out_peak=16384 mic_peak=0 frames=221184 limited=80889 P3
+I (462643) audio: music buffer=8192 B drops=1 underruns=12 | call rx_drops=0 tx_drops=0 underruns=17 | i2s_errors=0
+I (467663) audio: MUSIC 44100 Hz PA=1 in_peak=18527 out_peak=16384 mic_peak=0 frames=221184 limited=77382 P3
+I (467663) audio: music buffer=16384 B drops=1 underruns=12 | call rx_drops=0 tx_drops=0 underruns=17 | i2s_errors=0
+I (472673) audio: MUSIC 44100 Hz PA=1 in_peak=18433 out_peak=16384 mic_peak=0 frames=221184 limited=52339 P3
+I (472673) audio: music buffer=12288 B drops=1 underruns=12 | call rx_drops=0 tx_drops=0 underruns=17 | i2s_errors=0I (477693) audio: MUSIC 44100 Hz PA=1 in_peak=18425 out_peak=16384 mic_peak=0 frames=221184 limited=32502 P3
+I (477693) audio: musibuffer=12288 B drops=1 underruns=12 | call rx_drops=0 tx_drops=0 underruns=17 | i2s_errors=0
+I (482703) audio: MUSIC 44100 Hz PA=1 in_peak=18590 out_peak=16384 mic_peak=0 frames=221184 limited=72284 P3
+I (482703) audio: music buffer=16384 B drops=1 underruns=12 | call rx_drops=0 tx_drops=0 underruns=17 | i2s_errors=0
+I (487723) audio: MUSIC 44100 Hz PA=1 in_peak=18494 out_peak=16384 mic_peak=0 frames=221184 limited=45678 P3
+I (487723) audio: music buffer=16384 B drops=1 underruns=12 | call rx_drops=0 tx_drops=0 underruns=17 | i2s_errors=0
+I (492733) audio: MUSIC 44100 Hz PA=1 in_peak=18363 out_peak=16384 mic_peak=0 frames=221184 limited=36168 P3
+I (492733) audio: music buffer=8192 B drops=1 underruns=12 | call rx_drops=0 tx_drops=0 underruns=17 | i2s_errors=0
+I (497753) audio: MUSIC 44100 Hz PA=1 in_peak=18352 out_peak=16384 mic_peak=0 frames=221184 limited=22465 P3
+I (497753) audio: musicuffer=12288 B drops=1 underruns=12 | call rx_drops=0 tx_drops=0 underruns=17 | i2s_errors=0
+I (502763) audio: MUSIC 44100 Hz PA=1 in_peak=18384 out_peak=16384 mic_peak=0 frames=221184 limited=29116 P3
+I (502763) audio: music buffer=16384 B drops=1 underruns=12 | call rx_drops=0 tx_drops=0 underruns=17 | i2s_errors=0
+I (507783) audio: MUSIC 44100 Hz PA=1 in_peak=18425 out_peak=16384 mic_peak=0 frames=221184 limited=66112 P3
+I (507783) audio: music buffer=8192 B drops=1 underruns=12 | call rx_drops=0 tx_drops=0 underruns=17 | i2s_errors=0
+I (512793) audio: MUSIC 44100 Hz PA=1 in_peak=18596 out_peak=16384 mic_peak=0 frames=221184 limited=99748 P3
+I (512803) audio: music buffer=16384 B drops=1 underruns=12 | call rx_drops=0 tx_drops=0 underruns=17 | i2s_errors=0
+I (517813) audio: MUSIC 44100 Hz PA=1 in_peak=18472 out_peak=16384 mic_peak=0 frames=221184 limited=88995 P3
+I (517813) audio: music buffer=16384 B drops=1 underruns=12 | call rx_drops=0 tx_drops=0 underruns=17 | i2s_errors=0
+I (522833) audio: MUSIC 44100 Hz PA=1 in_peak=18312 out_peak=16384 mic_peak=0 frames=221184 limited=7061 P3
+I (522833) audio: musibuffer=12288 B drops=1 underruns=12 | call rx_drops=0 tx_drops=0 underruns=17 | i2s_errors=0
+I (527843) audio: MUSIC 44100 Hz PA=1 in_peak=20002 out_peak=16384 mic_peak=0 frames=221184 limited=2549 P3
+I (527843) audio: music buffer=12288 B drops=1 underruns=12 | call rx_drops=0 tx_drops=0 underruns=17 | i2s_errors=0
+I (532863) audio: MUSIC 44100 Hz PA=1 in_peak=20838 out_peak=16384 mic_peak=0 frames=221184 limited=2856 P3
+I (532863) audio: music buffer=12288 B drops=1 underruns=12 | call rx_drops=0 tx_drops=0 underruns=17 | i2s_errors=0

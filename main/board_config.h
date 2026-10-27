@@ -49,8 +49,12 @@
 #define CAL_TONE_HZ 60
 #define CAL_TONE_AMPLITUDE 23170
 #define CAL_STEP_MS 1500
-// Fallback: a reset while the amplifier was on (flag kept in NVS) lowers the
-// saved profile by this many steps.
+// Margin: the saved result is (highest step that passed) minus this. Test
+// T12 (docs/08): the test passed P4 but real streaming at P4 still reset the
+// board once; P3 then ran for 8+ minutes at full phone volume without a reset.
+#define CAL_MARGIN_STEPS 1
+// Fallback: a BROWNOUT reset while the amplifier was on (flag kept in NVS)
+// lowers the saved profile by this many steps.
 #define POWER_TRIP_DAC_STEP 1
 
 // Call (HFP) path. Voice PCM arrives from the phone as 16-bit mono at 8 kHz

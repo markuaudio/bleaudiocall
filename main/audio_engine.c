@@ -438,7 +438,12 @@ report:
 static void load_boot_profile(void)
 {
     esp_reset_reason_t why = esp_reset_reason();
-    bool trip_reason = why == ESP_RST_BROWNOUT || why == ESP_RST_POWERON || why == ESP_RST_UNKNOWN || why == ESP_RST_PWR_GLITCH;
+    // Only a BROWNOUT counts as a supply collapse. The brownout detector is set
+    // to 2.80 V (sdkconfig), above the IMP809 supervisor's 2.63 V, so it fires
+    // first and leaves a distinct reset reason. A POWERON reset (power switch,
+    // EN button, flash tool) is NOT a trip: before this rule, switching the
+    // speaker off while playing lowered the saved level at the next boot.
+    bool trip_reason = why == ESP_RST_BROWNOUT;
     unsigned profile = AUDIO_BOOT_DAC_PROFILE;
     bool cal_done = false;
     nvs_handle_t h;
@@ -450,7 +455,7 @@ static void load_boot_profile(void)
     if (nvs_get_u8(h, "calstep", &step) == ESP_OK) {
         nvs_erase_key(h, "calstep");
         if (trip_reason) {
-            profile = step > 0 ? step - 1 : 0;
+            profile = step > CAL_MARGIN_STEPS ? step - 1 - CAL_MARGIN_STEPS : 0; // one below the step that tripped, minus the margin
             nvs_set_u8(h, "dac", (uint8_t)profile); nvs_set_u8(h, "cal", 1); cal_done = true;
             if (step > 0)
                 ESP_LOGW(TAG, "POWER SELF-TEST result: the board reset at P%u (reset reason %d), so P%u (%.1f dB) is the loudest level this supply holds. Saved.",
@@ -520,13 +525,15 @@ static void power_self_test(void)
     }
     pa(false, &pa_on);
     bt_core_radio_load(false);
+    unsigned result = max >= CAL_MARGIN_STEPS ? max - CAL_MARGIN_STEPS : 0;
     nvs_handle_t h;
     if (nvs_open("audio", NVS_READWRITE, &h) == ESP_OK) {
-        nvs_erase_key(h, "calstep"); nvs_set_u8(h, "dac", (uint8_t)max); nvs_set_u8(h, "cal", 1); nvs_commit(h); nvs_close(h);
+        nvs_erase_key(h, "calstep"); nvs_set_u8(h, "dac", (uint8_t)result); nvs_set_u8(h, "cal", 1); nvs_commit(h); nvs_close(h);
     }
-    boot_profile = max;
-    portENTER_CRITICAL(&lock); st.dac_profile = max; portEXIT_CRITICAL(&lock);
-    ESP_LOGW(TAG, "POWER SELF-TEST passed up to P%u (%.1f dB): this supply holds the maximum tested level. Saved.", max, (double)es8388_dac_profile_db(max));
+    boot_profile = result;
+    portENTER_CRITICAL(&lock); st.dac_profile = result; portEXIT_CRITICAL(&lock);
+    ESP_LOGW(TAG, "POWER SELF-TEST passed up to P%u (%.1f dB); saving P%u (%.1f dB) with %u step(s) of margin for real streaming.",
+             max, (double)es8388_dac_profile_db(max), result, (double)es8388_dac_profile_db(result), (unsigned)CAL_MARGIN_STEPS);
 }
 
 esp_err_t audio_engine_init(void)

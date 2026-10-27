@@ -114,6 +114,8 @@ CONFIG_BTDM_CTRL_BR_EDR_MAX_SYNC_CONN=1, CONFIG_BT_HFP_WBS_ENABLE=y
     # calls; SCO voice over HCI (the PCM pins are not wired on the LyraT); mSBC wide-band on
 
 CONFIG_ESP_DEFAULT_CPU_FREQ_MHZ_240=y, CONFIG_ESP_BROWNOUT_DET=y
+CONFIG_ESP_BROWNOUT_DET_LVL_SEL_7=y          # 2.80 V, above the IMP809 supervisor (2.63 V): a supply collapse
+                                             # resets with reason BROWNOUT, a power-off with POWERON (docs/09 D16)
 CONFIG_COMPILER_OPTIMIZATION_PERF=y        # -O2 release (docs 05)
 CONFIG_BT_AVRCP_CT_COVER_ART_ENABLED=n     # unused
 ```

@@ -1,92 +1,35 @@
-I (6933) audio: DAC profile reset to P2 and saved limit cleared; running the power self-test again
-W (6933) audio: POWER SELF-TEST: 60 Hz tone at -3BFS on both speakers with the radio busy (inquiry), P0..P4, 1500 ms each, to find the loudest level this supply holds. A reset during the test is expected on a weak supply; the result is saved either way.
-E (7003) BT_BTM: tBTM_SEC_DEV:0x3ffd3a40 rs_disc_pending=0
-
-W (7083) BT_HCI: hcif link supv_to changed: hdl 0x81, supv_to 8000
-I (7253) i2s: TX clocks: source=160000000 MCLK=11289537 BCLK=2822400 Fs=44100 capture=0 (32-bit data and slots)
-I (7253) es8388: ADC/microphones OFF
-I (7253) es8388: DAC profile P0: -12.0 dB (reg 0x18)
-I (7253) audio:   self-test P0 (-12.0 dB)
-I (7283) audio: Music PCM 44100 Hz, 2 channel(s)
-W (7523) BT_APPL: new conn_srvc id:19, app_id:0
-I (7523) bt: Music (A2DP) connected to 2c:d0:66:b0:8c:74
-I (8183) bt: Radio: connectable, hidden while a phone is connected
-I (8763) es8388: DAC profile P1: -10.5 dB (reg 0x15)
-I (8763) audio:   self-test P1 (-10.5 dB)
-I (8893) BT_LOG: bta_av_link_role_ok hndl:x41 role:1 conn_audio:x1 bits:1 features:x864b
-
-W (8893) BT_APPL: new conn_srvc id:19, app_id:1
-I (8893) music: Music STARTED
-I (10263) es8388: DAC profile P2: -9.0 dB (reg 0x12)
-I (10263) audio:   self-test P2 (-9.0 dB)
-I (11763) es8388: DAC profile P3: -7.5 dB (reg 0x0f)
-I (11763) audio:   self-test P3 (-7.5 dB)
-I (12183) bt: Opening calls (HFP) to 2c:d0:66:b0:8c:74 ourselves
-I (13263) es8388: DAC profile P4: -6.0 dB (reg 0x0c)
-I (13263) audio:   self-test P4 (-6.0 dB)
-W (14223) BT_APPL: new conn_srvc id:27, app_id:1
-W (14233) BT_HCI: hci cmd send: sniff: hdl 0x81, intv(30 54)
-I (14223) music: Music SUSPENDED
-I (14233) call: Link state 2 (3 = ready for calls), phone features 0x0
-W (14423) BT_HCI: hcif mode change: hdl 0x81, mode 2, intv 54, status 0x0
-W (14463) BT_HCI: hcif mode change: hdl 0x81, mode 0, intv 0, status 0x0
-W (14483) BT_HCI: hci cmd send: sniff: hdl 0x81, intv(30 54)
-W (14513) BT_HCI: hcif mode change: hdl 0x81, mode 2, intv 54, status 0x0
-W (14513) BT_HCI: hci cmd send: unsniff: hdl 0x81
-W (14523) BT_HCI: hcif mode change: hdl 0x81, mode 0, intv 0, status 0x0
-W (14553) BT_HCI: hci cmd send: sniff: hdl 0x81, intv(30 54)
-W (14693) BT_HCI: hcif mode change: hdl 0x81, mode 2, intv 54, status 0x0
-W (14733) BT_HCI: hci cmd send: unsniff: hdl 0x81
-I (14733) call: Call ended / none
-I (14743) call: Call setup: none
-I (14743) call: Phone network available
-I (14743) call: Phone signal 3/5
-I (14743) call: Roaming inactive
-I (14743) call: Phone battery 2/5
-I (14743) call: Call held status 0
-W (14763) audio: POWER SELF-TEST passed up to P4 (-6.0 dB): this supply holds the maximum tested level. Saved.
-I (14763) es8388: DAC profile P4: -6.0 dB (reg 0x0c)
-I (14763) es8388: ADC/microphones OFF
-W (14763) BT_HCI: hcif mode change: hdl 0x81, mode 0, intv 0, status 0x0
-I (14773) i2s: TX clocks: source=160000000 MCLK=11289537 BCLK=2822400 Fs=44100 capture=0 (32-bit data and slots)
-I (14783) audio: Path: MUSIC at 44100 Hz
-I (14793) audio: MUSIC 44100 Hz PA=0 in_peak=0 out_peak=0 mic_peak=0 frames=0 limited=0 P4
-I (14793) audio: music buffer=0 B drops=176 underruns=0 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
-W (14873) BT_HCI: hci cmd send: sniff: hdl 0x81, intv(30 54)
-W (14893) BT_HCI: hcif mode change: hdl 0x81, mode 2, intv 54, status 0x0
-W (14893) BT_HCI: hci cmd send: unsniff: hdl 0x81
-I (14893) call: Link state 3 (3 = ready for calls), phone features 0xf67
-W (14903) BT_HCI: hcif mode change: hdl 0x81, mode 0, intv 0, status 0x0
-I (14903) bt: Calls (HFP) connected to 2c:d0:66:b0:8c:74
-W (14953) BT_HCI: hci cmd send: sniff: hdl 0x81, intv(30 54)
-W (15003) BT_HCI: hcif mode change: hdl 0x81, mode 2, intv 54, status 0x0
-W (15003) BT_HCI: hci cmd send: unsniff: hdl 0x81
-W (15033) BT_HCI: hcif mode change: hdl 0x81, mode 0, intv 0, status 0x0
-W (15093) BT_HCI: hci cmd send: sniff: hdl 0x81, intv(30 54)
-W (15103) BT_HCI: hcif mode change: hdl 0x81, mode 2, intv 54, status 0x0
-W (15133) BT_HCI: hcif mode change: hdl 0x81, mode 0, intv 0, status 0x0
-W (15163) BT_HCI: hci cmd send: sniff: hdl 0x81, intv(30 54)
-W (15243) BT_HCI: hcif mode change: hdl 0x81, mode 2, intv 54, status 0x0
-W (15243) BT_HCI: hci cmd send: unsniff: hdl 0x81
-W (15313) BT_HCI: hcif mode change: hdl 0x81, mode 0, intv 0, status 0x0
-W (18513) BT_HCI: hci cmd send: sniff: hdl 0x81, intv(30 54)
-W (18563) BT_HCI: hcif mode change: hdl 0x81, mode 2, intv 54, status 0x0
-W (18783) BT_HCI: hcif ssr evt: st 0x0, hdl 0x81, tx_lat 54 rx_lat 1188
-I (19803) audio: MUSIC 44100 Hz PA=0 in_peak=0 out_peak=0 mic_peak=0 frames=0 limited=0 P4
-I (19813) audio: music buffer=0 B drops=176 underruns=0 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
-I (24813) audio: MUSIC 44100 Hz PA=0 in_peak=0 out_peak=0 mic_peak=0 frames=0 limited=0 P4
-I (24813) audio: music buffer=0 B drops=176 underruns=0 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
-I (29823) audio: MUSIC 44100 Hz PA=0 in_peak=0 out_peak=0 mic_peak=0 frames=0 limited=0 P4
-I (29823) audio: music buffer=0 B drops=176 underruns=0 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
-I (34833) audio: MUSIC 44100 Hz PA=0 in_peak=0 out_peak=0 mic_peak=0 frames=0 limited=0 P4
-I (34833) audio: music buffer=0 B drops=176 underruns=0 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
-I (39843) audio: MUSIC 44100 Hz PA=0 in_peak=0 out_peak=0 mic_peak=0 frames=0 limited=0 P4
-I (39843) audio: music buffer=0 B drops=176 underruns=0 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
-W (42543) BT_HCI: hci cmd send: unsniff: hdl 0x81
-I (42543) call: Phone signal 2/5
-W (43283) BT_HCI: hcif mode change: hdl 0x81, mode 0, intv 0, status 0x0
-I (44853) audio: MUSIC 44100 Hz PA=0 in_peak=0 out_peak=0 mic_peak=0 frames=0 limited=0 P4
-I (44853) audio: music buffer=0 B drops=176 underruns=0 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
-W (46483) BT_HCI: hci cmd send: sniff: hdl 0x81, intv(30 54)
-W (46513) BT_HCI: hcif mode change: hdl 0x81, mode 2, intv 54, status 0x0
-W (46733) BT_HCI: hcif ssr evt: st 0x0, hdl 0x81, tx_lat 54 rx_lat 1188
+I (12593) audio: DAC profile reset to P2 and saved limit cleared; running the power self-test again
+W (12593) audio: POWER SELF-TEST60 Hz tone at -3 dBFS on both speakers with the radio busy (inquiry), P0..P4, 1500 ms each, to find the loudest level this supply holds. A reset during the test is expected on a weak supply; the result is saved either way.
+I (12913) i2s: TX clocks: source=160000000 MCLK=11289537 BCLK=2822400 Fs=44100 capture=0 (32-bit data and slots)
+I (12913) es8388: ADC/microones OFF
+I (12913) es8388: DAC profile P0: -12.0 dB (reg 0x18)
+I (12913) audio:   self-test P0 (-12.0 dB)
+I (14423) es8388: DAC profile P1: -10.5 dB (reg 0x15)
+I (14423) audio:   self-test P1 (-10.5 dB)
+I (15923) es8388: DAC profile P2: -9.0 dB (reg 0x12)
+I (15923) audio:   self-test P2 (-9.0 dB)
+I (17423) es8388: DAC profile P3: -7.5 dB (reg 0x0f)
+I (17423) audio:   self-test P3 (-7.5 dB)
+I (18923) es8388: DAC profile P4: -6.0 dB (reg 0x0c)
+I (18923) audio:   self-test P4 (-6.0 dB)
+W (19783) BT_HCI: hci cmd send: sniff: hdl 0x81, intv(400 800)
+W (19823) BT_HCI: hcif mode change: hdl 0x81, mode 2, intv 804, status 0x0
+W (20423) audio: POWER SELF-TEST passed up to P4 (-6.0 dB); saving P3 (-7.5 dB) with 1 step(s) of margin for real streaming.
+I (20423) es8388: DAC profile P3: -7.5 dB (reg 0x0f)
+I (20423) es8388: ADC/microphones OFF
+I (20433) i2sTX clocks: source=160000000 MCLK=12288000 BCLK=3072000 Fs=48000 capture=0 (32-bit data and slots)
+I (20443) audio: Path: MUSIC at 48000 Hz
+I (203) audio: MUSIC 48000 Hz PA=0 in_peak=0 out_peak=0 mic_peak=0 frames=0 limited=0 P3
+I (20453) audio: music buffer=0 B drops=0 underruns=0 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (25463) audio: MUSIC 48000 Hz PA=0 in_peak=0 out_peak=0 mic_peak=0 frames=0 limited=0 P3
+I (25463) audio: music buffer=0 B drops=0 underruns=0 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (30473) audio: MUSIC 48000 Hz PA=0 in_peak=0 out_peak=0 mic_peak=0 frames=0 limited=0 P3
+I (30473) audio: music buffer=0 B drops=0 underruns=0 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (35483) audio: MUSIC 48000 Hz PA=0 in_peak=0 out_peak=0 mic_peak=0 frames=0 limited=0 P3
+I (35483) audio: music buffer=0 B drops=0 underruns=0 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (40483) audio: MUSIC 48000 Hz PA=0 in_peak=0 out_peak=0 mic_peak=0 frames=0 limited=0 P3
+I (40493) audio: music buffer=0 B drops=0 underruns=0 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (45493) audio: MUSIC 48000 Hz PA=0 in_peak=0 out_peak=0 mic_peak=0 frames=0 limited=0 P3
+I (45493) audio: music buffer=0 B drops=0 underruns=0 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (50503) audio: MUSIC 48000 Hz PA=0 in_peak=0 out_peak=0 mic_peak=0 frames=0 limited=0 P3
+I (50503) audio: music buffer=0 B drops=0 underruns=0 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0

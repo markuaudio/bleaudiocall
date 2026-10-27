@@ -31,6 +31,8 @@ What it does:
 7. [Hardware mapping (LyraT V4.3)](docs/lyrat-v4.3-hardware.md)
 8. [**Schematic, layout, BOM** (official Espressif PDFs + rendered pages + parts list)](docs/hardware/README.md), [shopping list + board BOM](docs/hardware/BOM.md)
 9. [**Reconnect and power-trip fixes**: why the speaker did not auto-connect, why the link dropped at high volume, what changed and where, verification](docs/07-reconnect-and-power-trip-fixes.md)
+10. [**Test report**: every test run on the board on 2026-10-27, firmware, log evidence, verdicts, charts](docs/08-test-report.md)
+11. [**Defect register**: every problem found, root cause, fix, files, verification, open items; notes for hardware builders](docs/09-defect-register.md)
 
 All changes in one place: [CHANGELOG.md](CHANGELOG.md). Build logs and serial logs live in `docs/` with their dates.
 
@@ -43,6 +45,7 @@ partitions.csv   nvs + phy + 3 MB factory app
 tools/           Build.ps1, Flash.ps1, Monitor.ps1, Enter-EspIdf.ps1, live_serial.py, capture_serial.py
 docs/            learning notes, audit, build guide, build/serial logs, ES8388 reference driver
 docs/hardware/   official schematic + component layout (PDF + PNG), BOM
+docs/test-data/  live serial log of the test day, SVG charts and CSV table generated from it (tools/plot_serial_log.py)
 build/           generated (gitignored)
 ```
 
@@ -75,4 +78,4 @@ LED: steady = phone connected, slow blink = waiting / discoverable. The speaker 
 
 The speaker never gives up on its own. 3 s after boot it connects to the **last connected phone** (remembered in NVS); if that fails it retries every 10 s for 4 attempts, then every 45 s for ever (short 5 s page timeout, so the radio stays free for new phones), alternating between the last connected phone and the other bonded phones, until a phone answers. If the phone drops the link, the same cycle starts after 5 s. Only a user disconnect (SET hold / `x`) stops it, until a reboot or `c`.
 
-**Power self-test (why the link used to drop at high volume).** A disconnect at high volume is the board resetting: the amplifiers pull the 5 V input down through the board's own diode/LDO path, the 3.3 V rail collapses and the IMP809 supervisor resets the ESP32 (verified in the live log, see [docs/07](docs/07-reconnect-and-power-trip-fixes.md)). Firmware cannot add voltage, so it finds the loudest safe level once: on the first boot after flashing it plays a 60 Hz tone at -3 dBFS for 1.5 s at each DAC level from -12 dB up to -6 dB, with the Bluetooth radio kept busy so the load matches streaming, writing the step to NVS first. If the supply collapses, the board resets once during the tone and the next boot saves the previous level as the limit; otherwise -6 dB is saved. Music peaks are held at -6 dBFS by the limiter, 3 dB below the test tone, so a passed level should not trip in use. Speakers must be connected during the test. After switching to a better adapter (5 V / 2 A, short thick cable on the **POWER** port), type `0` in the monitor to run the test again.
+**Power self-test (why the link used to drop at high volume).** A disconnect at high volume is the board resetting: the amplifiers pull the 5 V input down through the board's own diode/LDO path, the 3.3 V rail collapses and the IMP809 supervisor resets the ESP32 (verified in the live log, see [docs/07](docs/07-reconnect-and-power-trip-fixes.md)). Firmware cannot add voltage, so it finds the loudest safe level once: on the first boot after flashing it plays a 60 Hz tone at -3 dBFS for 1.5 s at each DAC level from -12 dB up to -6 dB, with the Bluetooth radio kept busy so the load matches streaming, writing the step to NVS first. If the supply collapses, the board resets once during the tone (the brownout detector is set to 2.80 V, above the board's own supervisor, so this reset is recognised as a brownout) and the next boot saves the level below the one that tripped, minus one step of margin; otherwise the highest tested level minus one step of margin is saved. Music peaks are held at -6 dBFS by the limiter, 3 dB below the test tone, so a passed level should not trip in use. Speakers must be connected during the test. After switching to a better adapter (5 V / 2 A, short thick cable on the **POWER** port), type `0` in the monitor to run the test again.
