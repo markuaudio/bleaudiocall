@@ -30,6 +30,7 @@ What it does:
 6. [**Complete build guide**: from zero to a working project so anyone can build it (hardware, PC, modules in order, tests, troubleshooting)](docs/06-complete-build-guide.md)
 7. [Hardware mapping (LyraT V4.3)](docs/lyrat-v4.3-hardware.md)
 8. [**Schematic, layout, BOM** (official Espressif PDFs + rendered pages + parts list)](docs/hardware/README.md), [shopping list + board BOM](docs/hardware/BOM.md)
+9. [**Reconnect and power-trip fixes**: why the speaker did not auto-connect, why the link dropped at high volume, what changed and where, verification](docs/07-reconnect-and-power-trip-fixes.md)
 
 All changes in one place: [CHANGELOG.md](CHANGELOG.md). Build logs and serial logs live in `docs/` with their dates.
 
