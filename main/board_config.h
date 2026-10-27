@@ -31,6 +31,10 @@
 // ES8388 DAC digital volume profile (see dac_profiles[] in es8388.c): 4 = -6 dB,
 // ESP-ADF's real LyraT maximum, the clean limit of the NS4150 PA (research 2026-10-26).
 #define AUDIO_BOOT_DAC_PROFILE 4
+// Power-trip protection: if the board resets (brownout / supervisor) while the
+// amplifier is on, the DAC profile is lowered by this many steps and saved in
+// NVS, so the next boot is quieter and stays connected. Console '0' clears it.
+#define POWER_TRIP_DAC_STEP 1
 
 // Call (HFP) path. Voice PCM arrives from the phone as 16-bit mono at 8 kHz
 // (CVSD) or 16 kHz (mSBC); the I2S bus runs at that same rate during a call.
@@ -44,7 +48,10 @@
 #define CALL_RING_OFF_MS 2000
 
 // Link manager: how hard we try to connect by ourselves (older phones often
-// wait for the accessory to open the profiles).
+// wait for the accessory to open the profiles). The speaker never gives up:
+// LINK_RECONNECT_ATTEMPTS quick attempts, then one every LINK_RECONNECT_SLOW_PERIOD_S
+// until the phone answers or the user disconnects (SET hold / 'x').
 #define LINK_RECONNECT_ATTEMPTS 6
 #define LINK_RECONNECT_PERIOD_S 10
+#define LINK_RECONNECT_SLOW_PERIOD_S 30
 #define LINK_PROFILE_FOLLOWUP_S 4 // after one profile (or pairing) is up, open the other one ourselves

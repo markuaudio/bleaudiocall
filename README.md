@@ -11,7 +11,7 @@ What you will find here: the full source (`main/`), build/flash/monitor scripts 
 
 Board: ESP32-LyraT V4.3 (ESP32-D0WD-V3, 8 MB flash; the same board used by the earlier kanchan speaker project, which is not part of this repo). Framework: ESP-IDF v6.1 installed by the Espressif Installation Manager (EIM) into `<IDF folder>`; ESP-IDF on Windows does not support paths containing spaces. Chip target: `esp32`. Bluetooth name: **`blu2`** (`BT_DEVICE_NAME` in `main/board_config.h`).
 
-**Status (2026-10-27):** final release build (-O2, 0 warnings) flashed and verified on the board: the serial log proves the reconnect logic (6 attempts, then idle; no audio reclock on failed attempts) and an HFP service-level connection with a real phone (see the verification section of [docs/05](docs/05-final-audit-and-optimization.md)). Music playback and a live call remain user tests (see the "pending" section of [docs/04](docs/04-learning-process.md)).
+**Status (2026-10-27):** final release build (-O2, 0 warnings) flashed and verified on the board: the serial log proves the reconnect logic (no audio reclock on failed attempts; the retry loop now runs for ever, see below) and an HFP service-level connection with a real phone (see the verification section of [docs/05](docs/05-final-audit-and-optimization.md)). Music playback and a live call remain user tests (see the "pending" section of [docs/04](docs/04-learning-process.md)).
 
 What it does:
 
@@ -72,4 +72,6 @@ LED: steady = phone connected, slow blink = waiting / discoverable.
 
 ## Reconnect behaviour (final)
 
-3 s after boot the speaker connects to the bonded phone by itself; if that fails it retries every 10 s, 6 times in total, then stays quiet (until the phone connects, the console command `c`, or a reboot). If the phone drops the link, the same cycle starts after 5 s. After a user disconnect (SET hold / `x`) there is no auto-reconnect until a reboot or `c`.
+The speaker never gives up on its own. 3 s after boot it connects to the **last connected phone** (remembered in NVS); if that fails it retries every 10 s for 6 attempts, then every 30 s for ever, alternating between the last connected phone and the other bonded phones, until a phone answers. If the phone drops the link, the same cycle starts after 5 s. Only a user disconnect (SET hold / `x`) stops it, until a reboot or `c`.
+
+**Power-trip protection.** A disconnect "at high volume" is almost always the board resetting because the 5 V supply sags under the amplifier load (the IMP809 supervisor resets the ESP32 at 2.63 V on the 3.3 V rail; the brownout detector too). The firmware detects a reset that happened while the amplifier was on (a flag in RTC memory survives the reset), lowers the DAC profile by one step (1.5 dB), saves it in NVS and logs `POWER TRIP`. Each trip lowers it once more, so the speaker settles at the loudest level the supply can hold and stays connected. Console `0` clears the learned limit. Use a 5 V / 2 A adapter with a short, thick cable; a weak adapter or thin cable trips at a lower level.

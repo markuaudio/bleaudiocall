@@ -231,7 +231,7 @@ Short capture without holding the port: `python tools\capture_serial.py --port C
 
 | # | Test | Pass = |
 |---|---|---|
-| 1 | Boot | READY line, no reset loop (reset reason 1 = power-on) |
+| 1 | Boot | READY line, no reset loop (reset reason 1 = power-on); no `POWER TRIP` warning |
 | 2 | `l` `r` `z` `b` | correct speaker, correct tone, no hiss in silence |
 | 3 | Phone: forget the old "kanchan" → scan → `blu2` → pair (PIN 0000 if asked) | "Pairing successful", Android shows both the Media and Phone calls toggles |
 | 4 | Music | "MUSIC 44100", drops/underruns 0, L/R correct, pads work, phone volume slider in sync |
@@ -254,6 +254,8 @@ Our status (2026-10-27): 1–2 pass (from the kanchan hardware), 3–8 **pending
 | Silence + rising underruns | 16-bit data, 32-bit slots | data = slots = 32-bit, PCM16 × 65536 |
 | Very quiet, more gain does not help | LOUT2/ROUT2 at 0 dB → PA differential cancellation | reg 0x30/0x31 = 0x00 |
 | Board resets on bass, `phy_init` loop | PC USB port current limit; the PA runs from the 5 V rail | 5 V 2 A charger; lower the DAC profile with `[` |
+| **Bluetooth disconnects at high volume** | The board reset (supply sag → IMP809 2.63 V supervisor / brownout). Boot log shows `reset reason=1 (power-on / EN pin)` or `9 (BROWNOUT)` right after the drop, then `POWER TRIP: ... DAC profile lowered to Px` | Automatic: each trip lowers the saved DAC profile one step (1.5 dB). Better supply (5 V 2 A, short thick cable) lets you run louder; `0` clears the learned limit |
+| Speaker reconnects to the wrong phone / never auto-connects | Old firmware tried only the newest bond, 6 times, then stopped | Now: last connected phone (NVS) first, other bonds in turn, every 10 s then every 30 s for ever |
 | Phone shows "connected (no media)" / HFP does not open | the speaker went NON_CONNECTABLE | always CONNECTABLE (bt_core) |
 | Old phone does not list the speaker | CoD uncategorized | CoD AV/hands-free |
 | Phone shows "kanchan" as music-only without calls | the phone's SDP cache | forget on the phone; new name `blu2` |
@@ -270,7 +272,7 @@ Our status (2026-10-27): 1–2 pass (from the kanchan hardware), 3–8 **pending
 
 ## 8. Numbers you will tune (`main/board_config.h`)
 
-`MUSIC_BOOT_VOLUME 70`, `AUDIO_BOOT_DAC_PROFILE 4` (-6 dB; P0 -12 … P8 0 dB), `CALL_BOOT_VOLUME 10`, `CALL_RX/TX_BUFFER_BYTES 6144`, `CALL_PREFILL_BYTES 480`, `MIC_PGA_REG 0x88`, `MIC_DIGITAL_GAIN 2.0f`, `CALL_RING_ON/OFF_MS 1000/2000`, `LINK_RECONNECT_ATTEMPTS 6`, `LINK_RECONNECT_PERIOD_S 10`, `LINK_PROFILE_FOLLOWUP_S 4`, `BT_DEVICE_NAME "blu2"`, `BT_LEGACY_PIN "0000"`.
+`MUSIC_BOOT_VOLUME 70`, `AUDIO_BOOT_DAC_PROFILE 4` (-6 dB; P0 -12 … P8 0 dB), `CALL_BOOT_VOLUME 10`, `CALL_RX/TX_BUFFER_BYTES 6144`, `CALL_PREFILL_BYTES 480`, `MIC_PGA_REG 0x88`, `MIC_DIGITAL_GAIN 2.0f`, `CALL_RING_ON/OFF_MS 1000/2000`, `LINK_RECONNECT_ATTEMPTS 6`, `LINK_RECONNECT_PERIOD_S 10`, `LINK_RECONNECT_SLOW_PERIOD_S 30`, `LINK_PROFILE_FOLLOWUP_S 4`, `POWER_TRIP_DAC_STEP 1`, `BT_DEVICE_NAME "blu2"`, `BT_LEGACY_PIN "0000"`.
 
 ---
 

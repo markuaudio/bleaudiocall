@@ -47,7 +47,8 @@ When the source/rate/DAC profile changes, `epoch` increments: PA off, DAC mute, 
 - `CALL_BOOT_VOLUME 10` (0..15), changed by the phone via +VGS.
 - `MIC_PGA_REG 0x88` (+24 dB analog), `MIC_DIGITAL_GAIN 2.0f`. If the other side hears you too quietly, raise the digital gain to 3.0 first, then the PGA.
 - `AUDIO_BOOT_DAC_PROFILE 4` (-6 dB, ADF maximum). Test live with `] [`.
-- `LINK_RECONNECT_ATTEMPTS 6`, `LINK_RECONNECT_PERIOD_S 10`, `LINK_PROFILE_FOLLOWUP_S 4`.
+- `LINK_RECONNECT_ATTEMPTS 6`, `LINK_RECONNECT_PERIOD_S 10`, `LINK_RECONNECT_SLOW_PERIOD_S 30` (after the quick attempts, for ever), `LINK_PROFILE_FOLLOWUP_S 4`.
+- `POWER_TRIP_DAC_STEP 1`: DAC profile steps removed (and saved in NVS) after a reset with the amplifier on.
 
 ## Limitations worth knowing
 

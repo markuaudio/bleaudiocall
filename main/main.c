@@ -75,7 +75,11 @@ static void console_task(void *arg)
 
 void app_main(void)
 {
-    ESP_LOGI("boot", "bleaudiocall: music + calls; reset reason=%d", esp_reset_reason());
+    static const char *reasons[] = {"unknown", "power-on / EN pin", "external", "software", "panic", "interrupt WDT",
+                                    "task WDT", "other WDT", "deep sleep", "BROWNOUT", "SDIO", "USB", "JTAG", "efuse", "POWER GLITCH", "CPU lockup"};
+    int why = esp_reset_reason();
+    ESP_LOGI("boot", "bleaudiocall: music + calls; reset reason=%d (%s)", why,
+             why >= 0 && why < (int)(sizeof(reasons) / sizeof(reasons[0])) ? reasons[why] : "?");
     gpio_config_t out = {.pin_bit_mask = (1ULL << BOARD_LED) | (1ULL << BOARD_PA_ENABLE), .mode = GPIO_MODE_OUTPUT};
     ESP_ERROR_CHECK(gpio_config(&out));
     gpio_set_level(BOARD_LED, 0);

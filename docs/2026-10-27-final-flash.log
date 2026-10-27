@@ -67,7 +67,7 @@ NOTE: Kconfig parser version: 1
 NOTE: Kconfig defaults policy: use sdkconfig
 NOTE: Status: Finished with notifications
 NOTE: D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/bt/host/bluedroid/Kconfig.in:299: BT_BLE_ENABLED has 
-user-set value n from C:\Users\rohit\AppData\Local\Temp\kconfgen_tmpbziac5f_ but is not visible (disabled dependency)
+user-set value n from C:\Users\rohit\AppData\Local\Temp\kconfgen_tmp1taffsr9 but is not visible (disabled dependency)
 -- Compiler supported targets: xtensa-esp-elf
 -- Detecting C compiler ABI info
 -- Detecting C compiler ABI info - done
@@ -77,7 +77,7 @@ user-set value n from C:\Users\rohit\AppData\Local\Temp\kconfgen_tmpbziac5f_ but
 -- Detecting C compiler ABI info - done
 -- Detecting CXX compiler ABI info
 -- Detecting CXX compiler ABI info - done
--- App "bleaudiocall" version: 831add3-dirty
+-- App "bleaudiocall" version: a28e378-dirty
 -- Setting up mbedtls configuration
 -- Linkage type is PUBLIC
 -- Adding linker script D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/esp_system/ld/esp32/memory.ld.in
@@ -174,29 +174,42 @@ Call Stack (most recent call first):
 -- Component idf::esp_trace will be linked with -Wl,--whole-archive
 -- Components: app_trace app_update bootloader bootloader_support bt cmock console cxx driver efuse esp-tls esp_adc esp_app_format esp_asrc_adapter esp_blockdev esp_blockdev_util esp_bootloader_format esp_coex esp_common esp_driver_ana_cmpr esp_driver_bitscrambler esp_driver_cam esp_driver_cordic esp_driver_dac esp_driver_dma esp_driver_gpio esp_driver_gptimer esp_driver_i2c esp_driver_i2s esp_driver_i3c esp_driver_isp esp_driver_jpeg esp_driver_ledc esp_driver_mcpwm esp_driver_parlio esp_driver_pcnt esp_driver_ppa esp_driver_rmt esp_driver_sd_intf esp_driver_sdio esp_driver_sdm esp_driver_sdmmc esp_driver_sdspi esp_driver_spi esp_driver_touch_sens esp_driver_tsens esp_driver_twai esp_driver_uart esp_driver_usb_serial_jtag esp_eth esp_event esp_gdbstub esp_hal_ana_cmpr esp_hal_ana_conv esp_hal_asrc esp_hal_cam esp_hal_clock esp_hal_cordic esp_hal_dma esp_hal_emac esp_hal_gpio esp_hal_gpspi esp_hal_i2c esp_hal_i2s esp_hal_i3c esp_hal_ieee802154 esp_hal_jpeg esp_hal_lcd esp_hal_ledc esp_hal_mcpwm esp_hal_mspi esp_hal_parlio esp_hal_pcnt esp_hal_pmu esp_hal_ppa esp_hal_regi2c esp_hal_rmt esp_hal_rtc_timer esp_hal_sd esp_hal_security esp_hal_systimer esp_hal_timg esp_hal_touch_sens esp_hal_twai esp_hal_uart esp_hal_usb esp_hal_wdt esp_hid esp_http_client esp_http_server esp_https_ota esp_https_server esp_hw_support esp_lcd esp_libc esp_local_ctrl esp_mm esp_netif esp_netif_stack esp_partition esp_phy esp_pm esp_psram esp_ringbuf esp_rom esp_security esp_stdio esp_system esp_timer esp_trace esp_usb_cdc_rom_console esp_wifi espcoredump esptool_py fatfs freertos hal heap http_parser ieee802154 log lwip main mbedtls nvs_flash nvs_sec_provider openthread partition_table perfmon protobuf-c protocomm pthread rt sdmmc soc spi_flash spiffs tcp_transport ulp unity vfs wear_levelling wpa_supplicant xtensa
 -- Component paths: D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/app_trace D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/app_update D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/bootloader D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/bootloader_support D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/bt D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/cmock D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/console D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/cxx D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/driver D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/efuse D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/esp-tls D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/esp_adc D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/esp_app_format D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/esp_asrc_adapter D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/esp_blockdev D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/esp_blockdev_util D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/esp_bootloader_format D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/esp_coex D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/esp_common D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/esp_driver_ana_cmpr D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/esp_driver_bitscrambler D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/esp_driver_cam D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/esp_driver_cordic D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/esp_driver_dac D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/esp_driver_dma D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/esp_driver_gpio D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/esp_driver_gptimer D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/esp_driver_i2c D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/esp_driver_i2s D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/esp_driver_i3c D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/esp_driver_isp D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/esp_driver_jpeg D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/esp_driver_ledc D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/esp_driver_mcpwm D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/esp_driver_parlio D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/esp_driver_pcnt D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/esp_driver_ppa D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/esp_driver_rmt D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/esp_driver_sd_intf D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/esp_driver_sdio D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/esp_driver_sdm D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/esp_driver_sdmmc D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/esp_driver_sdspi D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/esp_driver_spi D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/esp_driver_touch_sens D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/esp_driver_tsens D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/esp_driver_twai D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/esp_driver_uart D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/esp_driver_usb_serial_jtag D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/esp_eth D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/esp_event D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/esp_gdbstub D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/esp_hal_ana_cmpr D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/esp_hal_ana_conv D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/esp_hal_asrc D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/esp_hal_cam D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/esp_hal_clock D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/esp_hal_cordic D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/esp_hal_dma D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/esp_hal_emac D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/esp_hal_gpio D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/esp_hal_gpspi D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/esp_hal_i2c D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/esp_hal_i2s D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/esp_hal_i3c D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/esp_hal_ieee802154 D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/esp_hal_jpeg D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/esp_hal_lcd D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/esp_hal_ledc D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/esp_hal_mcpwm D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/esp_hal_mspi D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/esp_hal_parlio D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/esp_hal_pcnt D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/esp_hal_pmu D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/esp_hal_ppa D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/esp_hal_regi2c D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/esp_hal_rmt D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/esp_hal_rtc_timer D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/esp_hal_sd D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/esp_hal_security D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/esp_hal_systimer D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/esp_hal_timg D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/esp_hal_touch_sens D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/esp_hal_twai D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/esp_hal_uart D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/esp_hal_usb D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/esp_hal_wdt D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/esp_hid D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/esp_http_client D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/esp_http_server D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/esp_https_ota D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/esp_https_server D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/esp_hw_support D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/esp_lcd D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/esp_libc D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/esp_local_ctrl D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/esp_mm D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/esp_netif D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/esp_netif_stack D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/esp_partition D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/esp_phy D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/esp_pm D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/esp_psram D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/esp_ringbuf D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/esp_rom D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/esp_security D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/esp_stdio D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/esp_system D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/esp_timer D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/esp_trace D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/esp_usb_cdc_rom_console D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/esp_wifi D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/espcoredump D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/esptool_py D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/fatfs D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/freertos D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/hal D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/heap D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/http_parser D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/ieee802154 D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/log D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/lwip D:/Vscode/bleaudiocall/main D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/mbedtls D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/nvs_flash D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/nvs_sec_provider D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/openthread D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/partition_table D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/perfmon D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/protobuf-c D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/protocomm D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/pthread D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/rt D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/sdmmc D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/soc D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/spi_flash D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/spiffs D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/tcp_transport D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/ulp D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/unity D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/vfs D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/wear_levelling D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/wpa_supplicant D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/xtensa
--- Configuring done (20.2s)
--- Generating done (1.6s)
+-- Configuring done (17.6s)
+-- Generating done (1.4s)
 -- Build files have been written to: D:/Vscode/bleaudiocall/build
-[1/18] Performing build step for 'bootloader'
+[1/18] Building C object esp-idf/main/CMakeFiles/__idf_main.dir/audio_io.c.obj
+[2/18] Building C object esp-idf/main/CMakeFiles/__idf_main.dir/es8388.c.obj
+[3/18] Performing build step for 'bootloader'
 [1/1] C:\WINDOWS\system32\cmd.exe /C "cd /D D:\Vscode\bleaudiocall\build\bootloader && C:\Espressif\tools\python\v6.1\venv\Scripts\python.exe D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/partition_table/check_sizes.py --offset 0x8000 bootloader 0x1000 D:/Vscode/bleaudiocall/build/bootloader/bootloader.bin"
 
 Bootloader binary size 0x6640 bytes. 0x9c0 bytes (9%) free.
 
 
-[2/18] Building C object esp-idf/main/CMakeFiles/__idf_main.dir/main.c.obj
-[3/18] Building C object esp-idf/main/CMakeFiles/__idf_main.dir/audio_io.c.obj
 [4/18] Building C object esp-idf/main/CMakeFiles/__idf_main.dir/bt_call.c.obj
-[5/18] Building C object esp-idf/main/CMakeFiles/__idf_main.dir/es8388.c.obj
-[6/18] Building C object esp-idf/main/CMakeFiles/__idf_main.dir/touch_buttons.c.obj
-[7/18] No install step for 'bootloader'
-[8/18] Building C object esp-idf/main/CMakeFiles/__idf_main.dir/audio_engine.c.obj
-[9/18] Completed 'bootloader'
-[10/18] Building C object esp-idf/esp_app_format/CMakeFiles/__idf_esp_app_format.dir/esp_app_desc.c.obj
-[11/18] Linking C static library esp-idf\esp_app_format\libesp_app_format.a
-[12/18] Building C object esp-idf/main/CMakeFiles/__idf_main.dir/bt_core.c.obj
+[5/18] Building C object esp-idf/main/CMakeFiles/__idf_main.dir/touch_buttons.c.obj
+[6/18] No install step for 'bootloader'
+[7/18] Completed 'bootloader'
+[8/18] Building C object esp-idf/esp_app_format/CMakeFiles/__idf_esp_app_format.dir/esp_app_desc.c.obj
+[9/18] Building C object esp-idf/main/CMakeFiles/__idf_main.dir/main.c.obj
+[10/18] Linking C static library esp-idf\esp_app_format\libesp_app_format.a
+[11/18] Building C object esp-idf/main/CMakeFiles/__idf_main.dir/bt_core.c.obj
+[12/18] Building C object esp-idf/main/CMakeFiles/__idf_main.dir/audio_engine.c.obj
 [13/18] Linking C static library esp-idf\main\libmain.a
 [14/18] Generating esp-idf/esp_system/ld/sections.ld
-Skipping linker script generation, section names unchanged
+NOTE: D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/bt/host/nimble/Kconfig.in:1428: BT_NIMBLE_MESH_PROVISIONER: 'default 0' is not a valid bool value (only 'y' and 'n' are allowed). Value is treated as 'n'.
+NOTE: D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/bt/controller/esp32/Kconfig.in:177: BTDM_CTRL_LEGACY_AUTH_VENDOR_EVT_EFF: 'default 0' is not a valid bool value (only 'y' and 'n' are allowed). Value is treated as 'n'.
+NOTE: D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/fatfs/Kconfig:240: FATFS_PRINT_LLI: 'default 0' is not a valid bool value (only 'y' and 'n' are allowed). Value is treated as 'n'.
+NOTE: D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/fatfs/Kconfig:245: FATFS_PRINT_FLOAT: 'default 0' is not a valid bool value (only 'y' and 'n' are allowed). Value is treated as 'n'.
+NOTE: D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/bootloader/Kconfig.projbuild:383: Deprecation notice: hex literal '0' without '0x' prefix detected. In the next major version, hex literals will be required to have a '0x' prefix.
+NOTE: D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/bootloader/Kconfig.projbuild:423: Deprecation notice: hex literal '0' without '0x' prefix detected. In the next major version, hex literals will be required to have a '0x' prefix.
+NOTE: D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/bt/common/Kconfig.in:136: Deprecation notice: hex literal '0' without '0x' prefix detected. In the next major version, hex literals will be required to have a '0x' prefix.
+NOTE: D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/bt/host/nimble/Kconfig.in:1023: Deprecation notice: hex literal '0' without '0x' prefix detected. In the next major version, hex literals will be required to have a '0x' prefix.
+NOTE: D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/bt/controller/esp32/Kconfig.in:542: Deprecation notice: hex literal '0' without '0x' prefix detected. In the next major version, hex literals will be required to have a '0x' prefix.
+NOTE: D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/esp_hw_support\./lowpower/port/esp32p4/Kconfig.p4_rev3_mspi_workaround:6: Deprecation notice: hex literal '0' without '0x' prefix detected. In the next major version, hex literals will be required to have a '0x' prefix.
+NOTE: D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/esp_mm/Kconfig:20: Deprecation notice: hex literal '0' without '0x' prefix detected. In the next major version, hex literals will be required to have a '0x' prefix.
+NOTE: D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/esp_system\./port/soc/esp32/Kconfig.memory:24: Deprecation notice: hex literal '0' without '0x' prefix detected. In the next major version, hex literals will be required to have a '0x' prefix.
+NOTE: D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/openthread/Kconfig:106: Deprecation notice: hex literal '0' without '0x' prefix detected. In the next major version, hex literals will be required to have a '0x' prefix.
+Skipping linker fragment parsing, fragment files unchanged
 
 [15/18] Linking CXX executable bleaudiocall.elf
 [16/18] Generating binary image from built executable
@@ -210,7 +223,7 @@ Successfully created ESP32 image.
 
 Generated D:/Vscode/bleaudiocall/build/bleaudiocall.bin
 [17/18] C:\WINDOWS\system32\cmd.exe /C "cd /D D:\Vscode\bleaudiocall\build && C:\Espressif\tools\python\v6.1\venv\Scripts\python.exe D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/partition_table/check_sizes.py --offset 0x8000 partition --type app D:/Vscode/bleaudiocall/build/partition_table/partition-table.bin D:/Vscode/bleaudiocall/build/bleaudiocall.bin"
-bleaudiocall.bin binary size 0xc7d10 bytes. Smallest app partition is 0x300000 bytes. 0x2382f0 bytes (74%) free.
+bleaudiocall.bin binary size 0xc8590 bytes. Smallest app partition is 0x300000 bytes. 0x237a70 bytes (74%) free.
 
 Adding "flash"'s dependency "all" to list of commands with default set of options.
 Executing action: all (aliases: build)
@@ -221,7 +234,7 @@ Running ninja in directory D:\Vscode\bleaudiocall\build
 Executing "ninja flash"...
 [1/5] C:\WINDOWS\system32\cmd.exe /C "cd /D D:\Vscode\bleaudiocall\build && C:\Espressif\tools\python\v6.1\venv\Scripts\python.exe D:/Vscode/esp-tooling/espressif/v6.1/esp-idf/components/partition_table/check_sizes.py --offset 0x8000 partition --type app D:/Vscode/bleaudiocall/build/partition_table/partition-table.bin D:/Vscode/bleaudiocall/build/bleaudiocall.bin"
 
-bleaudiocall.bin binary size 0xc7d10 bytes. Smallest app partition is 0x300000 bytes. 0x2382f0 bytes (74%) free.
+bleaudiocall.bin binary size 0xc8590 bytes. Smallest app partition is 0x300000 bytes. 0x237a70 bytes (74%) free.
 
 
 [2/5] Performing build step for 'bootloader'
@@ -245,7 +258,7 @@ esptool v5.6.0
 
 Serial port COM6:
 
-Connecting..............
+Connecting.....
 
 Connected to ESP32 on COM6:
 
@@ -303,141 +316,83 @@ Reflashing 1 changed sector at 0x00010000...
 
 Flash will be erased from 0x00010000 to 0x00010fff...
 
-Compressed 4096 bytes to 1925...
+Compressed 4096 bytes to 1920...
 
 Writing at 0x00011000 ============================== 100.0% 1.88kB/1.88kB [0s] 
 
-Wrote 4096 bytes (1925 compressed) at 0x00010000 in 0.1 seconds (641.8 kbit/s).
+Wrote 4096 bytes (1920 compressed) at 0x00010000 in 0.1 seconds (651.9 kbit/s).
 
-Reflashing 29 changed sectors at 0x00014000...
+Reflashing 198 changed sectors at 0x00013000...
 
-Flash will be erased from 0x00014000 to 0x00030fff...
+Flash will be erased from 0x00013000 to 0x000d8fff...
 
-Compressed 118784 bytes to 36440...
+Compressed 811008 bytes to 518502...
 
-Writing at 0x0002192a =============                   45.0% 16.00kB/35.59kB [0s] 
+Writing at 0x000204a6 >                                3.2% 16.00kB/506.35kB [0s] 
 
-Writing at 0x0002f010 ==========================>     89.9% 32.00kB/35.59kB [0s] 
+Writing at 0x0002e02c =>                               6.3% 32.00kB/506.35kB [0s] 
 
-Writing at 0x00031000 ============================== 100.0% 35.59kB/35.59kB [1s] 
+Writing at 0x000381f8 ==>                              9.5% 48.00kB/506.35kB [1s] 
 
-Wrote 118784 bytes (36440 compressed) at 0x00014000 in 1.5 seconds (653.4 kbit/s).
+Writing at 0x00040526 ===>                            12.6% 64.00kB/506.35kB [1s] 
 
-Reflashing 1 changed sector at 0x00032000...
+Writing at 0x00046149 ====>                           15.8% 80.00kB/506.35kB [2s] 
 
-Flash will be erased from 0x00032000 to 0x00032fff...
+Writing at 0x0004b496 =====>                          19.0% 96.00kB/506.35kB [2s] 
 
-Compressed 4096 bytes to 1375...
+Writing at 0x0005072d ======>                         22.1% 112.00kB/506.35kB [3s] 
 
-Writing at 0x00033000 ============================== 100.0% 1.34kB/1.34kB [0s] 
+Writing at 0x00055e84 =======>                        25.3% 128.00kB/506.35kB [3s] 
 
-Wrote 4096 bytes (1375 compressed) at 0x00032000 in 0.0 seconds (865.7 kbit/s).
+Writing at 0x0005b9ba ========>                       28.4% 144.00kB/506.35kB [3s] 
 
-Reflashing 5 changed sectors at 0x00034000...
+Writing at 0x00060c62 =========                       31.6% 160.00kB/506.35kB [4s] 
 
-Flash will be erased from 0x00034000 to 0x00038fff...
+Writing at 0x00065ee0 ==========                      34.8% 176.00kB/506.35kB [4s] 
 
-Compressed 20480 bytes to 6972...
+Writing at 0x0006bcad ===========                     37.9% 192.00kB/506.35kB [5s] 
 
-Writing at 0x00039000 ============================== 100.0% 6.81kB/6.81kB [0s] 
+Writing at 0x000714bd ============                    41.1% 208.00kB/506.35kB [5s] 
 
-Wrote 20480 bytes (6972 compressed) at 0x00034000 in 0.2 seconds (985.3 kbit/s).
+Writing at 0x00076995 =============                   44.2% 224.00kB/506.35kB [5s] 
 
-Reflashing 1 changed sector at 0x0003c000...
+Writing at 0x0007bcf3 ==============                  47.4% 240.00kB/506.35kB [6s] 
 
-Flash will be erased from 0x0003c000 to 0x0003cfff...
+Writing at 0x0008143f ===============                 50.6% 256.00kB/506.35kB [6s] 
 
-Compressed 4096 bytes to 2323...
+Writing at 0x00086ef7 ================                53.7% 272.00kB/506.35kB [6s] 
 
-Writing at 0x0003d000 ============================== 100.0% 2.27kB/2.27kB [0s] 
+Writing at 0x0008c429 =================               56.9% 288.00kB/506.35kB [7s] 
 
-Wrote 4096 bytes (2323 compressed) at 0x0003c000 in 0.1 seconds (546.4 kbit/s).
+Writing at 0x000912ef ==================              60.0% 304.00kB/506.35kB [7s] 
 
-Reflashing 4 changed sectors at 0x00040000...
+Writing at 0x00096557 ==================>             63.2% 320.00kB/506.35kB [8s] 
 
-Flash will be erased from 0x00040000 to 0x00043fff...
+Writing at 0x0009bed7 ===================>            66.4% 336.00kB/506.35kB [8s] 
 
-Compressed 16384 bytes to 10392...
+Writing at 0x000a1825 ====================>           69.5% 352.00kB/506.35kB [8s] 
 
-Writing at 0x00044000 ============================== 100.0% 10.15kB/10.15kB [0s] 
+Writing at 0x000a70d6 =====================>          72.7% 368.00kB/506.35kB [9s] 
 
-Wrote 16384 bytes (10392 compressed) at 0x00040000 in 0.2 seconds (542.3 kbit/s).
+Writing at 0x000ad04d ======================>         75.8% 384.00kB/506.35kB [9s] 
 
-Reflashing 3 changed sectors at 0x0007e000...
+Writing at 0x000b2c8b =======================>        79.0% 400.00kB/506.35kB [9s] 
 
-Flash will be erased from 0x0007e000 to 0x00080fff...
+Writing at 0x000b8744 ========================>       82.2% 416.00kB/506.35kB [10s] 
 
-Compressed 12288 bytes to 8881...
+Writing at 0x000bdeab =========================>      85.3% 432.00kB/506.35kB [10s] 
 
-Writing at 0x00081000 ============================== 100.0% 8.67kB/8.67kB [0s] 
+Writing at 0x000c38b7 ==========================>     88.5% 448.00kB/506.35kB [11s] 
 
-Wrote 12288 bytes (8881 compressed) at 0x0007e000 in 0.2 seconds (473.0 kbit/s).
+Writing at 0x000c9570 ===========================     91.6% 464.00kB/506.35kB [11s] 
 
-Reflashing 9 changed sectors at 0x000a7000...
+Writing at 0x000cef50 ============================    94.8% 480.00kB/506.35kB [11s] 
 
-Flash will be erased from 0x000a7000 to 0x000affff...
+Writing at 0x000d4b85 =============================   98.0% 496.00kB/506.35kB [12s] 
 
-Compressed 36864 bytes to 25430...
+Writing at 0x000d9000 ============================== 100.0% 506.35kB/506.35kB [12s] 
 
-Writing at 0x000ace7c ===================             64.4% 16.00kB/24.83kB [0s] 
-
-Writing at 0x000b0000 ============================== 100.0% 24.83kB/24.83kB [0s] 
-
-Wrote 36864 bytes (25430 compressed) at 0x000a7000 in 0.6 seconds (499.4 kbit/s).
-
-Reflashing 1 changed sector at 0x000b1000...
-
-Flash will be erased from 0x000b1000 to 0x000b1fff...
-
-Compressed 4096 bytes to 3171...
-
-Writing at 0x000b2000 ============================== 100.0% 3.10kB/3.10kB [0s] 
-
-Wrote 4096 bytes (3171 compressed) at 0x000b1000 in 0.1 seconds (418.9 kbit/s).
-
-Reflashing 8 changed sectors at 0x000b3000...
-
-Flash will be erased from 0x000b3000 to 0x000bafff...
-
-Compressed 32768 bytes to 23463...
-
-Writing at 0x000b886c ====================>           69.8% 16.00kB/22.91kB [0s] 
-
-Writing at 0x000bb000 ============================== 100.0% 22.91kB/22.91kB [0s] 
-
-Wrote 32768 bytes (23463 compressed) at 0x000b3000 in 0.5 seconds (481.5 kbit/s).
-
-Reflashing 2 changed sectors at 0x000bc000...
-
-Flash will be erased from 0x000bc000 to 0x000bdfff...
-
-Compressed 8192 bytes to 6267...
-
-Writing at 0x000be000 ============================== 100.0% 6.12kB/6.12kB [0s] 
-
-Wrote 8192 bytes (6267 compressed) at 0x000bc000 in 0.1 seconds (439.8 kbit/s).
-
-Reflashing 6 changed sectors at 0x000c9000...
-
-Flash will be erased from 0x000c9000 to 0x000cefff...
-
-Compressed 24576 bytes to 17435...
-
-Writing at 0x000ce978 ============================    94.0% 16.00kB/17.03kB [0s] 
-
-Writing at 0x000cf000 ============================== 100.0% 17.03kB/17.03kB [0s] 
-
-Wrote 24576 bytes (17435 compressed) at 0x000c9000 in 0.4 seconds (481.9 kbit/s).
-
-Reflashing 1 changed sector at 0x000d7000...
-
-Flash will be erased from 0x000d7000 to 0x000d7fff...
-
-Compressed 4096 bytes to 2238...
-
-Writing at 0x000d8000 ============================== 100.0% 2.19kB/2.19kB [0s] 
-
-Wrote 4096 bytes (2238 compressed) at 0x000d7000 in 0.1 seconds (491.4 kbit/s).
+Wrote 811008 bytes (518502 compressed) at 0x00013000 in 12.5 seconds (517.8 kbit/s).
 
 Verifying written data...
 

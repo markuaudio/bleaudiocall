@@ -10,6 +10,7 @@
 #include "esp_gap_bt_api.h"
 #include "esp_log.h"
 #include "esp_timer.h"
+#include "nvs.h"
 #include "board_config.h"
 #include "bt_core.h"
 #include "bt_music.h"
@@ -25,7 +26,74 @@ static struct {
     esp_bd_addr_t target; bool have_target;        // reconnect target (bonded phone)
     unsigned attempts; int64_t next_attempt_at; bool user_stopped;
     bool acl_ok;                                   // last radio-link attempt reached the phone
+    unsigned other_idx;                            // rotates through the other bonded phones
 } s;
+
+// The phone we last connected to, kept in NVS so a reboot tries it first.
+static bool load_last_peer(esp_bd_addr_t out)
+{
+    nvs_handle_t h; size_t len = sizeof(esp_bd_addr_t);
+    if (nvs_open("btlink", NVS_READONLY, &h) != ESP_OK) return false;
+    bool ok = nvs_get_blob(h, "last", out, &len) == ESP_OK && len == sizeof(esp_bd_addr_t);
+    nvs_close(h);
+    return ok;
+}
+
+static void save_last_peer(const uint8_t *bda)
+{
+    esp_bd_addr_t cur;
+    if (load_last_peer(cur) && !memcmp(cur, bda, sizeof(cur))) return; // unchanged: no flash write
+    nvs_handle_t h;
+    if (nvs_open("btlink", NVS_READWRITE, &h) != ESP_OK) return;
+    nvs_set_blob(h, "last", bda, sizeof(esp_bd_addr_t)); nvs_commit(h); nvs_close(h);
+    char str[18];
+    ESP_LOGI(TAG, "Remembered %s as the phone to reconnect to", bt_core_bda_str(bda, str));
+}
+
+static void forget_last_peer(void)
+{
+    nvs_handle_t h;
+    if (nvs_open("btlink", NVS_READWRITE, &h) != ESP_OK) return;
+    nvs_erase_key(h, "last"); nvs_commit(h); nvs_close(h);
+}
+
+// Reconnect target for boot / 'c': the last connected phone if it is still
+// bonded, otherwise the newest bond. Returns false when nothing is bonded.
+static bool pick_preferred_target(void)
+{
+    int num = esp_bt_gap_get_bond_device_num();
+    if (num <= 0) return false;
+    esp_bd_addr_t list[8]; int n = num > 8 ? 8 : num;
+    if (esp_bt_gap_get_bond_device_list(&n, list) != ESP_OK || n <= 0) return false;
+    int idx = n - 1;
+    esp_bd_addr_t last;
+    if (load_last_peer(last))
+        for (int i = 0; i < n; ++i) if (!memcmp(list[i], last, sizeof(last))) { idx = i; break; }
+    portENTER_CRITICAL(&lock);
+    memcpy(s.target, list[idx], 6); s.have_target = true;
+    portEXIT_CRITICAL(&lock);
+    return true;
+}
+
+// Some other bonded phone than the preferred target (round robin), so a user
+// who switched phones is still found. Returns false when only one bond exists.
+static bool pick_other_bond(esp_bd_addr_t out)
+{
+    int num = esp_bt_gap_get_bond_device_num();
+    esp_bd_addr_t list[8]; int n = num > 8 ? 8 : num;
+    if (n <= 1 || esp_bt_gap_get_bond_device_list(&n, list) != ESP_OK || n <= 1) return false;
+    esp_bd_addr_t pref; unsigned k;
+    portENTER_CRITICAL(&lock); memcpy(pref, s.target, 6); k = s.other_idx++; portEXIT_CRITICAL(&lock);
+    int others = 0;
+    for (int i = 0; i < n; ++i) if (memcmp(list[i], pref, 6)) ++others;
+    if (!others) return false;
+    int want = k % others;
+    for (int i = 0; i < n; ++i) {
+        if (!memcmp(list[i], pref, 6)) continue;
+        if (want-- == 0) { memcpy(out, list[i], 6); return true; }
+    }
+    return false;
+}
 
 const char *bt_core_bda_str(const uint8_t *b, char out[18])
 {
@@ -64,6 +132,7 @@ void bt_core_profile_link(bt_profile_t profile, bool up, const uint8_t *bda)
         if (!s.user_stopped) { s.attempts = 0; s.next_attempt_at = esp_timer_get_time() + 5000000LL; }
     }
     portEXIT_CRITICAL(&lock);
+    if (up) save_last_peer(bda);
     ESP_LOGI(TAG, "%s %s %s", profile == PROFILE_A2DP ? "Music (A2DP)" : "Calls (HFP)",
              up ? "connected to" : "disconnected from", bt_core_bda_str(bda, str));
 }
@@ -214,18 +283,26 @@ static void link_task(void *arg)
             continue;
         }
 
-        // Reconnect to the bonded phone (boot, or after it dropped the link).
-        if (!connected && have_target && !user_stopped && attempts < LINK_RECONNECT_ATTEMPTS && now >= next_attempt_at) {
+        // Reconnect to a bonded phone (boot, or after it dropped the link). Never
+        // gives up: quick attempts first, then one every LINK_RECONNECT_SLOW_PERIOD_S.
+        // Every other attempt goes to one of the other bonded phones, so the
+        // preferred (last connected) phone is still tried every ~2 periods.
+        if (!connected && have_target && !user_stopped && now >= next_attempt_at) {
             char str[18];
-            ESP_LOGI(TAG, "Reconnect attempt %u/%u to bonded phone %s", attempts + 1, (unsigned)LINK_RECONNECT_ATTEMPTS, bt_core_bda_str(target, str));
-            try_connect(target, true, false);
+            esp_bd_addr_t who; memcpy(who, target, 6);
+            bool other = (attempts & 1) && pick_other_bond(who);
+            unsigned period = attempts < LINK_RECONNECT_ATTEMPTS ? LINK_RECONNECT_PERIOD_S : LINK_RECONNECT_SLOW_PERIOD_S;
+            ESP_LOGI(TAG, "Reconnect attempt %u to %s phone %s (next in %u s)", attempts + 1,
+                     other ? "other bonded" : "last connected", bt_core_bda_str(who, str), period);
+            try_connect(who, true, false);
             portENTER_CRITICAL(&lock);
-            memcpy(s.peer, target, 6); s.have_peer = true; s.a2dp_tried = true; s.hfp_tried = false;
+            memcpy(s.peer, who, 6); s.have_peer = true; s.a2dp_tried = true; s.hfp_tried = false;
             s.followup_at = 0; // HFP follows only after this attempt succeeds or fails
-            s.attempts = attempts + 1; s.next_attempt_at = now + LINK_RECONNECT_PERIOD_S * 1000000LL;
+            s.attempts = attempts + 1; s.next_attempt_at = now + period * 1000000LL;
             portEXIT_CRITICAL(&lock);
             if (attempts + 1 == LINK_RECONNECT_ATTEMPTS)
-                ESP_LOGI(TAG, "Last reconnect attempt; afterwards waiting for the phone (or 'c' / reboot)");
+                ESP_LOGI(TAG, "Phone not found after %u quick attempts; keep trying every %u s until it answers (SET hold or 'x' stops this)",
+                         (unsigned)LINK_RECONNECT_ATTEMPTS, (unsigned)LINK_RECONNECT_SLOW_PERIOD_S);
         }
     }
 }
@@ -240,16 +317,13 @@ void bt_core_disconnect(void)
 
 void bt_core_connect_last(void)
 {
-    int num = esp_bt_gap_get_bond_device_num();
-    if (num <= 0) { ESP_LOGW(TAG, "No bonded phone yet; pair first"); return; }
-    esp_bd_addr_t list[8]; int n = num > 8 ? 8 : num;
-    if (esp_bt_gap_get_bond_device_list(&n, list) != ESP_OK || n <= 0) { ESP_LOGW(TAG, "Bond list read failed"); return; }
+    if (!pick_preferred_target()) { ESP_LOGW(TAG, "No bonded phone yet; pair first"); return; }
+    esp_bd_addr_t t; char str[18];
     portENTER_CRITICAL(&lock);
-    memcpy(s.target, list[n - 1], 6); s.have_target = true;
+    memcpy(t, s.target, 6);
     s.attempts = 0; s.next_attempt_at = 0; s.user_stopped = false;
     portEXIT_CRITICAL(&lock);
-    char str[18];
-    ESP_LOGI(TAG, "Will connect to bonded phone %s now", bt_core_bda_str(list[n - 1], str));
+    ESP_LOGI(TAG, "Will connect to bonded phone %s now", bt_core_bda_str(t, str));
 }
 
 void bt_core_list_bonds(void)
@@ -269,6 +343,7 @@ void bt_core_forget_all(void)
     bt_core_disconnect();
     for (int i = 0; i < n; ++i) esp_bt_gap_remove_bond_device(list[i]);
     portENTER_CRITICAL(&lock); s.have_target = false; s.have_peer = false; portEXIT_CRITICAL(&lock);
+    forget_last_peer();
     ESP_LOGI(TAG, "Removed %d bond(s). Also forget the device on the phone, then pair again", n);
 }
 
@@ -327,18 +402,15 @@ esp_err_t bt_core_start(void)
     ESP_ERROR_CHECK(bt_music_init());
     ESP_ERROR_CHECK(bt_call_init());
 
-    // Remember the newest bonded phone and try to reach it shortly after boot.
-    int num = esp_bt_gap_get_bond_device_num();
-    if (num > 0) {
-        esp_bd_addr_t list[8]; int n = num > 8 ? 8 : num;
-        if (esp_bt_gap_get_bond_device_list(&n, list) == ESP_OK && n > 0) {
-            char str[18];
-            portENTER_CRITICAL(&lock);
-            memcpy(s.target, list[n - 1], 6); s.have_target = true;
-            s.next_attempt_at = esp_timer_get_time() + 3000000LL;
-            portEXIT_CRITICAL(&lock);
-            ESP_LOGI(TAG, "%d bonded phone(s); will try %s in 3 s", num, bt_core_bda_str(list[n - 1], str));
-        }
+    // Try the last connected phone (NVS) shortly after boot; other bonds follow.
+    if (pick_preferred_target()) {
+        esp_bd_addr_t t; char str[18];
+        portENTER_CRITICAL(&lock);
+        memcpy(t, s.target, 6);
+        s.next_attempt_at = esp_timer_get_time() + 3000000LL;
+        portEXIT_CRITICAL(&lock);
+        ESP_LOGI(TAG, "%d bonded phone(s); will try %s (last connected) in 3 s, then the others in turn",
+                 esp_bt_gap_get_bond_device_num(), bt_core_bda_str(t, str));
     } else {
         ESP_LOGI(TAG, "No bonded phone yet: pair from the phone (PIN %s if asked)", BT_LEGACY_PIN);
     }

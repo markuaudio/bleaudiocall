@@ -7,6 +7,9 @@
 #include "driver/gpio.h"
 #include "esp_log.h"
 #include "esp_timer.h"
+#include "esp_attr.h"
+#include "esp_system.h"
+#include "nvs.h"
 #include "esp_hf_client_api.h"
 #include "esp_hf_client_legacy_api.h"
 #include "board_config.h"
@@ -15,6 +18,11 @@
 #include "audio_engine.h"
 
 static const char *TAG = "audio";
+// Survives every reset except a real power cycle: tells the next boot whether
+// the amplifier was on when the chip reset (= supply collapsed under load).
+#define PA_FLAG_MAGIC 0x50A0C0DEu
+static RTC_NOINIT_ATTR uint32_t rtc_pa_flag;
+static unsigned boot_profile = AUDIO_BOOT_DAC_PROFILE; // after NVS / power-trip adjustment
 static portMUX_TYPE lock = portMUX_INITIALIZER_UNLOCKED;
 static RingbufHandle_t music_ring, call_rx_ring, call_tx_ring;
 
@@ -166,11 +174,16 @@ void audio_engine_dac_step(int delta)
     if (p < 0) p = 0;
     if (p > (int)es8388_dac_profile_max()) p = es8388_dac_profile_max();
     portENTER_CRITICAL(&lock); st.dac_profile = p; ++st.epoch; portEXIT_CRITICAL(&lock);
-    ESP_LOGI(TAG, "DAC profile P%d requested; reboot returns to P%u", p, (unsigned)AUDIO_BOOT_DAC_PROFILE);
+    ESP_LOGI(TAG, "DAC profile P%d requested; reboot returns to P%u", p, boot_profile);
 }
 void audio_engine_dac_reset(void)
 {
+    // Back to the compile-time default and forget any learned power-trip limit.
+    nvs_handle_t h;
+    if (nvs_open("audio", NVS_READWRITE, &h) == ESP_OK) { nvs_erase_key(h, "dac"); nvs_commit(h); nvs_close(h); }
+    boot_profile = AUDIO_BOOT_DAC_PROFILE;
     portENTER_CRITICAL(&lock); st.dac_profile = AUDIO_BOOT_DAC_PROFILE; ++st.epoch; portEXIT_CRITICAL(&lock);
+    ESP_LOGI(TAG, "DAC profile reset to P%u; learned power-trip limit cleared", (unsigned)AUDIO_BOOT_DAC_PROFILE);
 }
 void audio_engine_log_status(void)
 {
@@ -209,6 +222,7 @@ static void pa(bool on, bool *pa_on)
     gpio_set_level(BOARD_PA_ENABLE, on);
     if (!on) es8388_dac_mute(true);
     *pa_on = on;
+    rtc_pa_flag = on ? PA_FLAG_MAGIC : 0;
 }
 
 // --------------------------------------------------------------- the task
@@ -386,8 +400,42 @@ report:
     }
 }
 
+// Decide the boot DAC profile: the saved one (if any), lowered once more when
+// the previous run ended in a reset with the amplifier on.
+static void load_boot_profile(void)
+{
+    esp_reset_reason_t why = esp_reset_reason();
+    bool pa_was_on = rtc_pa_flag == PA_FLAG_MAGIC;
+    rtc_pa_flag = 0;
+    unsigned profile = AUDIO_BOOT_DAC_PROFILE;
+    nvs_handle_t h;
+    if (nvs_open("audio", NVS_READWRITE, &h) != ESP_OK) return;
+    uint8_t stored;
+    if (nvs_get_u8(h, "dac", &stored) == ESP_OK && stored <= es8388_dac_profile_max()) {
+        profile = stored;
+        ESP_LOGI(TAG, "DAC profile P%u restored from NVS (learned limit)", profile);
+    }
+    bool power_trip = pa_was_on && (why == ESP_RST_BROWNOUT || why == ESP_RST_POWERON ||
+                                    why == ESP_RST_UNKNOWN || why == ESP_RST_PWR_GLITCH);
+    if (power_trip) {
+        if (profile >= POWER_TRIP_DAC_STEP) {
+            profile -= POWER_TRIP_DAC_STEP;
+            nvs_set_u8(h, "dac", (uint8_t)profile); nvs_commit(h);
+            ESP_LOGW(TAG, "POWER TRIP: the board reset while the amplifier was on (reset reason %d). "
+                          "DAC profile lowered to P%u (%.1f dB) and saved. Use a 5 V / 2 A supply and a short, thick cable; '0' clears this",
+                     (int)why, profile, (double)es8388_dac_profile_db(profile));
+        } else {
+            ESP_LOGW(TAG, "POWER TRIP at the lowest DAC profile: the supply or cable must be fixed");
+        }
+    }
+    nvs_close(h);
+    boot_profile = profile;
+    st.dac_profile = profile;
+}
+
 esp_err_t audio_engine_init(void)
 {
+    load_boot_profile();
     gpio_config_t pins = {.pin_bit_mask = 1ULL << BOARD_PA_ENABLE, .mode = GPIO_MODE_OUTPUT};
     ESP_ERROR_CHECK(gpio_config(&pins));
     gpio_set_level(BOARD_PA_ENABLE, 0);
@@ -398,7 +446,7 @@ esp_err_t audio_engine_init(void)
     if (!music_ring || !call_rx_ring || !call_tx_ring) return ESP_ERR_NO_MEM;
     ESP_ERROR_CHECK(audio_io_init(44100));
     ESP_LOGI(TAG, "Engine: music 1x gain + limiter, DAC P%u, call volume %u/15, mic gain %.1fx",
-             (unsigned)AUDIO_BOOT_DAC_PROFILE, (unsigned)CALL_BOOT_VOLUME, (double)MIC_DIGITAL_GAIN);
+             boot_profile, (unsigned)CALL_BOOT_VOLUME, (double)MIC_DIGITAL_GAIN);
     if (xTaskCreatePinnedToCore(audio_task, "audio", 8192, NULL, 6, NULL, 1) != pdPASS) return ESP_ERR_NO_MEM;
     return ESP_OK;
 }
