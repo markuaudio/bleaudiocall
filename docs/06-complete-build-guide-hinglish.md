@@ -66,10 +66,10 @@ Poora detail: [00-esp-idf-setup-hinglish.md](00-esp-idf-setup-hinglish.md). Shor
    ```
 3. ESP-IDF **v6.1**, target **esp32** (board ka chip esp32 hai, S3 nahi):
    ```powershell
-   & "$env:LOCALAPPDATA\Microsoft\WinGet\Packages\Espressif.EIM-CLI_Microsoft.Winget.Source_8wekyb3d8bbwe\eim.exe" install -i v6.1 -t esp32 -p 'D:\Vscode\esp\tooling\espressif' --idf-features ide --skip-components-download true --do-not-track true
+   & "$env:LOCALAPPDATA\Microsoft\WinGet\Packages\Espressif.EIM-CLI_Microsoft.Winget.Source_8wekyb3d8bbwe\eim.exe" install -i v6.1 -t esp32 -p 'D:\Vscode\esp-tooling\espressif' --idf-features ide --skip-components-download true --do-not-track true
    & "...\eim.exe" select v6.1
    ```
-   Tools `C:\Espressif\tools` mein jate hain (EIM ka default; yeh ek jagah hai jahan C drive zaroori hai). Python venv `C:\Espressif\tools\python\v6.1\venv`.
+   IDF checkout `D:\Vscode\esp-tooling\espressif\v6.1\esp-idf` par (path mein **space mat rakho**, ESP-IDF Windows par support nahi karta; 2026-10-27 ko folder rename se yahi toota tha). Tools `C:\Espressif\tools` mein jate hain (EIM ka default; yeh ek jagah hai jahan C drive zaroori hai). Python venv `C:\Espressif\tools\python\v6.1\venv`.
 4. Is folder ko VS Code mein kholo. `.vscode/settings.json` terminal profile "ESP-IDF v6.1 (bleaudiocall)" set karta hai jo `tools/Enter-EspIdf.ps1` chalata hai. Naya terminal kholo:
    ```powershell
    idf.py --version      # ESP-IDF v6.1

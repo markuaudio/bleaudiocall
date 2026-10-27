@@ -1,8 +1,8 @@
 # bleaudiocall: LyraT Bluetooth speaker jo phone call bhi uthata hai
 
-Board: ESP32-LyraT v4.3 (ESP32-D0WD-V3, 8 MB flash; wahi board jo `D:\Vscode\esp` ke kanchan speaker project mein hai). Framework: ESP-IDF v6.1 (shared tooling `D:\Vscode\esp\tooling`). Chip target: `esp32`. Bluetooth naam: **`blu2`** (`main/board_config.h` mein `BT_DEVICE_NAME`).
+Board: ESP32-LyraT v4.3 (ESP32-D0WD-V3, 8 MB flash; wahi board jo `D:\Vscode\esp` ke kanchan speaker project mein hai). Framework: ESP-IDF v6.1 (toolchain `D:\Vscode\esp-tooling`, 2026-10-27 se; path mein space nahi hona chahiye). Chip target: `esp32`. Bluetooth naam: **`blu2`** (`main/board_config.h` mein `BT_DEVICE_NAME`).
 
-Status (2026-10-27): final build pass, release (-O2) config, 0 warnings in `main/`. Board par flash + phone test **pending** (dekho [04](docs/04-learning-process-hinglish.md) ka "pending" section).
+Status (2026-10-27 16:05): final build pass, release (-O2), 0 warnings, **board par flashed**; serial log se reconnect fixes proof (docs/05 verification section), ek phone se HFP connect hua. Music/call ka phone test **pending** (dekho [04](docs/04-learning-process-hinglish.md) ka "pending" section).
 
 Kya karta hai:
 

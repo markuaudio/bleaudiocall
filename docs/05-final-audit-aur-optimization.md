@@ -96,9 +96,20 @@ Matlab: purane `sdkconfig` mein koi hidden menuconfig change nahi tha; `sdkconfi
 
 CMake ki 5 warnings IDF ke apne `esp_wifi`/`wpa_supplicant` components ki hain (private include dirs), hamare code ki nahi; Wi-Fi link hi nahi hota.
 
+## Board par verification (2026-10-27 16:05, `docs/2026-10-27-final-flash.log`, `docs/2026-10-27-final-serial.log`)
+
+Flash pass (hash verified). 75 s serial capture, bonded phone paas nahi tha:
+
+- Finding 2 **proof**: `Reconnect attempt 1/6 ... 6/6`, `Last reconnect attempt; afterwards waiting for the phone`, uske baad koi attempt nahi. Counter reset nahi hua.
+- Finding 3 **proof**: har attempt ke baad `Radio link ... status 0x104` + `Music (A2DP) attempt failed (phone not reachable)`; HFP ki alag page attempt nahi hui.
+- Finding 4 **proof**: fail ke baad koi `DAC profile` / `ADC/microphones OFF` / `Path: MUSIC` reclock line nahi (pehle har fail par aati thi).
+- Bonus: ek doosra bonded phone (04:ec:d8:68:0e:79) khud HFP se juda: `Calls (HFP) connected`, features 0xf67, `Phone network NOT available` (phone par network/SIM nahi tha us waqt). Yani HFP SLC asli phone ke saath kaam karta hai.
+- Boot: free heap 71468 B, touch baselines 1278/1278/1152/838, I2S 44.1 kHz clocks sahi, koi reset nahi.
+- Chhoti warning `gpio: conflict found for GPIO[21]`: PA pin `main.c` aur `audio_engine_init` dono configure karte hain. Harmless; chaho to `audio_engine_init` wali `gpio_config` hata do.
+
 ## Jo abhi bhi pending hai (board par)
 
-Yeh build **flash nahi** kiya gaya; board par abhi bhi pehla firmware hai. Test plan [01](01-project-overview-hinglish.md) ke "Test plan" section mein. Khaas dekhna:
+Music playback, incoming call ring/answer/awaaz/hang-up: phone ke saath user test chahiye. Test plan [01](01-project-overview-hinglish.md) ke "Test plan" section mein. Khaas dekhna:
 
 1. Phone paas na ho: log mein "Reconnect attempt 6/6" ke baad "Last reconnect attempt" aur phir **koi** attempt nahi (finding 2 proof).
 2. Phone paas ho, pair karke: "Music (A2DP) connected", 4 s mein "Calls (HFP) connected"; `Radio link ... status 0x0`.
