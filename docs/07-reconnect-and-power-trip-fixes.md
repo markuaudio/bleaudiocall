@@ -101,6 +101,61 @@ followed by an automatic reconnect to the phone within a few seconds.
 
 ---
 
+## Second iteration: supply guard (find the safe level without any reset)
+
+The learned limit above only acts *after* a reset, and every reset means reboot, reconnect and the phone re-starting the stream. The user rightly called that "calibrating in front of the user". The second iteration measures the supply while playing and backs off before the supervisor can reset the chip.
+
+### How the rail is measured on a board with no sense pin
+
+The REC button line (GPIO36 / SENSOR_VP, ADC1 channel 0) is pulled up to the 3.3 V rail through R140 10 kΩ + R138 100 Ω (schematic, "Switch Keys"). The ESP32 ADC uses an internal bandgap reference, not VDD, so reading that pin tracks the 3.3 V rail itself. With 12 dB attenuation the ADC saturates near 3.1 V: a healthy rail reads near full scale (raw ≈ 4095), and the reading only starts to fall once the LDO has dropped out, which is exactly the region between "fine" and the IMP809 threshold (2.63 V). Pressing REC shorts the line to ground, which looks like a deep sag: a built-in way to test the ducking without a weak supply.
+
+### What was changed
+
+| Change | Where | Why |
+|---|---|---|
+| New module `supply.c/.h`: ADC1 oneshot on GPIO36, 12 dB attenuation, 4-sample average | `main/supply.c`, `main/CMakeLists.txt` (`supply.c`, `esp_adc`) | One call per audio block (about 15 us each) is cheap. |
+| Quiet baseline: while the PA is off the task tracks the highest reading | audio task, `supply_base` | The threshold is relative, so it works whether the rail reads 4095 (saturated) or less. |
+| Sag = reading more than `SUPPLY_SAG_COUNTS` (200) below the baseline | audio task | Roughly the first 0.1 to 0.2 V of rail drop, well before the 2.63 V reset point. |
+| Duck: while a sag lasts, the output gain is multiplied by 0.87 per block (about 6 dB per 50 ms) down to `SUPPLY_DUCK_MIN` (0.25 = -12 dB); afterwards it recovers linearly over `SUPPLY_RECOVER_S` (3 s) | music `target`, call `level`, tones | Cuts the amplifier current within one or two blocks, so the rail recovers instead of collapsing. Recovery is slow enough not to pump. |
+| Repeated sags (`SUPPLY_SAG_LIMIT` 4 within `SUPPLY_SAG_WINDOW_S` 30 s) lower the DAC profile one step **while playing** and save it (`save_dac_profile`) | audio task; `audio_engine.c` | The speaker converges on the loudest level the supply holds without a single disconnect. A brief reclock click is the only side effect. |
+| Stats line every 5 s: `supply raw=... quiet=... duck=... sags=...` | audio task | Shows the rail reading and how often it sagged. |
+| `POWER_TRIP_DAC_STEP` raised to 2 (3 dB) | `board_config.h` | The reset path is now the fallback only; if it ever triggers it should converge in one step. |
+
+Expected behaviour on a weak supply: at a loud bass passage the log shows `Supply sag: rail raw 3850 (quiet 4095) with PA on; ducking output`, the volume dips for a moment, no reset, no disconnect. If that repeats four times in half a minute: `Supply sags repeatedly at P4: DAC profile lowered to P3 (-7.5 dB) and saved`. From then on the boot level is P3 and the sags stop (or the next step follows). `0` on the console clears the saved level after a better adapter is connected.
+
+Bench check without a phone: start a tone (`l`), press REC: the tone ducks and the log reports the sag; release REC: it comes back within 3 s. Pressing REC four times within 30 s lowers the profile one step (restore with `0`).
+
+---
+
+## Third iteration: a second phone must connect without "refreshing", new phones must find the speaker
+
+Reported: a second device only connected after refreshing the phone's Bluetooth list, and a brand-new Android phone (Redmi) could not connect at all.
+
+### Why
+
+- **Hidden while connected.** The speaker was discoverable only when no phone was connected (`hidden (already in use)` in the log). A second phone could not see it until the first one was gone.
+- **The speaker's own paging starved the scans.** Reconnect attempts ran every 10 s with a 10 s page timeout, so the radio was paging almost all the time. While the controller pages, it skips inquiry-scan and page-scan windows, so a new phone's scan does not see `blu2` and its connection attempt times out. That matches "refresh" and "the new phone cannot connect".
+- **No hand-over.** If a second phone did reach the speaker while the first was connected, the stack rejected its A2DP/HFP links (one phone at a time) and nothing in the firmware switched over.
+- Checked and ruled out: the Bluedroid device-record limit (`BTM_SEC_MAX_DEVICE_RECORDS` = `BT_SMP_MAX_BONDS` 15 + `BT_ACL_CONNECTIONS` 4 = 19) is far above the 4 stored bonds.
+
+### What was changed (`main/bt_core.c`, `main/board_config.h`)
+
+| Change | Where | Why |
+|---|---|---|
+| Always **connectable + general discoverable**, also while a phone is connected | `set_scan_mode(true)` from `link_task`, log `DISCOVERABLE (always visible ...)` | A second phone sees `blu2` in its list at any time, no refresh. |
+| **Newest phone wins**: when a radio link (ACL) from a different address succeeds while a phone is connected, the current phone's HFP and A2DP are disconnected, the newcomer becomes `peer`/`target`, and the follow-up opens our profiles to it 2 s later; reconnect paging is paused for 15 s | `ESP_BT_GAP_ACL_CONN_CMPL_STAT_EVT` handler | Whoever actively connects or pairs gets the speaker, like most consumer speakers. |
+| A disconnect of a phone that is no longer the current peer does not clear the follow-up or restart reconnects | `bt_core_profile_link(up=false)` (`same_phone` check) | Otherwise the old phone's disconnect event would cancel the switch to the new one. |
+| Lower paging duty: `LINK_RECONNECT_ATTEMPTS` 4, `LINK_RECONNECT_SLOW_PERIOD_S` 45, new `LINK_PAGE_TIMEOUT 0x2000` (5.12 s per attempt instead of 10 s) | `board_config.h`, `bt_core_start()` | Paging now occupies roughly 10 % of the time instead of nearly 100 %, so inquiry/page scans get through and new phones connect at the first try. |
+| SET hold while nothing is connected = pairing mode | existing `bt_core_disconnect()` (`user_stopped`) | Stops the speaker's own paging completely until `c` or reboot; the speaker is then free for a new phone. |
+
+### What to expect
+
+- Phone A connected, phone B opens Bluetooth: `blu2` is listed immediately. Tapping it: log `Another phone B arrived while A is connected: switching to the new phone`, then `Music (A2DP) disconnected from A`, `Calls (HFP) disconnected from A`, and within a few seconds `Music (A2DP) connected to B`, `Calls (HFP) connected to B`. Phone A shows "disconnected".
+- A bonded phone that reconnects on its own (for example an old phone coming home) also takes over. If that is unwanted, forget `blu2` on that phone.
+- New phone pairing: pair from the phone as usual (Just Works, or PIN 0000 on old phones). No "refresh" needed; if it does not appear, hold SET for 2 s (pairing mode) and scan again.
+
+---
+
 ## Files touched
 
 | File | Lines changed (approx.) |
@@ -108,7 +163,8 @@ followed by an automatic reconnect to the phone within a few seconds.
 | `main/bt_core.c` | +90: NVS helpers, `pick_preferred_target`, `pick_other_bond`, reconnect block, `connect_last`, `forget_all`, `bt_core_start` |
 | `main/audio_engine.c` | +45: RTC flag, `load_boot_profile`, `dac_reset`, banner |
 | `main/main.c` | +4: reset reason in words |
-| `main/board_config.h` | +2 constants, comments |
+| `main/board_config.h` | +8 constants, comments |
+| `main/supply.c`, `main/supply.h` | new: 3.3 V rail sensing on the REC line |
 | `README.md`, `docs/01`, `docs/02`, `docs/06`, `CHANGELOG.md` | behaviour and troubleshooting rows |
 
 Commit: "Reconnect for ever to the last connected phone; power-trip protection".

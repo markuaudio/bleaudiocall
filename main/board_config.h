@@ -34,7 +34,19 @@
 // Power-trip protection: if the board resets (brownout / supervisor) while the
 // amplifier is on, the DAC profile is lowered by this many steps and saved in
 // NVS, so the next boot is quieter and stays connected. Console '0' clears it.
-#define POWER_TRIP_DAC_STEP 1
+#define POWER_TRIP_DAC_STEP 2
+
+// Supply guard (see supply.h): the REC button line senses the 3.3 V rail.
+// A reading SUPPLY_SAG_COUNTS below the quiet baseline is a sag: the output
+// gain is cut at once (down to SUPPLY_DUCK_MIN) and recovers over
+// SUPPLY_RECOVER_S. SUPPLY_SAG_LIMIT sags within SUPPLY_SAG_WINDOW_S lower the
+// DAC profile one step and save it, while playing, without any reset.
+#define SUPPLY_SENSE_ADC_CHANNEL ADC_CHANNEL_0 // ADC1 channel 0 = GPIO36 (SENSOR_VP, REC button)
+#define SUPPLY_SAG_COUNTS 200
+#define SUPPLY_DUCK_MIN 0.25f
+#define SUPPLY_RECOVER_S 3.0f
+#define SUPPLY_SAG_LIMIT 4
+#define SUPPLY_SAG_WINDOW_S 30
 
 // Call (HFP) path. Voice PCM arrives from the phone as 16-bit mono at 8 kHz
 // (CVSD) or 16 kHz (mSBC); the I2S bus runs at that same rate during a call.
@@ -51,7 +63,10 @@
 // wait for the accessory to open the profiles). The speaker never gives up:
 // LINK_RECONNECT_ATTEMPTS quick attempts, then one every LINK_RECONNECT_SLOW_PERIOD_S
 // until the phone answers or the user disconnects (SET hold / 'x').
-#define LINK_RECONNECT_ATTEMPTS 6
+// Our own paging blocks the radio's inquiry/page scans, so new phones cannot
+// see or reach the speaker while it pages: keep the duty cycle low.
+#define LINK_RECONNECT_ATTEMPTS 4
 #define LINK_RECONNECT_PERIOD_S 10
-#define LINK_RECONNECT_SLOW_PERIOD_S 30
+#define LINK_RECONNECT_SLOW_PERIOD_S 45
+#define LINK_PAGE_TIMEOUT 0x2000 // 5.12 s per attempt (controller default); 0x4000 = 10 s
 #define LINK_PROFILE_FOLLOWUP_S 4 // after one profile (or pairing) is up, open the other one ourselves

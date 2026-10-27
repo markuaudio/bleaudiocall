@@ -128,8 +128,9 @@ void bt_core_profile_link(bt_profile_t profile, bool up, const uint8_t *bda)
         s.attempts = 0; s.user_stopped = false;
         s.followup_at = esp_timer_get_time() + LINK_PROFILE_FOLLOWUP_S * 1000000LL; // open the other profile too
     } else if (!any) {
-        s.a2dp_tried = s.hfp_tried = false; s.followup_at = 0;
-        if (!s.user_stopped) { s.attempts = 0; s.next_attempt_at = esp_timer_get_time() + 5000000LL; }
+        bool same_phone = !memcmp(s.peer, bda, sizeof(esp_bd_addr_t));
+        if (same_phone) { s.a2dp_tried = s.hfp_tried = false; s.followup_at = 0; }
+        if (!s.user_stopped && same_phone) { s.attempts = 0; s.next_attempt_at = esp_timer_get_time() + 5000000LL; }
     }
     portEXIT_CRITICAL(&lock);
     if (up) save_last_peer(bda);
@@ -211,9 +212,28 @@ static void gap_callback(esp_bt_gap_cb_event_t event, esp_bt_gap_cb_param_t *p)
         break;
     case ESP_BT_GAP_ACL_CONN_CMPL_STAT_EVT: {
         bool ok = p->acl_conn_cmpl_stat.stat == ESP_BT_STATUS_SUCCESS;
-        portENTER_CRITICAL(&lock); s.acl_ok = ok; portEXIT_CRITICAL(&lock);
+        esp_bd_addr_t cur; bool connected;
+        portENTER_CRITICAL(&lock);
+        s.acl_ok = ok; connected = s.a2dp_up || s.hfp_up; memcpy(cur, s.peer, 6);
+        portEXIT_CRITICAL(&lock);
         ESP_LOGI(TAG, "Radio link with %s: status 0x%x%s", bt_core_bda_str(p->acl_conn_cmpl_stat.bda, str),
                  p->acl_conn_cmpl_stat.stat, ok ? "" : " (0x104 = page timeout: phone off / out of range)");
+        if (ok && connected && memcmp(cur, p->acl_conn_cmpl_stat.bda, 6)) {
+            // Newest phone wins: drop the current phone's profiles and open ours
+            // to the newcomer shortly after, so it never has to "refresh".
+            char old[18];
+            ESP_LOGI(TAG, "Another phone %s arrived while %s is connected: switching to the new phone",
+                     str, bt_core_bda_str(cur, old));
+            portENTER_CRITICAL(&lock);
+            memcpy(s.peer, p->acl_conn_cmpl_stat.bda, 6); s.have_peer = true;
+            memcpy(s.target, p->acl_conn_cmpl_stat.bda, 6); s.have_target = true;
+            s.a2dp_tried = s.hfp_tried = false; s.user_stopped = false;
+            s.followup_at = esp_timer_get_time() + 2000000LL;   // give the old links time to close
+            s.next_attempt_at = esp_timer_get_time() + 15000000LL; // no reconnect paging meanwhile
+            portEXIT_CRITICAL(&lock);
+            bt_call_disconnect();
+            bt_music_disconnect();
+        }
         break;
     }
     case ESP_BT_GAP_ACL_DISCONN_CMPL_STAT_EVT:
@@ -237,11 +257,13 @@ static void set_scan_mode(bool discoverable)
 {
     // Always connectable: phones open HFP seconds after A2DP (or the other way
     // round), so the radio must keep answering pages while one profile is up.
+    // Always discoverable too: a second phone must find the speaker without
+    // anyone having to disconnect the first one (newest phone wins, see GAP).
     esp_err_t err = esp_bt_gap_set_scan_mode(ESP_BT_CONNECTABLE,
                                              discoverable ? ESP_BT_GENERAL_DISCOVERABLE : ESP_BT_NON_DISCOVERABLE);
     if (err != ESP_OK) { ESP_LOGW(TAG, "Scan mode: %s", esp_err_to_name(err)); return; }
     portENTER_CRITICAL(&lock); s.discoverable = discoverable; s.scan_set = true; portEXIT_CRITICAL(&lock);
-    ESP_LOGI(TAG, "Radio: connectable, %s", discoverable ? "DISCOVERABLE (visible in the phone's list)" : "hidden (already in use)");
+    ESP_LOGI(TAG, "Radio: connectable, %s", discoverable ? "DISCOVERABLE (always visible in the phone's list)" : "hidden");
 }
 
 static void link_task(void *arg)
@@ -265,7 +287,7 @@ static void link_task(void *arg)
         led = connected ? true : !led;
         gpio_set_level(BOARD_LED, led);
 
-        if (!scan_set || disc == connected) set_scan_mode(!connected);
+        if (!scan_set || !disc) set_scan_mode(true);
 
         // Follow-up: one profile (or pairing) is up, the other is not; open it ourselves.
         // The timer is re-armed by bt_core_profile_link(up) or bt_core_profile_failed()
@@ -396,8 +418,9 @@ esp_err_t bt_core_start(void)
     esp_bt_pin_code_t pin; memcpy(pin, BT_LEGACY_PIN, 4);
     ESP_ERROR_CHECK(esp_bt_gap_set_pin(ESP_BT_PIN_TYPE_FIXED, 4, pin));
 
-    // Give slow / sleeping phones 10 s to answer our own connection attempts.
-    esp_bt_gap_set_page_timeout(0x4000);
+    // Page timeout for our own connection attempts: short, so the radio gets
+    // back to inquiry/page scanning quickly and new phones can find us.
+    esp_bt_gap_set_page_timeout(LINK_PAGE_TIMEOUT);
 
     ESP_ERROR_CHECK(bt_music_init());
     ESP_ERROR_CHECK(bt_call_init());
