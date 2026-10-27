@@ -1,6 +1,6 @@
 #pragma once
 
-// ESP32-LyraT v4.3 wiring. Same board as the kanchan speaker project (d:/Vscode/esp).
+// ESP32-LyraT v4.3 wiring. Same board as the earlier kanchan speaker project.
 // Only this file describes the hardware; a new board needs a new mapping.
 #define BOARD_I2C_SDA 18
 #define BOARD_I2C_SCL 23

@@ -2,7 +2,6 @@
     "idf.extensionActivationMode": "always",
     "idf.port": "COM6",
     "idf.flashType": "UART",
-    "idf.currentSetup": "D:\\Vscode\\esp-tooling\\espressif\\v6.1\\esp-idf",
     "terminal.integrated.profiles.windows": {
         "ESP-IDF v6.1 (bleaudiocall)": {
             "path": "powershell.exe",

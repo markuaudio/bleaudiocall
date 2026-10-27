@@ -1,49 +1,43 @@
-# bleaudiocall: LyraT Bluetooth speaker jo phone call bhi uthata hai
+# bleaudiocall: a LyraT Bluetooth speaker that also answers phone calls
 
-**English summary (for everyone else; the rest of this repo is written in Hinglish):**
-Firmware for the **ESP32-LyraT V4.3** audio board, written directly on **ESP-IDF v6.1** (no ESP-ADF pipeline).
-It turns the board into a Bluetooth speaker that also answers phone calls:
+Firmware for the **ESP32-LyraT V4.3** audio board, written directly on **ESP-IDF v6.1** (no ESP-ADF pipeline). It turns the board into a Bluetooth speaker that advertises as **`blu2`** and also takes phone calls:
 
 - **Music**: A2DP sink (SBC) + AVRCP play/pause/next and absolute volume.
 - **Calls**: HFP hands-free unit, voice over HCI (CVSD 8 kHz / mSBC 16 kHz), ring, answer, hang-up, both onboard microphones back to the phone, I2S full duplex into the ES8388 codec.
 - **Any phone**: Secure Simple Pairing (Just Works) for modern phones, fixed PIN 0000 for old ones, a link manager that opens A2DP/HFP itself and reconnects with a bounded retry loop.
 - One audio task owns the codec/I2S bus and switches between music, call and ring sources.
 
-What you will find here: the full source (`main/`), build/flash/monitor scripts for Windows (`tools/`), a step-by-step build guide, a learning log with every mistake and fix from the first "hiss only" bring-up to the LOUT2 amplifier-cancellation root cause, a code audit with the bugs found in serial logs, and the official Espressif schematic, component layout and a BOM extracted from it (`docs/hardware/`). Docs are Hinglish (Hindi in Latin script + English); the code comments, register tables and log lines are English, so the firmware itself is readable without Hindi.
+What you will find here: the full source (`main/`), build/flash/monitor scripts for Windows (`tools/`), a step-by-step build guide, a learning log with every mistake and fix from the first "hiss only" bring-up to the LOUT2 amplifier-cancellation root cause, a code audit with the bugs found in serial logs, and the official Espressif schematic, component layout and a BOM extracted from it (`docs/hardware/`).
 
-Status: final release build flashed and verified on the board (reconnect logic, HFP service-level connection). Music playback and a live call with a phone are the remaining user tests.
+Board: ESP32-LyraT V4.3 (ESP32-D0WD-V3, 8 MB flash; the same board used by the earlier kanchan speaker project, which is not part of this repo). Framework: ESP-IDF v6.1 installed by the Espressif Installation Manager (EIM) into `<IDF folder>`; ESP-IDF on Windows does not support paths containing spaces. Chip target: `esp32`. Bluetooth name: **`blu2`** (`BT_DEVICE_NAME` in `main/board_config.h`).
 
----
+**Status (2026-10-27):** final release build (-O2, 0 warnings) flashed and verified on the board: the serial log proves the reconnect logic (6 attempts, then idle; no audio reclock on failed attempts) and an HFP service-level connection with a real phone (see the verification section of [docs/05](docs/05-final-audit-and-optimization.md)). Music playback and a live call remain user tests (see the "pending" section of [docs/04](docs/04-learning-process.md)).
 
-Board: ESP32-LyraT v4.3 (ESP32-D0WD-V3, 8 MB flash; wahi board jo `D:\Vscode\esp` ke kanchan speaker project mein hai). Framework: ESP-IDF v6.1 (toolchain `D:\Vscode\esp-tooling`, 2026-10-27 se; path mein space nahi hona chahiye). Chip target: `esp32`. Bluetooth naam: **`blu2`** (`main/board_config.h` mein `BT_DEVICE_NAME`).
+What it does:
 
-Status (2026-10-27 16:05): final build pass, release (-O2), 0 warnings, **board par flashed**; serial log se reconnect fixes proof (docs/05 verification section), ek phone se HFP connect hua. Music/call ka phone test **pending** (dekho [04](docs/04-learning-process-hinglish.md) ka "pending" section).
+- **Music**: A2DP stereo (SBC) from the phone; play/pause, next and the phone's volume slider over AVRCP.
+- **Calls**: HFP hands-free unit. On an incoming call the speaker rings by itself, the PLAY pad answers, the caller is heard on the speaker and your voice goes to the phone through the board's two onboard microphones. Hang up / reject from the board as well.
+- **Every kind of phone**: new phones (Secure Simple Pairing, "Just Works"), old phones (PIN `0000`), and for phones that do not open the profiles themselves the speaker connects A2DP/HFP on its own. Details: [docs/02](docs/02-connect-every-phone.md).
 
-Kya karta hai:
+## Documentation (read in this order)
 
-- **Music**: phone se A2DP stereo (SBC), AVRCP se play/pause, next, phone ka volume slider.
-- **Calls**: HFP Hands-Free unit. Incoming call par speaker khud ring karta hai, PLAY pad se call uthao, awaaz speaker se, tumhari awaaz board ke do onboard mics se phone tak. Hang up / reject bhi board se.
-- **Har tarah ka phone**: naye phone (Secure Simple Pairing, "Just Works"), purane phone (PIN `0000`), aur jo phone khud profile nahi kholte unke liye speaker khud A2DP/HFP connect karta hai. Detail: [docs/02](docs/02-har-type-bluetooth-connect.md).
+0. [ESP-IDF setup: toolchain, terminal, build commands](docs/00-esp-idf-setup.md)
+1. [Project overview, boot flow, file map, test plan](docs/01-project-overview.md)
+2. [Connecting every kind of phone: why the old phone failed, what is different now](docs/02-connect-every-phone.md)
+3. [Call audio path: SCO -> I2S full duplex -> ES8388, microphones back](docs/03-call-audio-path.md)
+4. [**Learning process**: the whole journey from 25 to 27 October, mistakes and lessons](docs/04-learning-process.md)
+5. [**Final audit**: what was not optimized, what was fixed, how it was verified](docs/05-final-audit-and-optimization.md)
+6. [**Complete build guide**: from zero to a working project so anyone can build it (hardware, PC, modules in order, tests, troubleshooting)](docs/06-complete-build-guide.md)
+7. [Hardware mapping (LyraT V4.3)](docs/lyrat-v4.3-hardware.md)
+8. [**Schematic, layout, BOM** (official Espressif PDFs + rendered pages + parts list)](docs/hardware/README.md), [shopping list + board BOM](docs/hardware/BOM.md)
 
-## Docs (is kram mein padho)
-
-0. [ESP-IDF setup: toolchain, terminal, build commands](docs/00-esp-idf-setup-hinglish.md)
-1. [Project overview, boot flow, file map, test plan](docs/01-project-overview-hinglish.md)
-2. [Har type ka Bluetooth connect: purana phone kyun fail hua, ab kya alag hai](docs/02-har-type-bluetooth-connect.md)
-3. [Call audio path: SCO -> I2S full duplex -> ES8388, mic wapas](docs/03-call-audio-path.md)
-4. [**Learning process**: 25–27 Oct ki poori yatra, galtiyan, seekh](docs/04-learning-process-hinglish.md)
-5. [**Final audit**: kya optimized nahi tha, kya fix kiya, kaise verify kiya](docs/05-final-audit-aur-optimization.md)
-6. [**Complete build guide**: zero se project tak, koi bhi bana sake (hardware, PC, modules kram mein, test, troubleshooting)](docs/06-complete-build-guide-hinglish.md)
-7. [Hardware mapping (LyraT v4.3)](docs/lyrat-v4.3-hardware.md)
-8. [**Schematic, layout, BOM** (official Espressif PDFs + rendered pages + parts list)](docs/hardware/README.md), [shopping list + board BOM](docs/hardware/BOM-hinglish.md)
-
-Saare changes ek jagah: [CHANGELOG.md](CHANGELOG.md). Build logs aur serial logs `docs/` mein date ke saath.
+All changes in one place: [CHANGELOG.md](CHANGELOG.md). Build logs and serial logs live in `docs/` with their dates.
 
 ## Folder layout
 
 ```
-main/            firmware source (8 modules, dekho docs/01)
-sdkconfig.defaults  project ki saari non-default settings; sdkconfig isse generate hota hai
+main/            firmware source (8 modules, see docs/01)
+sdkconfig.defaults  every non-default project setting; sdkconfig is generated from it
 partitions.csv   nvs + phy + 3 MB factory app
 tools/           Build.ps1, Flash.ps1, Monitor.ps1, Enter-EspIdf.ps1, live_serial.py, capture_serial.py
 docs/            learning notes, audit, build guide, build/serial logs, ES8388 reference driver
@@ -53,27 +47,29 @@ build/           generated (gitignored)
 
 ## Build / flash / monitor
 
-VS Code mein yeh folder kholo (`D:\Vscode\bleaudiocall`). Naya terminal kholne par ESP-IDF v6.1 profile activate hota hai.
+Open the project folder in VS Code. Opening a new terminal activates the ESP-IDF v6.1 profile (`tools/Enter-EspIdf.ps1`, which sources the EIM activation script in `C:\Espressif\tools`). `.vscode/settings.json` no longer pins an IDF path: after opening the folder, pick the installed v6.1 setup once via the ESP-IDF extension status bar ("ESP-IDF: Select Current ESP-IDF Version").
 
-- Build: `Ctrl+Shift+B` (task "ESP32: Build bleaudiocall") ya `idf.py build`
-- Flash: task "ESP32: Flash bleaudiocall (COM6)" ya `idf.py -p COM6 flash` (live monitor band karke; auto-download jumpers JP23/24/25 lage hon, upload ke baad hata do)
-- Live logs: task "ESP32: Live call/music logs (COM6)"; monitor mein ek letter type karke Enter: `a` answer, `h` hangup, `m` redial, `c` connect, `x` disconnect, `v` bonds, `f` forget, `i` status, `t` ring test, `l r z b` tones, `] [ 0` DAC steps.
+The serial port is COM6 in our setup; change it in `.vscode/settings.json`, `tools/Flash.ps1` and `tools/Monitor.ps1`.
 
-## Pehli baar pairing (zaroori)
+- Build: `Ctrl+Shift+B` (task "ESP32: Build bleaudiocall") or `idf.py build`
+- Flash: task "ESP32: Flash bleaudiocall (COM6)" or `idf.py -p COM6 flash` (close the live monitor first; the auto-download jumpers JP23/JP24/JP25 must be fitted, remove them after the upload)
+- Live logs: task "ESP32: Live call/music logs (COM6)"; in the monitor type one letter and Enter: `a` answer, `h` hang up, `m` redial, `c` connect, `x` disconnect, `v` bonds, `f` forget, `i` status, `t` ring test, `l r z b` tones, `] [ 0` DAC steps.
 
-Phone ne pehle "kanchan" ko sirf music speaker ke roop mein yaad rakha hai. Is firmware ka naam `blu2` hai taaki phone fresh service list (HFP ke saath) padhe. Phir bhi phone par purana "kanchan" **Forget device** kar do. Purana phone PIN maange to `0000`. Android mein `blu2` par "Media audio" aur "Phone calls" dono toggles dikhne chahiye.
+## First pairing (required)
+
+Your phone may still have the old device name "kanchan" cached as a music-only speaker. This firmware advertises as `blu2` so the phone reads a fresh service list (including HFP). Still, **Forget device** for the old "kanchan" entry on the phone. If an old phone asks for a PIN, enter `0000`. On Android, `blu2` should show both the "Media audio" and "Phone calls" toggles.
 
 ## Touch pads
 
-| Pad | Call nahi | Incoming call | Call chal rahi |
+| Pad | No call | Incoming call | Call in progress |
 |---|---|---|---|
 | PLAY | play / pause | **answer** | **hang up** |
 | SET tap | next track | - | - |
 | SET hold 2 s | Bluetooth disconnect | **reject** | hang up |
-| VOL+ / VOL- | music volume (phone sync) | - | call volume 0..15 (phone sync) |
+| VOL+ / VOL- | music volume (synced with the phone) | - | call volume 0..15 (synced with the phone) |
 
 LED: steady = phone connected, slow blink = waiting / discoverable.
 
 ## Reconnect behaviour (final)
 
-Boot ke 3 s baad bonded phone ko khud connect karta hai; fail ho to har 10 s, kul 6 baar, phir chup (phone khud aaye, ya console `c`, ya reboot). Phone link tode to 5 s baad wahi cycle. SET hold / `x` se user disconnect kare to reboot ya `c` tak koi auto-reconnect nahi.
+3 s after boot the speaker connects to the bonded phone by itself; if that fails it retries every 10 s, 6 times in total, then stays quiet (until the phone connects, the console command `c`, or a reboot). If the phone drops the link, the same cycle starts after 5 s. After a user disconnect (SET hold / `x`) there is no auto-reconnect until a reboot or `c`.
