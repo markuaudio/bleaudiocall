@@ -45,7 +45,7 @@ void bt_core_profile_ready(bt_profile_t profile)
     if (profile == PROFILE_A2DP) s.a2dp_ready = true; else s.hfp_ready = true;
     bool both = s.a2dp_ready && s.hfp_ready;
     portEXIT_CRITICAL(&lock);
-    if (both) ESP_LOGI(TAG, "READY: music (A2DP) + calls (HFP). Phone Bluetooth mein '%s' select karo", BT_DEVICE_NAME);
+    if (both) ESP_LOGI(TAG, "READY: music (A2DP) + calls (HFP). Select '%s' in the phone's Bluetooth list", BT_DEVICE_NAME);
 }
 
 void bt_core_profile_link(bt_profile_t profile, bool up, const uint8_t *bda)
@@ -114,7 +114,7 @@ static void gap_callback(esp_bt_gap_cb_event_t event, esp_bt_gap_cb_param_t *p)
             s.followup_at = esp_timer_get_time() + LINK_PROFILE_FOLLOWUP_S * 1000000LL;
             portEXIT_CRITICAL(&lock);
         } else {
-            ESP_LOGW(TAG, "Pairing failed, status %d [%s]. Phone par 'forget device' karke dobara try karo",
+            ESP_LOGW(TAG, "Pairing failed, status %d [%s]. Forget the device on the phone and pair again",
                      p->auth_cmpl.stat, bt_core_bda_str(p->auth_cmpl.bda, str));
         }
         break;
@@ -134,7 +134,7 @@ static void gap_callback(esp_bt_gap_cb_event_t event, esp_bt_gap_cb_param_t *p)
         esp_bt_gap_ssp_confirm_reply(p->cfm_req.bda, true);
         break;
     case ESP_BT_GAP_KEY_NOTIF_EVT:
-        ESP_LOGI(TAG, "SSP passkey %06"PRIu32": phone par yahi number daalo", p->key_notif.passkey);
+        ESP_LOGI(TAG, "SSP passkey %06"PRIu32": enter this number on the phone", p->key_notif.passkey);
         break;
     case ESP_BT_GAP_KEY_REQ_EVT:
         ESP_LOGW(TAG, "Phone asks us to type a passkey (no keyboard here); replying 000000");
@@ -172,7 +172,7 @@ static void set_scan_mode(bool discoverable)
                                              discoverable ? ESP_BT_GENERAL_DISCOVERABLE : ESP_BT_NON_DISCOVERABLE);
     if (err != ESP_OK) { ESP_LOGW(TAG, "Scan mode: %s", esp_err_to_name(err)); return; }
     portENTER_CRITICAL(&lock); s.discoverable = discoverable; s.scan_set = true; portEXIT_CRITICAL(&lock);
-    ESP_LOGI(TAG, "Radio: connectable, %s", discoverable ? "DISCOVERABLE (phone list mein dikhega)" : "hidden (already in use)");
+    ESP_LOGI(TAG, "Radio: connectable, %s", discoverable ? "DISCOVERABLE (visible in the phone's list)" : "hidden (already in use)");
 }
 
 static void link_task(void *arg)
@@ -269,7 +269,7 @@ void bt_core_forget_all(void)
     bt_core_disconnect();
     for (int i = 0; i < n; ++i) esp_bt_gap_remove_bond_device(list[i]);
     portENTER_CRITICAL(&lock); s.have_target = false; s.have_peer = false; portEXIT_CRITICAL(&lock);
-    ESP_LOGI(TAG, "Removed %d bond(s). Phone par bhi 'forget device' karo, phir dobara pair karo", n);
+    ESP_LOGI(TAG, "Removed %d bond(s). Also forget the device on the phone, then pair again", n);
 }
 
 void bt_core_log_status(void)
