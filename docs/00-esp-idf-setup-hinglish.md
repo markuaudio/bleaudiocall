@@ -1,3 +1,5 @@
+> Note 2026-10-27: toolchain ab `D:\Vscode\esp-tooling` par hai (neeche ke commands mein `D:\Vscode\esp	ooling` purana path hai).
+
 > Yeh file kanchan speaker project (`D:\Vscode\esp\docs\01-esp-idf-setup-hinglish.md`) se copy ki gayi hai, kyunki bleaudiocall wahi toolchain aur tooling folder share karta hai. Yahan ke `tools/Enter-EspIdf.ps1` aur VS Code terminal profile isi setup par chalte hain.
 
 # ESP32-LyraT v4.3: VS Code setup seekho

@@ -1,0 +1,186 @@
+ets Jul 29 2019 12:21:46
+
+rst:0x1 (POWERON_RESET),boot:0x1f (SPI_FAST_FLASH_BOOT)
+configsip: 0, SPIWP:0xee
+clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+mode:DIO, clock div:2
+load:0x3fff0040,len:6272
+load:0x40078000,len:15824
+load:0x40080400,len:3988
+entry 0x40080644
+I (27) boot: ESP-IDF v6.1 2nd stage bootloader
+I (27) boot: compile time Oct 27 2026 16:03:24
+I (28) boot: Multicore bootloader
+I (29) boot: chip revision: v3.0
+I (31) boot.esp32: SPI Speed      : 40MHz
+I (35) boot.esp32: SPI Mode       : DIO
+I (39) boot.esp32: SPI Flash Size : 8MB
+I (42) boot: Enabling RNG early entropy source...
+I (47) boot: Partition Table:
+I (49) boot: ## Label            Usage          Type ST Offset   Length
+I (56) boot:  0 nvs              WiFi data        01 02 00009000 00006000
+I (62) boot:  1 phy_init         RF data          01 01 0000f000 00001000
+I (69) boot:  2 factory          factory app      00 00 00010000 00300000
+I (75) boot: End of partition table
+I (79) esp_image: segment 0: paddr=00010020 vaddr=3f400020 size=26eb4h (159412) map
+I (143) esp_image: segment 1: paddr=00036edc vaddr=3ffbdb60 size=04fach ( 20396) load
+I (151) esp_image: segment 2: paddr=0003be90 vaddr=40080000 size=04188h ( 16776) load
+I (158) esp_image: segment 3: paddr=00040020 vaddr=400d0020 size=8682ch (550956) map
+I (355) esp_image: segment 4: paddr=000c6854 vaddr=40084188 size=11460h ( 70752) load
+I (384) esp_image: segment 5: paddr=000d7cbc vaddr=50000000 size=00028h (    40) load
+I (395) boot: Loaded app from partition at offset 0x10000
+I (395) boot: Disabling RNG early entropy source...
+I (406) cpu_start: Multicore app
+I (414) cpu_start: GPIO 3 and 1 are used as console UART I/O pins
+I (414) cpu_start: Pro cpu start user code
+I (414) cpu_start: cpu freq: 240000000 Hz
+I (416) app_init: Application information:
+I (420) app_init: Project name:     bleaudiocall
+I (424) app_init: App version:      27f411d-dirty
+I (429) app_init: Compile time:     Oct 27 2026 16:01:39
+I (434) app_init: ELF file SHA256:  7ee14ff2b...
+I (438) app_init: ESP-IDF:          v6.1
+I (442) efuse_init: Min chip rev:     v0.0
+I (446) efuse_init: Max chip rev:     v3.99 
+I (450) efuse_init: Chip rev:         v3.0
+I (454) heap_init: Initializing. RAM available for dynamic allocation:
+I (460) heap_init: At 3FFAFF10 len 000000F0 (0 KiB): DRAM
+I (465) heap_init: At 3FFB6BF8 len 00001408 (5 KiB): DRAM
+I (470) heap_init: At 3FFB9A20 len 00004108 (16 KiB): DRAM
+I (475) heap_init: At 3FFCD398 len 00012C68 (75 KiB): DRAM
+I (480) heap_init: At 3FFE0440 len 00003AE0 (14 KiB): D/IRAM
+I (486) heap_init: At 3FFE4350 len 0001BCB0 (111 KiB): D/IRAM
+I (491) heap_init: At 400955E8 len 0000AA18 (42 KiB): IRAM
+W (498) spi_flash: Detected boya flash chip but using generic driver. For optimal functionality, enable `SPI_FLASH_SUPPORT_BOYA_CHIP` in menuconfig
+I (510) spi_flash: detected chip: generic
+I (513) spi_flash: flash io: dio
+I (517) coexist: coex firmware version: a830d28
+I (521) main_task: Started on CPU0
+I (521) main_task: Calling app_main()
+I (521) boot: bleaudiocall: music + calls; reset reason=1
+I (541) bt: Starting Bluetooth radio before codec/I2S/touch initialization
+I (551) BTDM_INIT: BT controller compile version [4a0f94d]
+I (551) BTDM_INIT: Using main XTAL as clock source
+I (551) BTDM_INIT: Bluetooth MAC: 08:3a:f2:31:29:3e
+I (561) phy_init: phy_version 4863,a3a4459,Oct 28 2025,14:30:06
+I (1021) bt: Radio and host enabled, own address 08:3a:f2:31:29:3e
+W (1021) gpio: conflict found for GPIO[21]
+I (1141) es8388: Ready: DAC P4 (-6.0 dB) -> LOUT1 0 dB -> PA; mics LIN1/RIN1 PGA reg 0x88 (ADC off until a call)
+W (1141) i2s_common: the rx channel on I2S0 is switched from master to slave for full-duplex mode
+I (1141) i2s: TX clocks: source=160000000 MCLK=11289537 BCLK=2822400 Fs=44100 capture=0 (32-bit data and slots)
+I (1151) audio: Engine: music 1x gain + limiter, DAC P4, call volume 10/15, mic gain 2.0x
+I (1161) es8388: DAC profile P4: -6.0 dB (reg 0x0c)
+I (1171) es8388: ADC/microphones OFF
+I (1171) touch: Calibration: do not touch pads for 1 second
+I (1171) i2s: TX clocks: source=160000000 MCLK=11289537 BCLK=2822400 Fs=44100 capture=0 (32-bit data and slots)
+I (1181) audio: Path: MUSIC at 44100 Hz
+I (2111) touch: PLAY GPIO33 baseline=1278
+I (2111) touch: SET GPIO32 baseline=1278
+I (2111) touch: VOL+ GPIO27 baseline=1152
+I (2111) touch: VOL- GPIO13 baseline=838
+I (2111) touch: Ready: PLAY = answer / hang up / play-pause, SET = next (hold 2 s: reject / disconnect), VOL +/-
+W (2141) BT_BTC: A2DP Enable with AVRC
+I (2171) bt: READY: music (A2DP) + calls (HFP). Phone Bluetooth mein 'blu2' select karo
+I (2171) bt: 4 bonded phone(s); will try 30:94:35:07:5a:b8 in 3 s
+I (2171) console: Keys: a answer, h hangup/reject, m redial, c onnect bonded phone, x disconnect, v list bonds, f forget bonds, i status, t ring tone test, l/r/z/b tones, ]/[ DAC +-1.5 dB, 0 reset DAC
+I (2181) boot: Initialized; free heap=71468 bytes
+I (2201) main_task: Returned from app_main()
+I (3171) bt: Radio: connectable, DISCOVERABLE (phone list mein dikhega)
+I (6161) audio: MUSIC 44100 Hz PA=0 in_peak=0 out_peak=0 mic_peak=0 frames=0 limited=0 P4
+I (6161) audio: music buffer=0 B drops=0 underruns=0 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (6171) bt: Reconnect attempt 1/6 to bonded phone 30:94:35:07:5a:b8
+I (6171) bt: Opening music (A2DP) to 30:94:35:07:5a:b8 ourselves
+W (6181) BT_APPL: reset flags
+I (6191) music: A2DP connecting...
+I (11171) audio: MUSIC 44100 Hz PA=0 in_peak=0 out_peak=0 mic_peak=0 frames=0 limited=0 P4
+I (11171) audio: music buffer=0 B drops=0 underruns=0 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (16181) bt: Reconnect attempt 2/6 to bonded phone 30:94:35:07:5a:b8
+I (16181) bt: Opening music (A2DP) to 30:94:35:07:5a:b8 ourselves
+I (16181) audio: MUSIC 44100 Hz PA=0 in_peak=0 out_peak=0 mic_peak=0 frames=0 limited=0 P4
+I (16181) audio: music buffer=0 B drops=0 underruns=0 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+W (16431) BT_SDP: SDP - Rcvd conn cnf with error: 0x4  CID 0x40
+
+W (16431) BT_HCI: hcif conn complete: hdl 0xfff, st 0x4
+I (16431) bt: Radio link with 30:94:35:07:5a:b8: status 0x104 (0x104 = page timeout: phone off / out of range)
+W (16441) BT_BTC: BTA_AV_OPEN_EVT::FAILED status: 2
+
+I (16451) bt: Music (A2DP) attempt failed (phone not reachable)
+I (21201) audio: MUSIC 44100 Hz PA=0 in_peak=0 out_peak=0 mic_peak=0 frames=0 limited=0 P4
+I (21201) audio: music buffer=0 B drops=underruns=0 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (26181) bt: Reconnect attempt 3/6 to bonded phone 30:94:35:07:5a:b8
+I (26181) bt: Opening music (A2DP) to 30:94:35:07:5a:b8 ourselves
+I (26191) music: A2DP connecting...
+I (26211) audio: MUSIC 44100 Hz PA=0 in_peak=0 out_peak=0 mic_peak=0 frames=0 limited=0 P4
+I (26211) audio: music buffer=0 B drops=0 underruns=0 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (31221) audio: MUSIC 44100 Hz PA=0 in_peak=0 out_peak=0 mic_peak=0 frames=0 limited=0 P4
+I (31221) audio: music buffer=0 B drops=0 underruns=0 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (36231) audio: MUSIC 44100 Hz PA=0 in_peak=0 out_peak=0 mic_peak=0 frames=0 limited=0 P4
+I (36231) audio: music buffer=0 B drops=0 underruns=0 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+W (36431) BT_SDP: SDP - Rcvd conn cnf with error: 0x4  CID 0x41
+
+W (36431) BT_HCI: hcif conn complete: hdl 0xfff, st 0x4
+I (36431) bt: Radio link with 30:94:35:07:5a:b8: status 0x104 (0x104 = page timeout: phone off / out of range)
+W (36441) BT_BTC: BTA_AV_OPEN_EVT::FAILED status: 2
+
+I (36441) bt: Music (A2DP) attempt failed (phone not reachable)
+I (37181) bt: Reconnect attempt 4/6 to bonded phone 30:94:35:07:5a:b8
+I (37181) bt: Opening music (A2DP) to 30:94:35:07:5a:b8 ourselves
+I (37181) music: A2DP connecting...
+I (41241) audio: MUSIC 44100 Hz PA=0 in_peak=0 out_peak=0 mic_peak=0 frames=0 limited=0 P4
+I (41241) audio: music buffer=0 B drops=0 underruns=0 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (46241) audio: MUSIC 44100 Hz PA=0 in_peak=0 out_peak=0 mic_peak=0 frames=0 limited=0 P4
+I (46241) audio: music buffer=0 B drops=0 underruns=0 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+W (47431) BT_SDP: SDP - Rcvd conn cnf with error: 0x4  CID 0x40
+
+W (47431) BT_HCI: hcif conn complete: hdl 0xfff, st 0x4
+I (47431) bt: Radio link with 30:94:35:07:5a:b8: status 0x104 (0x104 = page timeout: phone off / out of range)
+W (47441) BT_BTC: BTA_AV_OPEN_EVT::FAILED status: 2
+
+I (47441) bt: Music (A2DP) attempt failed (phone not reachable)
+I (48181) bt: Reconnect attempt 5/6 to bonded phone 30:94:35:07:5a:b8
+I (48181) bt: Opening music (A2DP) to 30:94:35:07:5a:b8 ourselves
+I (48181) music: A2DP connecting...
+I (51251) audio: MUSIC 44100 Hz PA=0 in_peak=0 out_peak=0 mic_peak=0 frames=0 limited=0 P4
+I (51251) audio: music buffer=0 B drops=0 underruns=0 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (56261) audio: MUSIC 44100 Hz PA=0 in_peak=0 out_peak=0 mic_peak=0 frames=0 limited=0 P4
+I (56261) audio: music buffer=0 B drops=0 underruns=0 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+W (58421) BT_SDP: SDP - Rcvd conn cnf with error: 0x4  CID 0x41
+
+W (58421) BT_HCI: hcif conn complete: hdl 0xfff, st 0x4
+I (58431) bt: Radio link with 30:94:35:07:5a:b8: status 0x104 (0x104 = page timeout: phone off / out of range)
+W (58431) BT_BTC: BTA_AV_OPEN_EVT::FAILED status: 2
+
+I (58441) bt: Music (A2DP) attempt failed (phone not reachable)
+I (59181) bt: Reconnect attempt 6/6 to bonded phone 30:94:35:07:5a:b8
+I (59181) bt: Opening music (A2DP) to 30:94:35:07:5a:b8 ourselves
+I (59181) bt: Last reconnect tempt; afterwards waiting for the phone (or 'c' / reboot)
+I (59191) music: A2DP connecting...
+I (61271) audio: MUSIC 44100 Hz PA=0 in_peak=0 out_peak=0 mic_peak=0 frames=0 limited=0 P4
+I (61271) audio: music buffer=0 B drops=0 underruns=0 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+I (66281) audio: MUSIC 44100 Hz PA=0 in_peak=0 out_peak=0 mic_peak=0 frames=0 limited=0 P4
+I (66281) audio: music buffer=0 B drops=0 underruns=0 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
+W (69431) BT_SDP: SDP - Rcvd conn cnf with error: 0x4  CID 0x40
+
+W (69431) BT_HCI: hcif conn complete: hdl 0xfff, st 0x4
+I (69431) bt: Radio link with 30:94:35:07:5a:b8: status 0x104 (0x104 = page timeout: phone off / out of range)
+W (69441) BT_BTC: BTA_AV_OPEN_EVT::FAILED status: 2
+
+I (69441) bt: Music (A2DP) attempt failed (phone not reachable)
+W (69691) BT_HCI: hcif conn complete: hdl 0x80, st 0x0
+I (69711) bt: Radio link with 04:ec:d8:68:0e:79: status 0x0
+W (69901) BT_APPL: new conn_srvc id:27, app_id:1
+I (69901) call: Link state 2 (3 = ready for calls), phone features 0x0
+I (69961) call: Phone network NOT available
+I (69961) call: Call ended / none
+I (69961) call: Call setup: none
+I (69971) call: Call held status 0
+I (69971) call: Phone signal 0/5
+I (69971) call: Roaming inactive
+I (69981) call: Phone battery 5/5
+I (70001) call: Link state 3 (3 = ready for calls), phone features 0xf67
+I (70001) bt: Calls (HFP) connected to 04:ec:d8:68:0e:79
+I (70001) call: Call setup: none
+W (70031) BT_APPL: bta_hf_client_send_at: No service, skipping 11 command
+I (70181) bt: Radio: connectable, hidden (already in use)
+I (71291) audio: MUSIC 44100 Hz PA=0 in_peak=0 out_peak=0 mic_peak=0 frames=0 limited=0 P4
+I (71291) audio: music buffer=0 B drops=0 underruns=0 | call rx_drops=0 tx_drops=0 underruns=0 | i2s_errors=0
