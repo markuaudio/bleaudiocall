@@ -1,5 +1,20 @@
 # bleaudiocall: LyraT Bluetooth speaker jo phone call bhi uthata hai
 
+**English summary (for everyone else; the rest of this repo is written in Hinglish):**
+Firmware for the **ESP32-LyraT V4.3** audio board, written directly on **ESP-IDF v6.1** (no ESP-ADF pipeline).
+It turns the board into a Bluetooth speaker that also answers phone calls:
+
+- **Music**: A2DP sink (SBC) + AVRCP play/pause/next and absolute volume.
+- **Calls**: HFP hands-free unit, voice over HCI (CVSD 8 kHz / mSBC 16 kHz), ring, answer, hang-up, both onboard microphones back to the phone, I2S full duplex into the ES8388 codec.
+- **Any phone**: Secure Simple Pairing (Just Works) for modern phones, fixed PIN 0000 for old ones, a link manager that opens A2DP/HFP itself and reconnects with a bounded retry loop.
+- One audio task owns the codec/I2S bus and switches between music, call and ring sources.
+
+What you will find here: the full source (`main/`), build/flash/monitor scripts for Windows (`tools/`), a step-by-step build guide, a learning log with every mistake and fix from the first "hiss only" bring-up to the LOUT2 amplifier-cancellation root cause, a code audit with the bugs found in serial logs, and the official Espressif schematic, component layout and a BOM extracted from it (`docs/hardware/`). Docs are Hinglish (Hindi in Latin script + English); the code comments, register tables and log lines are English, so the firmware itself is readable without Hindi.
+
+Status: final release build flashed and verified on the board (reconnect logic, HFP service-level connection). Music playback and a live call with a phone are the remaining user tests.
+
+---
+
 Board: ESP32-LyraT v4.3 (ESP32-D0WD-V3, 8 MB flash; wahi board jo `D:\Vscode\esp` ke kanchan speaker project mein hai). Framework: ESP-IDF v6.1 (toolchain `D:\Vscode\esp-tooling`, 2026-10-27 se; path mein space nahi hona chahiye). Chip target: `esp32`. Bluetooth naam: **`blu2`** (`main/board_config.h` mein `BT_DEVICE_NAME`).
 
 Status (2026-10-27 16:05): final build pass, release (-O2), 0 warnings, **board par flashed**; serial log se reconnect fixes proof (docs/05 verification section), ek phone se HFP connect hua. Music/call ka phone test **pending** (dekho [04](docs/04-learning-process-hinglish.md) ka "pending" section).
