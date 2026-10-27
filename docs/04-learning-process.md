@@ -31,7 +31,7 @@ Mistakes, in order:
 2. **Silence + underruns.** 32-bit slots were configured but 16-bit packed data was sent. The ESP32 `i2s_ll.h` says data width and slot width must match (the FIFO packing mode is chosen from the slot width). Fix: PCM16 → MSB-aligned PCM32 (`* 65536`), codec reg 0x17 = 0x20 (32-bit). Then songs played.
 3. **Too quiet.** Digital gain 10x → 100x → trip (PC USB port over-current, `phy_init` reset loop). Rolled back to 4x, 6x, 20x, 60x: at 20x out_peak hit 32767 (full scale) and it was still quiet. So the digital path was exhausted; the problem was analog.
 4. **Root cause (26 Oct 16:45):** LyraT v4.3 schematic: the NS4150 PA has IN+ ← LOUT1, IN− ← LOUT2. We had LOUT2/ROUT2 (reg 0x30/0x31) at 0 dB = the same signal on both inputs = cancellation. ESP-ADF writes 0x00 (-45 dB) for exactly this reason. After the fix, "1x digital, DAC -6 dB" is already ADF-level loud.
-5. **Research (14 agents):** NS4150 gain 20 dB; PA clean limit at codec -11..-12 dB; ADF's real LyraT maximum is DAC -6 dB, not 0 dB.
+5. **Research (schematic + NS4150 datasheet + ESP-ADF source):** NS4150 gain 20 dB; PA clean limit at codec -11..-12 dB; ADF's real LyraT maximum is DAC -6 dB, not 0 dB.
 
 Lesson: understand the signal-path wiring before raising gain. One register wasted four experiments.
 
